@@ -1,0 +1,70 @@
+% intro.tex -- funnel, pipeline, objective equation, open question
+% (skills/paper-playbook/sections/03..06).
+\section{Introduction}\label{sec:intro}
+<<Field sentence with founding citations.>> <<Schemes of choice and why.>>
+<<Why the expensive component exists.>> <<Lineage sentence citing the line at once.>>
+<<Bottleneck sentence, ideally with a citable measurement.>>
+Concretely, <<procedure>> factors into three stages:
+\begin{itemize}
+\item \textbf{Stage 1: <<name>>.} <<map>>, cost $\bigO(<<\cdot>>)$.
+\item \textbf{Stage 2: <<name>>.} <<map>>, cost $\bigO(<<\cdot>>)$.
+\item \textbf{Stage 3: <<name>>.} <<map>>, cost $\bigO(<<\cdot>>)$.
+\end{itemize}
+In this work we concentrate on Stage <<j>>. Every previous construction can be cast as
+\begin{equation}\label{eq:intro:objective}
+  \min_{P}\ \cost(P) \quad \text{s.t.}\quad <<functional specification>>.
+\end{equation}
+Whether <<further structure>> can lower~\eqref{eq:intro:objective} further has remained open.
+
+\subsection{Related Work}\label{sec:related}
+We overview prior optimisations for <<task>>, focusing on <<bottleneck>>. Accelerating
+\eqref{eq:intro:objective} follows two paths: <<axis 1>> and <<axis 2>>.
+\Cref{tab:related} summarises the asymptotic comparison.
+\input{sections/related_table}
+
+\noindent\textbf{<<Axis 1>>.} <<One sentence per work: authors, what, cost. Shared limitation.>>
+
+\noindent\textbf{<<Recent lines>>.} Recently, two independent lines of work exploit <<structure>>:
+\begin{itemize}
+\item \textbf{<<Line A>>} restricts \emph{where} <<...>>; however, <<factual open point>>.
+\item \textbf{<<Line B>>} restricts \emph{how} <<...>>, assuming <<...>>.
+\end{itemize}
+
+\noindent\textbf{Insight from <<structure>>.} <<Why the lines are compatible; where each
+prior work sits in our framework; back to \Cref{tab:related}.>>
+
+\noindent\textbf{Our work.} <<Framework sentence; three technical points; one results sentence.>>
+
+\subsection{Our Contributions}\label{sec:contrib}
+Inspired by <<observation>>, we determine <<characterisation>>. Building on it, we propose
+<<Name>>, in which every prior <<object>> is a special case. Our main contributions are:
+\begin{itemize}
+\item \textbf{From <<structure>> to <<construction>>.} <<... coverage with one number (\Cref{tab:main}).>>
+\item \textbf{A unified <<framework>>.} <<... placement of prior work ... selection rule.>>
+\item \textbf{A <<algorithm>> with <<property>>.} <<... cost formula ...>>
+\item \textbf{<<Metric>> improvements.} <<two numbers, verified in \Cref{tab:main}.>>
+\end{itemize}
+
+\subsection{Technique Overview}\label{sec:overview}
+We begin by recalling the routes of \Cref{sec:related} in the notation of \Cref{sec:prelim}.
+
+\noindent\textbf{<<Route 1>> (per paper).} <<formula, cost; what it leaves open.>>
+
+\noindent\textbf{<<Route 2>> (per paper).} <<formula, cost; what it leaves open.>>
+
+Taken together, <<...>>. Whether they compose therefore reduces to two questions:
+(i)~<<...>>; (ii)~<<...>>. Insight~1 resolves (i) and Insight~2 resolves (ii),
+yielding the map in \Cref{fig:overview}.
+
+\begin{figure}[t]
+\centering
+\fbox{\parbox{0.8\linewidth}{\centering <<figure: prior works as corners, ours as the new region>>}}
+\caption{<<One sentence: prior works are ...; our work occupies ...>>}
+\label{fig:overview}
+\end{figure}
+
+\noindent\textbf{Insight 1: <<A complete declarative sentence.>>} <<...>>
+
+\noindent\textbf{Insight 2: <<A complete declarative sentence.>>} <<...>>
+
+\noindent\textbf{Putting it together.} <<Combined identity, literally as in \Cref{sec:construction}.>>

@@ -1,0 +1,73 @@
+# Algebraic Number Theory - A Brief Introduction
+
+- **Author(s):** J. S. Chahal
+- **Format:** pdf; pages: 167
+- **TOC source:** bookmarks
+- **Page convention:** bookmark pages are PDF physical pages (1-based) unless the note says otherwise.
+
+## Table of contents
+
+- Cover — p.1
+- Half Title — p.2
+- Series Page — p.3
+- Title Page — p.4
+- Copyright Page — p.5
+- Contents — p.6
+- Preface — p.8
+- 1. Genesis: What Is Number Theory? — p.10
+  - 1.1. What Is Number Theory? — p.10
+  - 1.2. Methods of Proving Theorems in Number Theory — p.13
+- 2. Review of the Prerequisite Material — p.18
+  - 2.1. Basic Concepts — p.18
+  - 2.2. Galois Extensions — p.21
+  - 2.3. Integral Domains — p.22
+  - 2.4. Factoring Rational Primes in Z[i] — p.24
+- 3. Basic Concepts — p.28
+  - 3.1. Generalities — p.28
+  - 3.2. Algebraic Integers — p.28
+  - 3.3. Integral Bases — p.32
+  - 3.4. Quadratic Fields — p.37
+  - 3.5. Unique Factorization Property for Ideals — p.38
+  - 3.6. Ideal Class Group and Class Number — p.46
+- 4. Arithmetic in Relative Extensions — p.52
+  - 4.1. Criterion for Rami cation — p.56
+  - 4.2. Review of Commutative Algebra — p.57
+  - 4.3. Relative Discriminant for Rings — p.59
+  - 4.4. Direct Product of Rings — p.60
+  - 4.5. Nilradical — p.62
+  - 4.6. Reduced Rings — p.63
+  - 4.7. Discriminant and Rami cation — p.64
+- 5. Geometry of Numbers — p.66
+  - 5.1. Lattices in Rn — p.66
+  - 5.2. Minkowski's Lemma on Convex Bodies — p.68
+  - 5.3. Logarithmic Embedding — p.69
+  - 5.4. Units of a Quadratic Field — p.75
+  - 5.5. Estimates on the Discriminant — p.75
+- 6. Analytic Methods — p.82
+  - 6.1. Preliminaries — p.83
+  - 6.2. The Regulator of a Number Field — p.83
+  - 6.3. Fundamental Domains — p.85
+  - 6.4. Zeta Functions — p.94
+- 7. Arithmetic in Galois Extensions — p.100
+  - 7.1. Hilbert Theory — p.101
+  - 7.2. Higher Rami cation Groups — p.104
+  - 7.3. The Frobenius Map — p.108
+  - 7.4. Rami cation in Cyclic Extensions — p.110
+  - 7.5. The Artin Symbol — p.112
+  - 7.6. Quadratic Fields — p.114
+  - 7.7. The Artin Map — p.115
+- 8. Cyclotomic Fields — p.118
+  - 8.1. Cyclotomic Fields — p.118
+  - 8.2. Arithmetic in Cyclotomic Fields — p.128
+- 9. The Kronecker-Weber Theorem — p.132
+  - 9.1. Gauss Sums — p.132
+  - 9.2. Proof of the Kronecker-Weber Theorem — p.134
+- 10. Passage to Algebraic Geometry — p.140
+  - 10.1. Valuations — p.142
+  - 10.2. Zeta Functions of Curves over Finite Fields — p.145
+  - 10.3. Riemann Hypothesis for Elliptic Curves over Finite — p.150
+- 11. Epilogue: Fermat's Last Theorem — p.158
+  - 11.1. Fermat's Last Theorem — p.158
+  - 11.2. An Alternative Approach to Proving FLT — p.159
+- Bibliography — p.160
+- Index — p.164

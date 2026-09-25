@@ -1,0 +1,20 @@
+% related_table.tex -- comparison table; "Ours" row must equal the abstract's formula.
+\begin{table}[t]
+\centering\scriptsize
+\caption{Asymptotic comparison of <<methods>>. <<Define every symbol.>>
+$^\dagger$<<scope restriction>>. $^\ddagger$<<scope restriction>>.}
+\label{tab:related}
+\renewcommand{\arraystretch}{0.92}\setlength{\tabcolsep}{3pt}
+\begin{tabular}{llccc}
+\toprule
+Technique & Method & <<Cost 1>> & <<Cost 2>> & <<Coordinate>> \\
+\midrule
+\multirow{2}{*}{<<Axis 1>>} & <<[A]>> & $\bigO(\cdot)$ & $\bigO(\cdot)$ & <<(1,$\cdot$)>> \\
+                            & <<[B]>>$^\dagger$ & $\bigO(\cdot)$ & $\bigO(\cdot)$ & <<($\cdot$,1)>> \\
+\midrule
+<<Axis 2>> & <<[C]>>$^\ddagger$ & $\bigO(\cdot)$ & $\bigO(\cdot)$ & <<($\cdot$,$\cdot$)>> \\
+\midrule
+\textbf{Ours} & & $\bigO(\cdot)$ & $\bigO(\cdot)$ & <<interior>> \\
+\bottomrule
+\end{tabular}
+\end{table}

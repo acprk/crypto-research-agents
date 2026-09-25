@@ -1,0 +1,66 @@
+# crypto.mplstyle -- house style base for crypto-research-agents figures.
+# Combine with a venue sheet:  plt.style.use(["crypto.mplstyle", "lncs.mplstyle"])
+# or simply call figures.style.palette.use("lncs").
+#
+# Categorical colours: validated 8-slot order (adjacent CVD dE >= 9 on white);
+# assign in THIS order, never cycle past 8 (fold into "Other" or facet).
+
+axes.prop_cycle : cycler(color=['2a78d6', 'eb6834', '1baf7a', 'eda100', 'e87ba4', '008300', '4a3aa7', 'e34948'])
+
+# ---- ink / chrome (recessive) --------------------------------------------
+text.color        : 0b0b0b
+axes.labelcolor   : 0b0b0b
+axes.edgecolor    : 52514e
+axes.linewidth    : 0.6
+axes.spines.top   : False
+axes.spines.right : False
+axes.grid         : True
+axes.grid.axis    : y
+axes.axisbelow    : True
+grid.color        : e4e3df
+grid.linestyle    : -
+grid.linewidth    : 0.4
+xtick.color       : 52514e
+ytick.color       : 52514e
+xtick.labelcolor  : 0b0b0b
+ytick.labelcolor  : 0b0b0b
+xtick.major.width : 0.6
+ytick.major.width : 0.6
+xtick.minor.width : 0.4
+ytick.minor.width : 0.4
+xtick.major.size  : 2.5
+ytick.major.size  : 2.5
+xtick.minor.size  : 1.5
+ytick.minor.size  : 1.5
+xtick.direction   : out
+ytick.direction   : out
+
+# ---- marks ------------------------------------------------------------------
+lines.linewidth      : 1.2
+lines.markersize     : 3.5
+lines.markeredgewidth: 0.6
+patch.linewidth      : 0.0
+hatch.linewidth      : 0.5
+errorbar.capsize     : 1.5
+scatter.marker       : o
+
+# ---- legend -------------------------------------------------------------------
+legend.frameon       : False
+legend.handlelength  : 1.6
+legend.handletextpad : 0.4
+legend.borderaxespad : 0.3
+legend.columnspacing : 1.0
+legend.labelspacing  : 0.3
+
+# ---- output -------------------------------------------------------------------
+figure.dpi          : 150
+savefig.dpi         : 300
+savefig.bbox        : tight
+savefig.pad_inches  : 0.02
+savefig.transparent : False
+pdf.fonttype        : 42
+ps.fonttype         : 42
+svg.fonttype        : none
+figure.constrained_layout.use : True
+axes.formatter.use_mathtext   : True
+axes.formatter.limits         : -3, 4

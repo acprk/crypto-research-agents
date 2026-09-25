@@ -1,0 +1,86 @@
+# Petersen Pedersen Matrix Cookbook
+
+- **Author(s):** Kaare Brandt Petersen, Michael Syskind Pedersen
+- **Format:** pdf; pages: 72
+- **TOC source:** bookmarks
+- **Page convention:** bookmark pages are PDF physical pages (1-based) unless the note says otherwise.
+
+## Table of contents
+
+- Basics — p.6
+  - Trace — p.6
+  - Determinant — p.6
+  - The Special Case 2x2 — p.7
+- Derivatives — p.8
+  - Derivatives of a Determinant — p.8
+  - Derivatives of an Inverse — p.9
+  - Derivatives of Eigenvalues — p.10
+  - Derivatives of Matrices, Vectors and Scalar Forms — p.10
+  - Derivatives of Traces — p.12
+  - Derivatives of vector norms — p.14
+  - Derivatives of matrix norms — p.14
+  - Derivatives of Structured Matrices — p.14
+- Inverses — p.17
+  - Basic — p.17
+  - Exact Relations — p.18
+  - Implication on Inverses — p.20
+  - Approximations — p.20
+  - Generalized Inverse — p.21
+  - Pseudo Inverse — p.21
+- Complex Matrices — p.24
+  - Complex Derivatives — p.24
+  - Higher order and non-linear derivatives — p.26
+  - Inverse of complex sum — p.27
+- Solutions and Decompositions — p.28
+  - Solutions to linear equations — p.28
+  - Eigenvalues and Eigenvectors — p.30
+  - Singular Value Decomposition — p.31
+  - Triangular Decomposition — p.32
+  - LU decomposition — p.32
+  - LDM decomposition — p.33
+  - LDL decompositions — p.33
+- Statistics and Probability — p.34
+  - Definition of Moments — p.34
+  - Expectation of Linear Combinations — p.35
+  - Weighted Scalar Variable — p.36
+- Multivariate Distributions — p.37
+  - Cauchy — p.37
+  - Dirichlet — p.37
+  - Normal — p.37
+  - Normal-Inverse Gamma — p.37
+  - Gaussian — p.37
+  - Multinomial — p.37
+  - Student's t — p.37
+  - Wishart — p.38
+  - Wishart, Inverse — p.39
+- Gaussians — p.40
+  - Basics — p.40
+  - Moments — p.42
+  - Miscellaneous — p.44
+  - Mixture of Gaussians — p.44
+- Special Matrices — p.46
+  - Block matrices — p.46
+  - Discrete Fourier Transform Matrix, The — p.47
+  - Hermitian Matrices and skew-Hermitian — p.48
+  - Idempotent Matrices — p.49
+  - Orthogonal matrices — p.49
+  - Positive Definite and Semi-definite Matrices — p.50
+  - Singleentry Matrix, The — p.52
+  - Symmetric, Skew-symmetric/Antisymmetric — p.54
+  - Toeplitz Matrices — p.54
+  - Transition matrices — p.55
+  - Units, Permutation and Shift — p.56
+  - Vandermonde Matrices — p.57
+- Functions and Operators — p.58
+  - Functions and Series — p.58
+  - Kronecker and Vec Operator — p.59
+  - Vector Norms — p.61
+  - Matrix Norms — p.61
+  - Rank — p.62
+  - Integral Involving Dirac Delta Functions — p.62
+  - Miscellaneous — p.63
+- One-dimensional Results — p.64
+  - Gaussian — p.64
+  - One Dimensional Mixture of Gaussians — p.65
+- Proofs and Details — p.66
+  - Misc Proofs — p.66

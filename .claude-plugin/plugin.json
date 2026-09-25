@@ -1,0 +1,8 @@
+{
+  "name": "crypto-research-agents",
+  "version": "0.1.0",
+  "description": "A 12-agent, blackboard-driven research system for cryptography papers: literature, ideation, theory, baselines, experiments, falsification, writing, figures, review, submission and rebuttal.",
+  "author": { "name": "crypto-research-agents contributors" },
+  "license": "MIT",
+  "keywords": ["cryptography", "research", "multi-agent", "FHE", "lattice", "symmetric", "MPC", "paper-writing"]
+}

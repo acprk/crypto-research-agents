@@ -1,0 +1,44 @@
+% crypto-tikz.sty -- house style for TikZ figures (crypto-research-agents).
+% Colours match figures/style/palette.py.  Load in the paper preamble with
+%   \usepackage{crypto-tikz}
+% or keep figures standalone (see the *.tex files next to this file).
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{crypto-tikz}[2026/09/25 house TikZ style]
+\RequirePackage{xcolor}
+\RequirePackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc,fit,backgrounds,
+  decorations.pathreplacing,shapes.geometric,shapes.misc,matrix}
+
+% --- palette (categorical order, never cycled) ----------------------------
+\definecolor{cr1}{HTML}{2A78D6} % blue  (ours)
+\definecolor{cr2}{HTML}{EB6834} % orange (accent)
+\definecolor{cr3}{HTML}{1BAF7A} % aqua
+\definecolor{cr4}{HTML}{EDA100} % yellow
+\definecolor{crink}{HTML}{0B0B0B}
+\definecolor{crink2}{HTML}{52514E}
+\definecolor{crmuted}{HTML}{8A8984}
+\definecolor{crgrid}{HTML}{E4E3DF}
+\definecolor{crtint}{HTML}{CDE2FB}  % light blue fill (message / highlight)
+\definecolor{crgrey}{HTML}{D3D2CC}  % noise / neutral fill
+\definecolor{crneutral}{HTML}{F0EFEC}
+
+% --- styles --------------------------------------------------------------------
+\tikzset{
+  >={Stealth[length=4pt,width=3pt]},
+  every picture/.append style={line width=0.5pt, draw=crink2, text=crink, font=\small},
+  box/.style={draw=crink2, rounded corners=1.5pt, minimum height=6mm, minimum width=14mm,
+              inner sep=3pt, align=center, fill=white},
+  ours/.style={box, fill=crtint, draw=cr1},
+  op/.style={font=\footnotesize, text=crink2},
+  flow/.style={->, draw=crink2},
+  msg/.style={->, draw=crink, line width=0.6pt},
+  party/.style={font=\small\bfseries},
+  wire/.style={draw=crink2, line width=0.4pt},
+  xorop/.style={circle, draw=crink2, inner sep=0pt, minimum size=3.2mm,
+                path picture={\draw[crink2] (path picture bounding box.north) -- (path picture bounding box.south)
+                (path picture bounding box.west) -- (path picture bounding box.east);}},
+  sbox/.style={draw=crink2, fill=crtint, minimum width=13mm, minimum height=6mm, font=\small},
+  lpt/.style={circle, fill=crmuted, inner sep=0pt, minimum size=2.2pt},
+  brace/.style={decorate, decoration={brace, amplitude=4pt, raise=1pt}, draw=crink2},
+}
+\endinput

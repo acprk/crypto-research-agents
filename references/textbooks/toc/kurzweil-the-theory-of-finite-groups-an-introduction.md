@@ -1,0 +1,57 @@
+# The Theory of Finite Groups An Introduction
+
+- **Author(s):** Hans Kurzweil, Bernd Stellmacher
+- **Format:** pdf; pages: 400
+- **TOC source:** text-heuristic
+- **Note:** parsed from printed contents pages; page numbers are PRINTED pages
+- **Page convention:** bookmark pages are PDF physical pages (1-based) unless the note says otherwise.
+
+## Table of contents
+
+- Preface
+- List of Symbols — p.1
+- Basic Concepts — p.1
+  - 1.1 Groups and Subgroups — p.1
+  - 1.2 Homomorphisms and Normal Subgroups — p.10
+  - 1.3 Automorphisms — p.15
+  - 1.4 Cyclic Groups — p.21
+  - 1.5 Commutators — p.24
+  - 1.6 Products of Groups — p.27
+  - 1.7 Minimal Normal Subgroups — p.36
+  - 1.8 Composition Series — p.39
+- Abelian Groups — p.43
+  - 2.1 The Structure of Abelian Groups — p.43
+  - 2.2 Automorphisms of Cyclic Groups — p.49
+- Action and Conjugation — p.55
+  - 3.1 Action — p.55
+  - 3.2 Sylow’s Theorem — p.62
+  - 3.3 Complements of Normal Subgroups — p.71
+- Permutation Groups — p.77
+  - 4.1 Transitive Groups and Frobenius Groups — p.77
+  - 4.2 Primitive Action — p.84
+  - 4.3 The Symmetric Group — p.87
+  - 4.4 Imprimitive Groups and Wreath Products — p.91
+- p-Groups and Nilpotent Groups — p.99
+  - 5.1 Nilpotent Groups — p.99
+  - 5.2 Nilpotent Normal Subgroups
+  - 5.3 p-Groups with Cyclic Maximal Subgroups — p.108
+- Normal and Subnormal Structure — p.121
+  - 6.1 Solvable Groups
+  - 6.2 The Theorem of Schur-Zassenhaus — p.125
+  - 6.3 Radical and Residue — p.128
+  - 6.4 π-Separable Groups
+  - 6.5 Components and the Generalized
+- Fitting Subgroup — p.141
+  - 6.6 Primitive Maximal Subgroups — p.145
+  - 6.7 Subnormal Subgroups — p.7
+- Transfer and p-Factor Groups — p.163
+  - 7.1 The Transfer Homomorphism — p.163
+  - 7.2 Normal p-Complements — p.8
+- Groups Acting on Groups — p.175
+  - 8.1 Action on Groups — p.175
+  - 8.2 Coprime Action — p.183
+  - 8.3 Action on Abelian Groups — p.190
+  - 8.4 The Decomposition of an Action
+  - 8.5 Minimal Nontrivial Action — p.203
+  - 8.6 Linear Action and the Two-Dimensional
+- Linear Groups — p.210

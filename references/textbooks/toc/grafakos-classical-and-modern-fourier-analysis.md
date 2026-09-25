@@ -1,0 +1,127 @@
+# Classical and modern fourier analysis
+
+- **Author(s):** Loukas Grafakos
+- **Format:** pdf; pages: 968
+- **TOC source:** text-heuristic
+- **Note:** parsed from printed contents pages; page numbers are PRINTED pages
+- **Page convention:** bookmark pages are PDF physical pages (1-based) unless the note says otherwise.
+
+## Table of contents
+
+- Preface
+- Chapter 1 L” Spaces and Interpolation
+  - 1.4 L” and Weak L?
+- Convolution and Approximate Identities
+- Interpolation
+- Lorentz Spaces* — p.1
+- Chapter 2 Maximal Functions, Fourier Transform, and Distributions — p.77
+- Bilt
+- oon
+  - 2.6 Maximal Functions
+- The Schwartz Class and the Fourier Transform
+- The Class of Tempered Distributions
+- More about Distributions and the Fourier Transform*
+- Convolution Operators on L? Spaces and Multipliers
+- Oscillatory Integrals
+- Chapter 3 Fourier Analysis on the Torus
+  - 3.1 Fourier Coefficients
+- Decay of Fourier Coefficients
+- Pointwise Convergence of Fourier Series
+- Divergence of Fourier Series and Bochner-Riesz Summability*
+- The Conjugate Function and Convergence in Norm
+- Multipliers, Transference, and Almost Everywhere Convergence
+- Lacunary Series*
+- Chapter 4 Singular Integrals of Convolution Type
+  - 4.4 The Hilbert Transform and the Riesz Transforms
+- Homogeneous Singular Integrals and the Method of Rotations
+- The Calderén-Zygmund Decomposition and Singular Integrals
+- Sufficient Conditions for L? Boundedness
+  - 4.5 Vector-Valued Inequalities*
+  - 4.6 Vector-Valued Singular Integrals — p.78
+- Chapter 5 Littlewood-Paley Theory and Multipliers
+  - 5.1 Littlewood-Paley Theory
+  - 5.2 Two Multiplier Theorems
+  - 5.3 Applications of Littlewood-Paley Theory
+  - 5.4 The Haar System, Conditional Expectation, and Martingales
+  - 5.5 The Spherical Maximal Function*
+  - 5.6 Wavelets
+- Chapter 6 Smoothness and Function Spaces
+  - 6.1 Riesz Potentials, Bessel Potentials, and Fractional Integrals
+  - 6.2 Sobolev Spaces
+  - 6.3 Lipschitz Spaces
+  - 6.4 Hardy Spaces*
+  - 6.5 Besov-Lipschitz and Triebel-Lizorkin Spaces*
+  - 6.6 Atomic Decomposition*
+  - 6.7 Singular Integrals on Function Spaces
+- Chapter 7 BMO and Carleson Measures
+  - 7.1 Functions of Bounded Mean Oscillation
+  - 7.2 Duality between H! and BMO
+  - 7.3 Nontangential Maximal Functions and Carleson Measures
+  - 7.4 The Sharp Maximal Function
+  - 7.5 Commutators of Singular Integrals with BMO Functions*
+- Chapter 8 Singular Integrals of Nonconvolution Type
+  - 8.1 General Background and the Role of BMO
+  - 8.2 Consequences of L? Boundedness
+  - 8.3 The T(1) Theorem
+  - 8.4 Paraproducts
+  - 8.5 An Almost Orthogonality Lemma and Applications
+  - 8.6 The Cauchy Integral of Calderon and the T(b) Theorem*
+  - 8.7 Square Roots of Elliptic Operators*
+- Chapter 9 Weighted Inequalities
+  - 9.1 The A, Condition
+  - 9.2 Reverse Holder Inequality for A, Weights and Consequences
+  - 9.3 The A, condition*
+  - 9.4 Weighted Norm Inequalities for Singular Integrals
+  - 9.5 Further Properties of A, Weights* — p.337
+- ATT — p.487
+- Chapter 10 Boundedness and Convergence of Fourier Integrals — p.733
+  - 10.1 The Multiplier Problem for the Ball — p.734
+  - 10.2 Bochner-Riesz Means and the Carleson-Sjolin Theorem — p.745
+  - 10.3 Kakeya Maximal Operators — p.762
+  - 10.4 Fourier Transform Restriction and Bochner-Riesz Means — p.780
+  - 10.5 Almost Everywhere Convergence of Fourier Integrals* — p.796
+  - 10.6 L? Boundedness of the Carleson Operator* — p.831
+- Appendix A Gamma and Beta Functions
+- A.1. A Useful Formula
+- A.2. Definitions of I(z) and B(z, w)
+- A.3. Volume of the Unit Ball and Surface of the Unit Sphere
+- A.4. A Useful Integral
+- A.5. Meromorphic Extensions of B(z,w) and I'(z)
+- A.6. Asymptotics of I'(2) as — oo
+- A.7. The Duplication Formula for the Gamma Function
+- Appendix B Bessel Functions
+- B.1. Definition
+- B.2. Some Basic Properties
+- B.3. An Interesting Identity
+- B.4. The Fourier Transform of Surface Measure on S"~!
+- B.5. The Fourier Transform of a Radial Function on R”
+- B.6. Asymptotics of Bessel Functions
+- Appendix C Rademacher Functions
+- C.1. Definition of the Rademacher Functions
+- C.2. Khintchine’s Inequalities
+- C.3. Derivation of Khintchine’s Inequalities
+- C.4. Khintchine’s Inequalities for Weak Type Spaces
+- C.5. Extension to Several Variables
+- Appendix D Spherical Coordinates
+- D.1. Spherical Coordinate Formula
+- D.2. A useful change of variables formula
+- D.3. Computation of an Integral over the Sphere
+- D.4. The Computation of Another Integral over the Sphere
+- D.5. Integration over a General Surface
+- D.6. The Stereographic Projection
+- Appendix E Some Trigonometric Identities and Inequalities
+- Appendix F Summation by Parts
+- Appendix G Basic Functional Analysis
+- Appendix H The Minimax Lemma
+- Appendix I The Schur Lemma
+- I.1. The Classical Schur Lemma
+- I.2. Schur’s Lemma for Positive Operators
+  - 1.3 An Example
+- Appendix J The Whitney Decomposition of Open Sets in R”
+- Appendix K Smoothness and Vanishing Moments
+- K.1. The Case of No Cancellation
+- K.2. The Case of Cancellation
+- K.3. The Case of Three Factors
+- Bibliography
+- Index of Notation
+- Index

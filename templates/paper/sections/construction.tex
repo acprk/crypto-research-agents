@@ -1,0 +1,32 @@
+% construction.tex -- statement -> construction -> cost -> selection -> example
+% (skills/paper-playbook/sections/08).
+\section{<<Main Construction>>}\label{sec:construction}
+<<Opening: what this section proves/builds and where it is used.>>
+
+\begin{theorem}[<<name>>]\label{thm:main}
+Let <<ALL hypotheses explicit>>. Then <<statement>>.
+\end{theorem}
+\begin{proof}[Proof sketch]
+<<Sketch; full proof in \Cref{app:proofs}.>>
+\end{proof}
+
+\begin{algorithm}[t]
+\footnotesize
+\caption{\textsf{<<Name>>} --- <<one-line purpose>>}\label{alg:main}
+\begin{algorithmic}[1]
+\Require <<typed inputs, e.g.\ $\ct\in\mathsf{LWE}_{\sk}(m)$>>
+\Ensure <<typed output>>
+\State <<step>> \Comment{<<meaning>>}
+\State \Return <<...>>
+\end{algorithmic}
+\end{algorithm}
+
+\begin{proposition}[Cost]\label{prop:cost}
+\Cref{alg:main} costs
+$\underbrace{<<a>>}_{\text{<<term 1>>}}+\underbrace{<<b>>}_{\text{<<term 2>>}}$
+<<cost units (the paper-wide currency)>>.
+\end{proposition}
+
+\noindent\textbf{Selection rule.} <<Closed-form choice of configuration from the instance; tie-breaking.>>
+
+\noindent\textbf{Example.} <<Tiny worked example, recomputable by a script (EVIDENCE id).>>

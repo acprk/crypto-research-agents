@@ -1,0 +1,42 @@
+% experiments.tex -- nine-part evaluation (sections/10, skills/experiments-writing).
+% Tables are generated from data files; do not hand-type numbers.
+\section{Implementation and Evaluation}\label{sec:eval}
+We evaluate <<objects>> inside <<library, commit>>, changing only <<stage>>; everything
+else is that of <<baseline>>, so every gain below is due to <<object>> alone.\footnote{<<artifact link>>}
+\Cref{sec:eval:setup} fixes the setup and \Cref{sec:eval:results} reports the results.
+
+\subsection{Setup}\label{sec:eval:setup}
+\noindent\textbf{Baselines.}
+\begin{itemize}
+\item \textbf{<<Baseline A>>}~\cite{ToyEprint}: <<what; where it runs; configuration>>.
+\end{itemize}
+\noindent\textbf{Platform.} <<CPU model @ GHz, threads, compiler/library versions, repetitions
+and statistic, interleaved runs, every output verified against a cleartext reference.>>
+
+\noindent\textbf{Parameters.} \Cref{tab:params} lists every set with its security estimate
+(<<estimator, commit>>). <<Excluded instances and why.>>
+% \input{tables/params}   % generated from EVIDENCE-backed data; placeholder below
+\begin{table}[t]\centering\scriptsize
+\caption{Parameter sets. <<Define columns.>> Security: <<estimator, commit>>.}\label{tab:params}
+\begin{tabular}{lccc}\toprule Set & <<param>> & <<param>> & $\secpar$ (bits)\\\midrule <<I>> & & & \\\bottomrule\end{tabular}
+\end{table}
+
+\noindent\textbf{Configurations.} (i)~<<= prior work>>; (ii)~<<one component>>; (iii)~<<ours, composed>>.
+
+\subsection{Results}\label{sec:eval:results}
+% \input{tables/main}     % generated; placeholder below
+\begin{table}[t]\centering\scriptsize
+\caption{Main results (<<unit>>). Ratio = <<baseline>> / ours. <<Scope.>>}\label{tab:main}
+\begin{tabular}{lcccc}\toprule Set & (i) & (ii) & (iii) & Ratio\\\midrule <<I>> & & & & \\\bottomrule\end{tabular}
+\end{table}
+\noindent\textbf{Speedup.} On <<scope>>, <<range>>; e.g.\ <<two concrete points>>.
+
+\noindent\textbf{The components compose, and neither suffices alone.} <<ablation>>.
+
+\noindent\textbf{Coverage and overhead.} <<new cases; capacity/memory/key-size overhead>>.
+
+\noindent\textbf{Comparison with published implementations.} <<measured vs claimed; incomparable rows marked>>.
+
+\begin{remark}[Scope of the comparison]
+<<Metric orientation; single-thread policy; where we lose and why.>>
+\end{remark}

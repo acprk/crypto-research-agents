@@ -1,0 +1,137 @@
+# A Classical Introduction to Modern Number Theory
+
+- **Author(s):** Kenneth Ireland, Michael Rosen
+- **Format:** pdf; pages: 406
+- **TOC source:** text-heuristic
+- **Note:** parsed from printed contents pages; page numbers are PRINTED pages
+- **Page convention:** bookmark pages are PDF physical pages (1-based) unless the note says otherwise.
+
+## Table of contents
+
+- Preface to the Second Edition
+- Preface
+- Chapter 1 Unique Factorization
+  - §I Unique Factorization in 7l
+  - §2 Unique Factorization in k[x]
+  - §3 Unique Factorization in a Principal Ideal Domain
+  - §4 The Rings 7l.[i ) and 7l. [w)
+- Chapter 2 Applications of Unique Factorization
+  - §I Infinitely Many Primes in 7l
+  - §2 Some Arithmetic Functions
+  - §3 L lip Diverges
+  - §4 The Growth of 1T(X)
+- Chapter 3 Congruence
+  - §I Elementary Observations
+  - §2 Congruence in 7l
+  - §3 The Congruence ax == b(m)
+  - §4 The Chinese Remainder Theorem
+- Chapter 4 The Structure of U(Z/nZ)
+  - §I Primitive Roots and the Group Structure of U(71.1n71.)
+- Chapter 5 Quadratic Reciprocity
+  - §I Quadratic Residues
+  - §2 Law of Quadratic Reciprocity
+  - §3 A Proof of the Law of Quadratic Reciprocity — p.1
+- Chapter 6 Quadratic Gauss Sums
+  - §I Algebraic Numbers and Algebraic Integers
+  - §2 The Quadratic Character of — p.2
+  - §3 Quadratic Gauss Sums
+  - §4 The Sign of the Quadratic Gauss Sum
+- Chapter 7 Finite Fields
+  - §I Basic Properties of Finite Fields
+  - §2 The Existence of Finite Fields
+  - §3 An Application to Quadratic Residues
+- Chapter 8 Gauss and Jacobi Sums
+  - §I Multipl icative Characters
+  - §2 Gauss Sums
+  - §3 Jacobi Sums
+  - §4 The Equation x" + y" = I in Fp
+  - §5 More on Jacobi Sums
+  - §6 Applications
+  - §7 A General Theorem
+- Chapter 9 Cubic and Biquadratic Reciprocity
+  - §I The Ring l[w]
+  - §2 Residue Class Rings
+  - §3 Cubic Residue Character
+  - §4 Proof of the Law of Cubic Reciprocity
+  - §5 Another Proof of the Law of Cubic Reciprocity
+  - §6 The Cubic Character of — p.2
+  - §7 Biquadratic Reciprocity: Preliminaries
+  - §8 The Quartic Residue Symbol
+  - §9 The Law of Biquadratic Reciprocity
+  - §10 Rational Biquadratic Reciprocity
+  - §II The Constructibility of Regular Polygons
+  - §12 Cubic Gauss Sums and the Problem of Kummer
+- Chapter 10 Equations over Finite Fields
+  - §I Affine Space, Projective Space, and Polynomials
+  - §2 Chevalley's Theorem
+  - §3 Gauss and Jacobi Sums over Finite Fields — p.66
+- Chapter 11 The Zeta Function — p.151
+  - §I The Zeta Function of a Projective Hypersurface — p.151
+  - §2 Trace and Norm in Finite Fields — p.158
+  - §3 The Rationality of the Zeta Function Associated to — p.161
+  - §4 A Proof of the Hasse-Davenport Relation — p.163
+  - §5 The Last Entry — p.166
+- Chapter 12 Algebraic Number Theory — p.172
+  - §I Algebraic Preliminaries — p.172
+  - §2 Unique Factorization in Algebraic Number Fields — p.174
+  - §3 Ramification and Degree — p.181
+- Chapter 13 Quadratic and Cyclotomic Fields — p.188
+  - §I Quadratic Number Fields — p.188
+  - §2 Cyclotomic Fields — p.193
+  - §3 Quadratic Reciprocity Revisited — p.199
+- Chapter 14 The Stickelberger Relation and the Eisenstein Reciprocity Law — p.203
+  - §I The Norm of an Ideal — p.203
+  - §2 The Power Residue Symbol — p.204
+  - §3 The Stickelberger Relation — p.207
+  - §4 The Proof of the Stickelberger Relation — p.209
+  - §5 The Proof of the Eisenstein Reciprocity Law — p.215
+  - §6 Three Applications — p.220
+- Chapter 15 Bernoulli Numbers — p.228
+  - §I Bernoulli Numbers; Definitions and Applications — p.228
+  - §2 Congruences Involving Bernoulli Numbers — p.234
+  - §3 Herbrand's Theorem — p.241
+- Chapter 16 Dirichlet L-functions — p.249
+  - §I The Zeta Function — p.249
+  - §2 A Special Case — p.251
+  - §3 Dirichlet Characters — p.253
+  - §4 Dirichlet L-functions — p.255
+  - §5 The Key Step — p.257
+  - §6 Evaluating Lis, X) at Negative Integers — p.261
+- Chapter 17 Diophantine Equations
+  - §I Generalities and First Examples
+  - §2 The Method of Descent
+  - §3 Legendre's Theorem
+  - §4 Sophie Germain's Theorem
+  - §5 Pelt's Equation
+  - §6 Sums of Two Squares
+  - §7 Sums of Four Squares
+  - §8 The Fermat Equation: Exponent — p.3
+  - §9 Cubic Curves with Infinitely Many Rational Points
+  - §1 O The Equation y 2 = xl + k
+  - §II The First Case of Fermat's Conjecture for Regular Exponent
+  - §12 Diophantine Equations and Diophantine Approximation
+- Chapter 18 Elliptic Curves
+  - §I Generalities
+  - §2 Local and Global Zeta Functions of an Elliptic Curve
+  - §3 y2 = xl + D, the Local Case
+  - §4 Dx, the Local Case
+  - §5 Heeke L-functions
+  - §6 Dx, the Global Case
+  - §7 y 2 = Xl + D, the Global Case
+  - §8 Final Remarks
+- Chapter 19 The Mordell-Weil Theorem
+  - §I The Addition Law and Several Identities
+  - §2 The Group EI2E
+  - §3 The Weak Dirichlet Unit Theorem
+  - §4 The Weak Mordell-Weil Theorem
+  - §5 The Descent Argument
+- Chapter 20 New Progress in Arithmetic Geometry
+  - §I The Mordell Conjecture
+  - §2 Elliptic Curves
+  - §3 Modular Curves
+  - §4 Heights and the Height Regulator
+  - §5 New Results on the Birch-Swinnerton-Dyer Conjecture
+  - §6 Applications to Gauss's Class Number Conjecture
+- Selected Hints for the Exercises
+- Bibliography
+- Index — p.269

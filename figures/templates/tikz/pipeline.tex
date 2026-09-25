@@ -1,0 +1,26 @@
+% Bootstrapping-style pipeline: left-to-right stages, levels above, the
+% modified stage highlighted (ours), a brace for consumed depth.  Toy labels.
+\documentclass[border=3pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{crypto-tikz}
+\begin{document}
+\begin{tikzpicture}[node distance=5mm]
+  \node (in)  {$\mathrm{ct}$};
+  \node[box, right=of in] (s1) {ModRaise};
+  \node[box, right=of s1] (s2) {CoeffToSlot};
+  \node[ours, right=of s2] (s3) {EvalMod\\[-1pt]{\footnotesize (new)}};
+  \node[box, right=of s3] (s4) {SlotToCoeff};
+  \node[right=of s4] (out) {$\mathrm{ct}'$};
+  \foreach \a/\b in {in/s1, s1/s2, s2/s3, s3/s4, s4/out} \draw[flow] (\a) -- (\b);
+  % levels, all on one baseline above the boxes
+  \coordinate (lv) at ($(s3.north)+(0,3mm)$);
+  \foreach \n/\l in {in/{0}, s1/{L}, s2/{L-3}, s3/{L-11}, s4/{L-14}, out/{L-14}}
+    \node[op, anchor=base] at (\n |- lv) {$\l$};
+  \node[op, anchor=base east, text=crmuted] at ($(in.west |- lv)+(-1mm,0)$) {level};
+  % consumed depth
+  \draw[brace, decoration={mirror}] ($(s2.south west)+(0,-1mm)$) -- node[op, below=5pt] {depth consumed: 14}
+        ($(s4.south east)+(0,-1mm)$);
+\end{tikzpicture}
+\end{document}

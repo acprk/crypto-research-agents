@@ -1,0 +1,69 @@
+# Introduction to Matrix Analysis and Applications
+
+- **Author(s):** Fumio Hiai, Dénes Petz
+- **Format:** pdf; pages: 337
+- **TOC source:** bookmarks
+- **Page convention:** bookmark pages are PDF physical pages (1-based) unless the note says otherwise.
+
+## Table of contents
+
+- Preface — p.6
+- Contents — p.8
+- 1 Fundamentals of Operators and Matrices — p.10
+  - 1.1 Basics on Matrices — p.10
+  - 1.2 Hilbert Space — p.13
+  - 1.3 Jordan Canonical Form — p.22
+  - 1.4 Spectrum and Eigenvalues — p.24
+  - 1.5 Trace and Determinant — p.30
+  - 1.6 Positivity and Absolute Value — p.37
+  - 1.7 Tensor Product — p.45
+  - 1.8 Notes and Remarks — p.54
+  - 1.9 Exercises — p.56
+- 2 Mappings and Algebras — p.63
+  - 2.1 Block Matrices — p.63
+  - 2.2 Partial Ordering — p.73
+  - 2.3 Projections — p.77
+  - 2.4 Subalgebras — p.84
+  - 2.5 Kernel Functions — p.91
+  - 2.6 Positivity-Preserving Mappings — p.93
+  - 2.7 Notes and Remarks — p.102
+  - 2.8 Exercises — p.103
+- 3 Functional Calculus and Derivation — p.109
+  - 3.1 The Exponential Function — p.110
+  - 3.2 Other Functions — p.119
+  - 3.3 Derivation — p.125
+  - 3.4 Fréchet Derivatives — p.133
+  - 3.5 Notes and Remarks — p.138
+  - 3.6 Exercises — p.139
+- 4 Matrix Monotone Functions and Convexity — p.144
+  - 4.1 Some Examples of Functions — p.145
+  - 4.2 Convexity — p.149
+  - 4.3 Pick Functions — p.166
+  - 4.4 Löwner's Theorem — p.171
+  - 4.5 Some Applications — p.179
+  - 4.6 Notes and Remarks — p.189
+  - 4.7 Exercises — p.190
+- 5 Matrix Means and Inequalities — p.193
+  - 5.1 The Geometric Mean — p.194
+  - 5.2 General Theory — p.202
+  - 5.3 Mean Examples — p.213
+  - 5.4 Mean Transformation — p.218
+  - 5.5 Notes and Remarks — p.228
+  - 5.6 Exercises — p.229
+- 6 Majorization and Singular Values — p.233
+  - 6.1 Majorization of Vectors — p.233
+  - 6.2 Singular Values — p.238
+  - 6.3 Symmetric Norms — p.247
+  - 6.4 More Majorizations for Matrices — p.259
+  - 6.5 Notes and Remarks — p.274
+  - 6.6 Exercises — p.275
+- 7 Some Applications — p.278
+  - 7.1 Gaussian Markov Property — p.279
+  - 7.2 Entropies and Monotonicity — p.282
+  - 7.3 Quantum Markov Triplets — p.293
+  - 7.4 Optimal Quantum Measurements — p.297
+  - 7.5 The Cramér--Rao Inequality — p.311
+  - 7.6 Notes and Remarks — p.325
+  - 7.7 Exercises — p.326
+- Bibliography — p.328
+- Index — p.332

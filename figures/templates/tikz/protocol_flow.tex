@@ -1,0 +1,29 @@
+% Two-party protocol message flow (house style).  Toy protocol: outsourced
+% homomorphic evaluation.  Columns: party computations on the sides,
+% messages as labelled horizontal arrows in the middle, rounds top-to-bottom.
+\documentclass[border=3pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}   % LNCS; for ACM/IEEE use \usepackage{newtxtext,newtxmath}
+\usepackage{amsmath}
+\usepackage{crypto-tikz}
+\newcommand{\alg}[1]{\mathsf{#1}}
+\begin{document}
+\begin{tikzpicture}[x=1cm,y=-0.62cm]
+  \node[party] at (0,0) {Client$(x)$};
+  \node[party] at (8,0) {Server$(f)$};
+  \draw[crgrid, line width=0.4pt] (-1.4,0.55) -- (9.4,0.55);
+  % round 1
+  \node[anchor=west] at (-1.4,1.4) {$(\mathit{pk},\mathit{sk},\mathit{evk}) \gets \alg{KeyGen}(1^\lambda)$};
+  \node[anchor=west] at (-1.4,2.3) {$c \gets \alg{Enc}_{\mathit{pk}}(x)$};
+  \draw[msg] (2.2,3.2) -- node[above, font=\footnotesize] {$c,\ \mathit{evk}$} (5.8,3.2);
+  % round 2
+  \node[anchor=east] at (9.4,4.1) {$c' \gets \alg{Eval}_{\mathit{evk}}(f, c)$};
+  \draw[msg] (5.8,5.0) -- node[above, font=\footnotesize] {$c'$} (2.2,5.0);
+  % output
+  \node[anchor=west] at (-1.4,5.9) {$y \gets \alg{Dec}_{\mathit{sk}}(c')$};
+  \node[anchor=west, text=crink2, font=\footnotesize] at (-1.4,6.8) {output $y = f(x)$};
+  % round markers
+  \foreach \y/\r in {3.2/1, 5.0/2}
+    \node[op, anchor=east] at (9.4,\y) {round \r};
+\end{tikzpicture}
+\end{document}

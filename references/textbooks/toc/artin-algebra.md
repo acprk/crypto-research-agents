@@ -1,0 +1,188 @@
+# Algebra
+
+- **Author(s):** Michael Artin
+- **Format:** pdf; pages: 559
+- **TOC source:** bookmarks
+- **Page convention:** bookmark pages are PDF physical pages (1-based) unless the note says otherwise.
+
+## Table of contents
+
+- Contents — p.4
+- Preface — p.10
+- 1 Matrices — p.16
+  - 1.1 The Basic Operations — p.16
+  - 1.2 Row Reduction — p.25
+  - 1.3 The Matrix Transpose — p.32
+  - 1.4 Determinants — p.33
+  - 1.5 Permutations — p.39
+  - 1.6 Other Formulas for the Determinant — p.42
+  - Exercises — p.46
+- 2 Groups — p.52
+  - 2.1 Laws of Composition — p.52
+  - 2.2 Groups and Subgroups — p.55
+  - 2.3 Subgroups of the Additive Group of Integers — p.58
+  - 2.4 Cyclic Groups — p.61
+  - 2.5 Homomorphisms — p.62
+  - 2.6 Isomorphisms — p.66
+  - 2.7 Equivalence Relations and Partitions — p.67
+  - 2.8 Cosets — p.71
+  - 2.9 Modular Arithmetic — p.75
+  - 2.10 The Correspondence Theorem — p.76
+  - 2.11 Product Groups — p.79
+  - 2.12 Quotient Groups — p.81
+  - Exercises — p.84
+- 3 Vector Spaces — p.93
+  - 3.1 Subspaces of Rn — p.93
+  - 3.2 Fields — p.95
+  - 3.3 Vector Spaces — p.99
+  - 3.4 Bases and Dimension — p.101
+  - 3.5 Computing with Bases — p.106
+  - 3.6 Direct Sums — p.110
+  - 3.7 Infinite-Dimensional Spaces — p.111
+  - Exercises — p.113
+- 4 Linear Operators — p.117
+  - 4.1 The Dimension Formula — p.117
+  - 4.2 The Matrix of a Linear Transformation — p.119
+  - 4.3 Linear Operators — p.123
+  - 4.4 Eigenvectors — p.125
+  - 4.5 The Characteristic Polynomial — p.128
+  - 4.6 Triangular and Diagonal Forms — p.131
+  - 4.7 Jordan Form — p.135
+  - Exercises — p.140
+- 5 Applications of Linear Operators — p.147
+  - 5.1 Orthogonal Matrices and Rotations — p.147
+  - 5.2 Using Continuity — p.153
+  - 5.3 Systems of Differential Equations — p.156
+  - 5.4 The Matrix Exponential — p.160
+  - Exercises — p.165
+- 6 Symmetry — p.169
+  - 6.1 Symmetry of Plane Figures — p.169
+  - 6.2 Isometries — p.171
+  - 6.3 Isometries of the Plane — p.174
+  - 6.4 Finite Groups of Orthogonal Operators on the Plane — p.178
+  - 6.5 Discrete Groups of Isometries — p.182
+  - 6.6 Plane Crystallographic Groups — p.187
+  - 6.7 Abstract Symmetry: Group Operations — p.191
+  - 6.8 The Operation on Cosets — p.193
+  - 6.9 The Counting Formula — p.195
+  - 6.10 Operations on Subsets — p.196
+  - 6.11 Permutation Representations — p.196
+  - 6.12 Finite Subgroups of the Rotation Group — p.198
+  - Exercises — p.203
+- 7 More Group Theory — p.210
+  - 7.1 Cayley's Theorem — p.210
+  - 7.2 The Class Equation — p.210
+  - 7.3 p-Groups — p.212
+  - 7.4 The Class Equation of the Icosahedral Group — p.213
+  - 7.5 Conjugation in the Symmetric Group — p.215
+  - 7.6 Normalizers — p.218
+  - 7.7 The Sylow Theorems — p.218
+  - 7.8 Groups of Order 12 — p.223
+  - 7.9 The Free Group — p.225
+  - 7.10 Generators and Relations — p.227
+  - 7.11 The Todd-Coxeter Algorithm — p.231
+  - Exercises — p.236
+- 8 Bilinear Forms — p.244
+  - 8.1 Bilinear Forms — p.244
+  - 8.2 Symmetric Forms — p.246
+  - 8.3 Hermitian Forms — p.247
+  - 8.4 Orthogonality — p.250
+  - 8.5 Euclidean Spaces and Hermitian Spaces — p.256
+  - 8.6 The Spectral Theorem — p.257
+  - 8.7 Conics and Quadrics — p.260
+  - 8.8 Skew-Symmetric Forms — p.264
+  - 8.9 Summary — p.267
+  - Exercises — p.269
+- 9 Linear Groups — p.276
+  - 9.1 The Classical Groups — p.276
+  - 9.2 Interlude: Spheres — p.278
+  - 9.3 The Special Unitary Group SU2 — p.281
+  - 9.4 The Rotation Group SO3 — p.284
+  - 9.5 One-Parameter Groups — p.287
+  - 9.6 The Lie Algebra — p.290
+  - 9.7 Translation in a Group — p.292
+  - 9.8 Normal Subgroups of SL2 — p.295
+  - Exercises — p.298
+- 10 Group Representations — p.305
+  - 10.1 Definitions — p.305
+  - 10.2 Irreducible Representations — p.309
+  - 10.3 Unitary Representations — p.311
+  - 10.4 Characters — p.313
+  - 10.5 One-Dimensional Characters — p.318
+  - 10.6 The Regular Representation — p.319
+  - 10.7 Schur's Lemma — p.322
+  - 10.8 Proof of the Orthogonality Relations — p.324
+  - 10.9 Representations of SU2 — p.326
+  - Exercises — p.329
+- 11 Rings — p.338
+  - 11.1 Definition of a Ring — p.338
+  - 11.2 Polynomial Rings — p.340
+  - 11.3 Homomorphisms and Ideals — p.343
+  - 11.4 Quotient Rings — p.349
+  - 11.5 Adjoining Elements — p.353
+  - 11.6 Product Rings — p.356
+  - 11.7 Fractions — p.357
+  - 11.8 Maximal Ideals — p.359
+  - 11.9 Algebraic Geometry — p.362
+  - Exercises — p.369
+- 12 Factoring — p.374
+  - 12.1 Factoring Integers — p.374
+  - 11.2 Unique Factorization Domains — p.375
+  - 12.3 Gauss's Lemma — p.382
+  - 12.4 Factoring Integer Polynomials — p.386
+  - 12.5 Gauss Primes — p.391
+  - Exercises — p.393
+- 13 Quadratic Number Fields — p.398
+  - 13.1 Algebraic Integers — p.398
+  - 13.2 Factoring Algebraic Integers — p.400
+  - 13.3 Ideals in Z[√-5] — p.402
+  - 13.4 Ideal Multiplication — p.404
+  - 13.5 Factoring Ideals — p.407
+  - 13.6 Prime Ideals and Prime Integers — p.409
+  - 13.7 Ideal Classes — p.411
+  - 13.8 Computing the Class Group — p.414
+  - 13.9 Real Quadratic Fields — p.417
+  - 13.10 About Lattices — p.420
+  - Exercises — p.423
+- 14 Linear Algebra in a Ring — p.427
+  - 14.1 Modules — p.427
+  - 14.2 Free Modules — p.429
+  - 14.3 Identities — p.432
+  - 14.4 Diagonalizing Integer Matrices — p.433
+  - 14.5 Generators and Relations — p.438
+  - 14.6 Noetherian Rings — p.441
+  - 14.7 Structure of Abelian Groups — p.444
+  - 14.8 Application to Linear Operators — p.447
+  - 14.9 Polynomial Rings in Several Variables — p.451
+  - Exercises — p.452
+- 15 Fields — p.457
+  - 15.1 Examples of Fields — p.457
+  - 15.2 Algebraic and Transcendental Fields — p.458
+  - 15.3 The Degree of a Field Extension — p.461
+  - 15.4 Finding the Irreducible Polynomial — p.464
+  - 15.5 Ruler and Compass Constructions — p.465
+  - 15.6 Adjoining Roots — p.471
+  - 15.7 Finite Fields — p.474
+  - 15.8 Primitive Elements — p.477
+  - 15.9 Function Fields — p.478
+  - 15.10 The Fundamental Theorem of Algebra — p.486
+  - Exercises — p.487
+- 16 Galois Theory — p.492
+  - 16.1 Symmetric Functions — p.492
+  - 16.2 The Discriminant — p.496
+  - 16.3 Splitting Fields — p.498
+  - 16.4 Isomorphisms of Field Extensions — p.499
+  - 16.5 Fixed Fields — p.501
+  - 16.6 Galois Extensions — p.503
+  - 16.7 The Main Theorem — p.504
+  - 16.8 Cubic Equations — p.507
+  - 16.9 Quartic Equations — p.508
+  - 16.10 Roots of Unity — p.512
+  - 16.11 Kummer Extensions — p.515
+  - 16.12 Quintic Equations — p.517
+  - Exercises — p.520
+- APPENDIX — p.528
+  - Background Material — p.528
+- Bibliography — p.538
+- Notation — p.540
+- Index — p.544

@@ -1,0 +1,19 @@
+name = "crypto_template"
+version = "0.1.0"
+keywords = ["math", "cryptography"]
+defaultTargets = ["CryptoTemplate"]
+
+[leanOptions]
+pp.unicode.fun = true
+relaxedAutoImplicit = false
+autoImplicit = false
+
+# Keep the Mathlib rev IN SYNC with lean-toolchain. A mismatch forces a from-source
+# Mathlib build (hours) because `lake exe cache get` finds no matching oleans.
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.33.1"
+
+[[lean_lib]]
+name = "CryptoTemplate"

@@ -1,0 +1,108 @@
+# Algebraic Number Theory
+
+- **Author(s):** J.S. Milne
+- **Format:** pdf; pages: 166
+- **TOC source:** bookmarks
+- **Page convention:** bookmark pages are PDF physical pages (1-based) unless the note says otherwise.
+
+## Table of contents
+
+- Notation — p.6
+- Introduction — p.9
+- Exercises — p.14
+- 1 Preliminaries from Commutative Algebra — p.16
+  - Basic definitions — p.16
+  - Ideals in products of rings — p.17
+  - Noetherian rings — p.17
+  - Noetherian modules — p.18
+  - Local rings — p.19
+  - Rings of fractions — p.20
+  - The Chinese remainder theorem — p.21
+  - Review of tensor products — p.23
+  - Exercise — p.26
+- 2 Rings of Integers — p.27
+  - First proof that the integral elements form a ring — p.27
+  - Dedekind's proof that the integral elements form a ring — p.28
+  - Integral elements — p.30
+  - Review of bases of A-modules — p.33
+  - Review of norms and traces — p.33
+  - Review of bilinear forms — p.34
+  - Discriminants — p.35
+  - Rings of integers are finitely generated — p.37
+  - Finding the ring of integers — p.39
+  - Algorithms for finding the ring of integers — p.42
+  - Exercises — p.46
+- 3 Dedekind Domains; Factorization — p.48
+  - Discrete valuation rings — p.48
+  - Dedekind domains — p.50
+  - Unique factorization of ideals — p.51
+  - The ideal class group — p.54
+  - Discrete valuations — p.57
+  - Integral closures of Dedekind domains — p.59
+  - Modules over Dedekind domains (sketch). — p.59
+  - Factorization in extensions — p.61
+  - The primes that ramify — p.62
+  - Finding factorizations — p.64
+  - Examples of factorizations — p.65
+  - Eisenstein extensions — p.68
+  - Exercises — p.69
+- 4 The Finiteness of the Class Number — p.70
+  - Norms of ideals — p.70
+  - Statement of the main theorem and its consequences — p.72
+  - Lattices — p.75
+  - Some calculus — p.79
+  - Finiteness of the class number — p.81
+  - Binary quadratic forms — p.83
+  - Exercises — p.85
+- 5 The Unit Theorem — p.87
+  - Statement of the theorem — p.87
+  - Proof that U is finitely generated — p.89
+  - Computation of the rank — p.90
+  - S-units — p.92
+  - Example: CM fields — p.92
+  - Example: real quadratic fields — p.93
+  - Example: cubic fields with negative discriminant — p.94
+  - Finding mu(K) — p.95
+  - Finding a system of fundamental units — p.95
+  - Regulators — p.96
+  - Exercises — p.96
+- 6 Cyclotomic Extensions; Fermat's Last Theorem. — p.97
+  - The basic results — p.97
+  - Class numbers of cyclotomic fields — p.103
+  - Units in cyclotomic fields — p.103
+  - The first case of Fermat's last theorem for regular primes — p.104
+  - Exercises — p.106
+- 7 Absolute Values; Local Fields — p.107
+  - Absolute Values — p.107
+  - Nonarchimedean absolute values — p.108
+  - Equivalent absolute values — p.109
+  - Properties of discrete valuations — p.111
+  - Complete list of absolute values for the rational numbers — p.112
+  - The primes of a number field — p.113
+  - The weak approximation theorem — p.115
+  - Completions — p.116
+  - Completions in the nonarchimedean case — p.118
+  - Newton's lemma — p.121
+  - Extensions of nonarchimedean absolute values — p.125
+  - Newton's polygon — p.127
+  - Locally compact fields — p.128
+  - Unramified extensions of a local field — p.129
+  - Totally ramified extensions of K — p.131
+  - Ramification groups — p.132
+  - Krasner's lemma and applications — p.133
+  - Exercises — p.135
+- 8 Global Fields — p.137
+  - Extending absolute values — p.137
+  - The product formula — p.139
+  - Decomposition groups — p.141
+  - The Frobenius element — p.143
+  - Examples — p.145
+  - Computing Galois groups (the hard way) — p.146
+  - Computing Galois groups (the easy way) — p.146
+  - Applications of the Chebotarev density theorem — p.151
+  - Finiteness Theorems — p.153
+  - Exercises — p.154
+- A Solutions to the Exercises — p.155
+- B Two-hour examination — p.162
+- Bibliography — p.163
+- Index — p.165

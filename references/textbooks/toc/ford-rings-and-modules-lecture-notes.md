@@ -1,0 +1,270 @@
+# Rings and Modules [lecture notes]
+
+- **Author(s):** Timothy J. Ford
+- **Format:** pdf; pages: 378
+- **TOC source:** text-heuristic
+- **Note:** parsed from printed contents pages; page numbers are PRINTED pages
+- **Page convention:** bookmark pages are PDF physical pages (1-based) unless the note says otherwise.
+
+## Table of contents
+
+- Chapter 1 Preliminaries and Prerequisites — p.9
+- 1 Some Set Theory — p.9
+- 2 Some Number Theory — p.11
+- 3 The Well Ordering Principle and Some of Its Equivalents — p.12
+- 4 Exercises — p.14
+- Chapter 2 First Properties of Rings and Modules — p.15
+- 1 Introduction to Ring Theory — p.15
+  - 1.1 Deﬁnitions and Terminology — p.15
+  - 1.2 Exercises — p.19
+  - 1.3 Direct Sums of Rings — p.21
+  - 1.4 Exercises — p.23
+  - 1.5 Factorization in Commutative Rings — p.24
+  - 1.6 Ring of Quotients — p.27
+  - 1.7 Polynomial Rings — p.28
+  - 1.8 Exercises — p.31
+  - 1.9 Polynomials over a UFD — p.32
+- 2 Introduction to Linear Algebra — p.34
+  - 2.1 Modules and Algebras — p.34
+  - 2.2 Direct Sums of Modules — p.36
+  - 2.3 Free Modules — p.37
+  - 2.4 Vector Spaces — p.38
+  - 2.5 Exercises — p.40
+  - 2.6 Finitely Generated Modules over a Principal Ideal Domain — p.41
+  - 2.7 The Matrix of a Linear Transformation — p.46
+  - 2.8 Minimum Polynomial — p.48
+  - 2.9 Rational Canonical Form — p.49
+  - 2.10 Jordan Canonical Form — p.51
+  - 2.11 Alternating Multilinear Forms and the Determinant — p.52
+  - 2.12 The Characteristic Polynomial — p.56
+  - 2.13 Exercises — p.58
+- 3 Introduction to Fields and Galois Theory — p.60
+  - 3.1 Algebraic Extensions and Transcendental Extensions — p.60
+  - 3.2 The Fundamental Theorem of Galois Theory — p.63
+  - 3.3 Splitting Fields — p.67
+  - 3.4 Separable Extensions — p.70
+  - 3.5 Finite Fields — p.72
+  - 3.6 Separable Closure — p.73
+  - 3.7 The Trace Map and Norm Map — p.74
+  - 3.8 Cyclic Galois Extensions — p.76
+  - 3.9 Exercises — p.79
+- Chapter 3 A Deeper Look at Modules — p.81
+- 1 Mostly about Projective Modules — p.81
+  - 1.1 Categories and Functors — p.81
+  - 1.2 Deﬁnition of Projective Module — p.82
+  - 1.3 Deﬁnition of Progenerator Modules — p.85
+  - 1.4 Nakayama’s Lemma — p.87
+  - 1.5 Exercises — p.89
+- 2 Introduction to Hom and Tensor — p.91
+  - 2.1 Tensor Product of Modules — p.91
+  - 2.2 Tensor Product of Homomorphisms — p.92
+  - 2.3 Various Identities Involving Tensor Products — p.93
+  - 2.4 Tensor Functor — p.96
+  - 2.5 Tensor Product of Algebras — p.97
+  - 2.6 Modules Under Change of Base Ring — p.97
+  - 2.7 Exercises — p.99
+  - 2.8 Hom Groups — p.101
+  - 2.9 Hom Functor — p.102
+  - 2.10 Various Identities Involving the Hom Functor — p.103
+  - 2.11 Hom Tensor Relations — p.104
+  - 2.12 Exercises — p.106
+- 3 Mostly About Injective Modules — p.107
+  - 3.1 Injective Modules — p.107
+  - 3.2 Exercises — p.110
+  - 3.3 Injective Modules and Flat Modules — p.111
+- Chapter 4 Modules over Commutative Rings — p.115
+- 1 Locally Free Modules — p.115
+  - 1.1 Localization of Modules and Rings — p.115
+  - 1.2 Finitely Generated Projective over a Local Ring is Free — p.116
+  - 1.3 The Rank of a Finitely Generated Projective Module — p.118
+  - 1.4 The Zariski Topology — p.119
+  - 1.5 A Finitely Generated Projective Module is Locally Free — p.120
+  - 1.6 Exercises — p.121
+- 2 Faithfully Flat Modules and Algebras — p.124
+  - 2.1 Faithfully Flat Modules — p.124
+  - 2.2 Faithfully Flat Algebras — p.125
+  - 2.3 Exercises — p.127
+- 3 Some Homological Algebra — p.128
+  - 3.1 The Five Lemma — p.128
+  - 3.2 The Snake Lemma — p.128
+  - 3.3 Another Hom Tensor Relation — p.129
+  - 3.4 Exercises — p.131
+- 4 Locally Free Modules — p.131
+  - 4.1 Faithfully Flat Base Change — p.131
+  - 4.2 Locally Free of Finite Rank Equals Finitely Generated Projective — p.133
+  - 4.3 Exercises — p.134
+  - 4.4 Invertible Modules and the Picard Group — p.134
+  - 4.5 Exercises — p.135
+- Chapter 5 Some Ring Theory — p.137
+- 1 Morita Theory — p.137
+  - 1.1 Categorical Equivalence — p.137
+  - 1.2 The Functors — p.138
+  - 1.3 The Morita Theorems — p.140
+- 2 Separable Algebras — p.143
+  - 2.1 The Deﬁnition — p.143
+  - 2.2 Examples of Separable Algebras — p.146
+  - 2.3 Separable Algebras Under Change of Base Ring — p.149
+  - 2.4 Exercises — p.152
+- 3 Structure Theory of Semisimple Artinian Rings — p.154
+  - 3.1 The Jacobson Radical and Nakayama’s Lemma — p.154
+  - 3.2 Direct Summands of Rings — p.156
+  - 3.3 Semisimple Modules and Semisimple Rings — p.157
+  - 3.4 Simple Rings and the Wedderburn-Artin Theorem — p.159
+- 4 Separable Algebras over a Field — p.161
+  - 4.1 Central Simple Equals Central Separable — p.161
+  - 4.2 A Separable Field Extension is a Separable Algebra — p.165
+  - 4.3 Exercises — p.166
+- 5 Azumaya Algebras — p.166
+  - 5.1 First Properties of Azumaya Algebras — p.166
+  - 5.2 The Commutator Theorems — p.169
+  - 5.3 The Brauer Group — p.171
+  - 5.4 Splitting Rings — p.173
+  - 5.5 Exercises — p.175
+  - 5.6 The Skolem-Noether Theorem — p.175
+  - 5.7 Exercises — p.177
+- 6 Separable Algebras, the Commutative Case — p.177
+  - 6.1 The Role of the Trace — p.177
+  - 6.2 Exercises — p.181
+- Chapter 6 Some More Commutative Algebra — p.183
+- 1 Direct Limits and Inverse Limits — p.183
+  - 1.1 The Direct Limit — p.183
+  - 1.2 The Inverse Limit — p.186
+  - 1.3 Inverse Systems Indexed by Non-negative Integers — p.187
+  - 1.4 Exercises — p.190
+- 2 Flat Modules and Algebras — p.191
+  - 2.1 Flat if and only if Locally Flat — p.191
+  - 2.2 A Finiteness Criterion for Flat — p.192
+  - 2.3 Finitely Presented and Flat is Projective — p.194
+  - 2.4 Flat Algebras — p.196
+  - 2.5 Exercises — p.197
+- 3 Artinian and Noetherian Rings and Modules — p.197
+  - 3.1 Primary Decomposition — p.197
+  - 3.2 Chain Conditions — p.201
+  - 3.3 Composition Series — p.204
+  - 3.4 The Hilbert Basis Theorem — p.206
+  - 3.5 Algebraic Varieties — p.208
+  - 3.6 Primary Decomposition in a Noetherian Ring — p.210
+  - 3.7 Artinian Rings — p.211
+  - 3.8 Exercises — p.212
+- 4 I-adic Topology and Completion — p.215
+  - 4.1 Completion of a Linear Topological Module — p.215
+  - 4.2 Functorial Properties of Completion — p.216
+  - 4.3 Stable I-ﬁltrations — p.217
+  - 4.4 Exercises — p.218
+- 5 Graded Rings and Modules — p.218
+  - 5.1 The Grading Associated to a Filtration — p.219
+  - 5.2 The Artin-Rees Theorem — p.220
+  - 5.3 The Completion of a Noetherian Ring is Flat — p.222
+  - 5.4 The Krull Intersection Theorem — p.224
+  - 5.5 Exercises — p.224
+  - 5.6 The Completion of a Noetherian Ring is Noetherian — p.225
+  - 5.7 Exercises — p.227
+- 6 Integral Extensions — p.227
+  - 6.1 Integral elements — p.227
+  - 6.2 Integrally Closed Domains — p.229
+  - 6.3 Going Up and Going Down — p.230
+  - 6.4 Exercises — p.233
+  - 6.5 Transcendental Field Extensions — p.233
+  - 6.6 Exercises — p.235
+- Chapter 7 Another Look at Separable Algebras — p.237
+- 1 Derivations and Separable Algebras — p.237
+  - 1.1 Derivations and Hochschild Cohomology — p.237
+  - 1.2 More Tests for Separability — p.239
+  - 1.3 Exercises — p.241
+- 2 The Module of Kähler Differentials — p.242
+  - 2.1 The Deﬁnition — p.242
+  - 2.2 The Fundamental Exact Sequences — p.244
+  - 2.3 Exercises — p.246
+  - 2.4 The Jacobian Criterion — p.247
+- 3 Étale Extensions — p.248
+  - 3.1 Unramiﬁed Extensions — p.248
+  - 3.2 Exercises — p.249
+  - 3.3 Étale Extensions — p.250
+- Chapter 8 Some Homological Algebra — p.251
+- 1 Homology Group Functors — p.251
+  - 1.1 Chain Complexes — p.251
+  - 1.2 Exercises — p.252
+  - 1.3 The long exact sequence of homology — p.253
+  - 1.4 Homotopy Equivalence — p.255
+  - 1.5 Exercises — p.257
+  - 1.6 Left Derived Functors — p.257
+  - 1.7 The Long Exact Sequence — p.259
+  - 1.8 Exercises — p.264
+  - 1.9 Left Derived Groups of an Acyclic Resolution — p.265
+  - 1.10 Bifunctors — p.266
+- 2 Cohomology Group Functors — p.269
+  - 2.1 Cochain Complexes — p.269
+  - 2.2 Exercises — p.270
+  - 2.3 The long exact sequence of cohomology — p.271
+  - 2.4 Homotopy Equivalence — p.271
+  - 2.5 Exercises — p.274
+  - 2.6 Right Derived Functors — p.274
+  - 2.7 The Long Exact Sequence — p.277
+  - 2.8 Exercises — p.283
+  - 2.9 Right Derived Groups of an Acyclic Resolution — p.284
+  - 2.10 Bifunctors — p.287
+- 3 Introduction to Tor and Ext Groups — p.289
+  - 3.1 Introduction to Tor groups — p.289
+  - 3.2 Exercises — p.292
+  - 3.3 Introduction to Ext Groups — p.293
+  - 3.4 Cohomological Dimension of a Ring — p.295
+  - 3.5 Exercises — p.297
+- Chapter 9 Some More Commutative Algebra — p.299
+- 1 Associated Primes — p.299
+  - 1.1 The Associated Primes of a Module — p.299
+  - 1.2 Exercises — p.302
+  - 1.3 Primary Submodules — p.302
+  - 1.4 Primary Decomposition — p.303
+- 2 Graded Rings and Modules — p.305
+  - 2.1 Associated Prime Ideals of a Graded Module — p.305
+  - 2.2 Numerical Polynomials — p.308
+  - 2.3 The Hilbert Polynomial — p.309
+- 3 Krull Dimension of a Commutative Noetherian Ring — p.310
+  - 3.1 Deﬁnitions — p.310
+  - 3.2 The Krull Dimension of a Noetherian Semilocal Ring — p.311
+  - 3.3 Exercises — p.315
+  - 3.4 The Krull Dimension of a Fiber of a Morphism — p.316
+  - 3.5 Krull Dimension of a Finitely Generated Extension — p.317
+- 4 Flat Modules and Algebras — p.320
+  - 4.1 Local Criteria for Flatness — p.320
+- 5 Henselian Local Rings — p.325
+  - 5.1 The Deﬁnition — p.325
+  - 5.2 Hensel’s Lemma — p.328
+  - 5.3 Exercises — p.330
+- 6 Zariski’s Main Theorem — p.330
+  - 6.1 Quasi-ﬁnite Algebras — p.331
+  - 6.2 Zariski’s Main Theorem — p.332
+  - 6.3 Exercises — p.337
+- 7 Other Results — p.337
+  - 7.1 A Theorem of Azumaya — p.337
+- Chapter 10 Some More Commutative Algebra — p.339
+- 1 Normal Rings and Regular Rings — p.339
+  - 1.1 Normal Integral Domains — p.339
+  - 1.2 Regular Local Rings — p.341
+  - 1.3 Exercises — p.342
+- 2 Valuations and Valuation Rings — p.342
+  - 2.1 Valuation Rings — p.342
+  - 2.2 Exercises — p.345
+  - 2.3 Discrete Valuation Rings — p.346
+- 3 Some Local Algebra — p.347
+  - 3.1 Regular Sequences — p.347
+  - 3.2 Exercises — p.353
+  - 3.3 Cohen-Macaulay Modules — p.353
+  - 3.4 Exercises — p.356
+  - 3.5 Regular Local Rings — p.356
+- 4 Divisor Classes of Integral Domains — p.357
+  - 4.1 A Noetherian Normal Integral Domain is a Krull Domain — p.358
+  - 4.2 Serre’s Criteria for Normality — p.359
+  - 4.3 The Class Group and Unique Factorization — p.361
+  - 4.4 Exercises — p.363
+  - 4.5 The Class Group of Rank One Projective Modules — p.363
+  - 4.6 Dedekind Domains — p.365
+  - 4.7 Exercises — p.367
+  - 4.8 The Class Group of Rank One Reﬂexive Modules — p.368
+  - 4.9 Exercises — p.371
+- 5 Some Algebraic Geometry — p.372
+  - 5.1 Locally of Finite Type is Finitely Generated as an Algebra — p.372
+  - 5.2 Nonsingular Varieties — p.372
+  - 5.3 Smooth Morphisms — p.373
+- Acronyms — p.375
+- Bibliography — p.377

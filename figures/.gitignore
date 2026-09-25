@@ -1,0 +1,6 @@
+# Harvested figures are copyrighted by their authors: local study only.
+gallery/
+# TikZ build products
+templates/tikz/build/
+__pycache__/
+*.pyc

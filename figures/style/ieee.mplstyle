@@ -1,0 +1,13 @@
+# ieee.mplstyle -- IEEEtran (conference/journal): column 3.5 in (252 pt),
+# text width 7.16 in (516 pt), Times.  STIX is bundled with matplotlib and
+# metrically close to Times.
+font.family      : serif
+font.serif       : TeX Gyre Termes, Times New Roman, Times, STIXGeneral, DejaVu Serif
+mathtext.fontset : stix
+font.size        : 8
+axes.labelsize   : 8
+axes.titlesize   : 8
+xtick.labelsize  : 7
+ytick.labelsize  : 7
+legend.fontsize  : 7
+figure.figsize   : 3.50, 2.16

@@ -1,0 +1,134 @@
+# Linear Representations of Finite Groups
+
+- **Author(s):** Jean-Pierre Serre
+- **Format:** pdf; pages: 178
+- **TOC source:** text-heuristic
+- **Note:** parsed from printed contents pages; page numbers are PRINTED pages
+- **Page convention:** bookmark pages are PDF physical pages (1-based) unless the note says otherwise.
+
+## Table of contents
+
+- Part I Representations and Characters — p.1
+- Generalities on linear representations — p.3
+  - 1.1 Definitions — p.3
+  - 1.2 Basic examples — p.4
+  - 1.3 Subrepresentations — p.5
+  - 1.4 Irreducible representations — p.7
+  - 1.5 Tensor product of two representations — p.7
+  - 1.6 Symmetric square and alternating square — p.9
+- 2 Character theory — p.10
+  - 2.1 The character of a representation — p.10
+  - 2.2 Schur's lemma; basic applications — p.13
+  - 2.3 Orthogonality relations for characters — p.15
+  - 2.4 Decomposition of the regular representation — p.17
+  - 2.5 Number of irreducible representations — p.18
+  - 2.6 Canonical decomposition of a representation — p.21
+  - 2.7 Explicit decomposition of a representation — p.23
+- 3 Subgroups, products, induced representations — p.25
+  - 3.1 Abelian subgroups — p.25
+  - 3.2 Product of two groups — p.26
+  - 3.3 Induced representations — p.28
+- 4 Compact groups — p.32
+  - 4.1 Compact groups — p.32
+  - 4.2 Invariant measure on a compact group — p.32
+  - 4.3 Linear representations of compact groups — p.33
+- 5 Examples
+- 5 The cyclic Group C
+  - 5.2 The group C
+  - 5.3 The dihedral group D,
+- 5 4 The group D
+  - 5.5 The group D
+  - 5.6 The group
+- 5 7 The alternating group
+  - 5.8 The symmetric group @54
+  - 5.9 The group of the cube
+- Bibliography: Part I
+- Part II Representations in Characteristic Zero
+- 6 The group algebra
+  - 6.1 Representations and modules
+  - 6.2 Decomposition of C[G]
+  - 6.3 The center of C[G]
+  - 6.4 Basic properties of integers
+  - 6.5 Integrality properties of characters. Applications
+- 7 Induced representations; Mackey's criterion
+- 7 Induction
+  - 7.2 The character of an induced representation;
+- the reciprocity formula
+- 7 3 Restriction to subgroups
+- 7 4 Mackey's irreducibility criterion
+- 8 Examples of induced representations
+- 8 Normal subgroups; applications to the degrees of the
+- irreducible representations
+  - 8.2 Semidirect products by an abelian group
+  - 8.3 A review of some classes of finite groups
+  - 8.4 Sylow's theorem
+  - 8.5 Linear representations of supersolvable groups
+- 9 Artin' s theorem
+  - 9.1 The ring R(G)
+  - 9.2 Statement of Artin's theorem
+  - 9.3 First proof
+  - 9.4 Second proof of (i) — p.10
+- A theorem of Brauer
+- I 0.1 p-regular elements; p-elementary subgroups
+  - 10.2 Induced characters arising fromp-elementary
+- subgroups
+  - 10.3 Construction of characters
+  - 10.4 Proof of theorems 18 and 18'
+  - 10.5 Brauer's theorem — p.35
+- Applications of Brauer's theorem
+- I I .I Characterization of characters
+- II .2 A theorem of Frobenius
+  - 11.3 A converse to Brauer's theorem
+- II .4 The spectrum of A ® R(G)
+- 12 Rationality questions
+  - 12.2 Schur indices
+  - 12.3 Realizability over cyclotomic fields
+  - 12.4 The rank of RK(G)
+  - 12.5 Generalization of Artin's theorem
+  - 12.6 Generalization of Brauer's theorem
+- I 2. 7 Proof of theorem — p.28
+- Rationality questions: examples
+  - 13.1 The field Q
+  - 13.2 The field R
+- Bibliography: Part II
+- Part III Introduction to Brauer Theory
+- 14 The groups RK(G),
+  - 14.2 The groups Pk(G) and PA(G)
+  - 14.3 Structure of Pk(G)
+  - 14.4 Structure of PA(G)
+  - 14.5 Dualities
+  - 14.6 Scalar extensions — p.15
+- The cde triangle
+- 15 4 Basic properties of the cde triangle
+  - 15.5 Example: p '-groups
+  - 15.6 Example: p-groups
+  - 15.7 Example: products of p '-groups and p-groups — p.16
+- Theorems
+  - 16.1 Properties of the cde triangle
+  - 16.2 Characterization of the image of e
+  - 16.3 Characterization of projective A [G ]-modules
+- by their characters
+  - 16.4 Examples of projective A [G ]-modules: irreducible
+- representations of defect zero — p.81
+- Proofs
+- 17 I Change of groups
+  - 17.2 Brauer's theorem in the modular case
+- I 7.3 Proof of theorem — p.33
+- I 7.4 Proof of theorem — p.35
+  - 17.5 Proof of theorem — p.37
+  - 17.6 Proof of theorem — p.38
+- Modular characters
+- I 8. I The modular character of a representation
+  - 18.2 Independence of modular characters
+- I 8 .3 Reformulations
+  - 18.4 A section ford
+  - 18.5 Example: Modular characters of the symmetric group 6 — p.4
+  - 18.6 Example: Modular characters of the alternating group — p.19
+- Application to Artin representations
+  - 19.1 Artin and Swan representations
+  - 19.2 Rationality of the Artin and Swan representations
+  - 19.3 An invariant
+- Appendix
+- Bibliography: Part III
+- Index of notation
+- Index of terminology — p.138

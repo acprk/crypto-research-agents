@@ -1,0 +1,148 @@
+# Combinatorics
+
+- **Author(s):** Russell Merris
+- **Format:** pdf; pages: 571
+- **TOC source:** bookmarks
+- **Page convention:** bookmark pages are PDF physical pages (1-based) unless the note says otherwise.
+
+## Table of contents
+
+- Cover — p.1
+- Contents — p.8
+- Preface — p.10
+- The Mathematics of Choice — p.14
+  - 1.1. THE FUNDAMENTAL COUNTING PRINCIPLE — p.15
+  - 1.1. EXERCISES — p.19
+  - 1.2. PASCAL’S TRIANGLE — p.23
+  - 1.2. EXERCISES — p.29
+  - *1.3. ELEMENTARY PROBABILITY — p.34
+  - 1.3. EXERCISES — p.42
+  - *1.4. ERROR- CORRECTING CODES — p.46
+  - 1.4. EXERCISES — p.52
+  - 1.5. COMBINATORIAL IDENTITIES — p.56
+  - 1.5. EXERCISES — p.65
+  - 1.6. FOUR WAYS TO CHOOSE — p.69
+  - 1.6. EXERCISES — p.75
+  - 1.7. THE BINOMIAL AND MULTINOMIAL THEOREMS — p.79
+  - 1.7. EXERCISES — p.86
+  - 1.8. PARTITIONS — p.89
+  - 1.8. EXERCISES — p.95
+  - 1.9. ELEMENTARY SYMMETRIC FUNCTIONS — p.100
+  - 1.9. EXERCISES — p.109
+  - *1.10. COMBINATORIAL ALGORITHMS — p.113
+  - 1.10. EXERCISES — p.124
+- The Combinatorics of Finite Functions — p.130
+  - 2.1. STIRLING NUMBERS OF THE SECOND KIND — p.130
+  - 2.1. EXERCISES — p.138
+  - 2.2. BELLS, BALLS, AND URNS — p.141
+  - 2.2. EXERCISES — p.150
+  - 2.3. THE PRINCIPLE OF INCLUSION AND EXCLUSION — p.153
+  - 2.3. EXERCISES — p.162
+  - 2.4. DISJOINT CYCLES — p.165
+  - 2.4. EXERCISES — p.173
+  - 2.5. STIRLING NUMBERS OF THE FIRST KIND — p.174
+  - 2.5. EXERCISES — p.183
+- Polya’s Theory of Enumeration — p.188
+  - 3.1. FUNCTION COMPOSITION — p.188
+  - 3.1. EXERCISES — p.195
+  - 3.2. PERMUTATION GROUPS — p.197
+  - 3.2. EXERCISES — p.205
+  - 3.3. BURNSIDE’S LEMMA — p.207
+  - 3.3. EXERCISES — p.216
+  - 3.4. SYMMETRY GROUPS — p.219
+  - 3.4. EXERCISES — p.227
+  - 3.5. COLOR PATTERNS — p.231
+  - 3.5. EXERCISES — p.237
+  - 3.6. PO LYA’S THEOREM — p.241
+  - 3.6. EXERCISES — p.250
+  - 3.7. THE CYCLE INDEX POLYNOMIAL — p.254
+  - 3.7. EXERCISES — p.261
+- Generating Functions — p.266
+  - 4.1. DIFFERENCE SEQUENCES — p.266
+  - 4.1. EXERCISES — p.276
+  - 4.2. ORDINARY GENERATING FUNCTIONS — p.281
+  - 4.2. EXERCISES — p.294
+  - 4.3. APPLICATIONS OF GENERATING FUNCTIONS — p.297
+  - 4.3. EXERCISES — p.308
+  - 4.4. EXPONENTIAL GENERATING FUNCTIONS — p.314
+  - 4.5. RECURSIVE TECHNIQUES — p.333
+  - 4.5. EXERCISES — p.344
+- Enumeration in Graphs — p.350
+  - 5.1. THE PIGEONHOLE PRINCIPLE — p.351
+  - 5.1. EXERCISES — p.357
+  - *5.2. EDGE COLORINGS AND RAMSEY THEORY — p.360
+  - 5.2. EXERCISES — p.367
+  - 5.3. CHROMATIC POLYNOMIALS — p.370
+  - 5.3. EXERCISES — p.379
+  - *5.4. PLANAR GRAPHS — p.385
+  - 5.4. EXERCISES — p.392
+  - 5.5. MATCHING POLYNOMIALS — p.396
+  - 5.5. EXERCISES — p.403
+  - 5.6. ORIENTED GRAPHS — p.407
+  - 5.6. EXERCISES — p.417
+  - 5.7. GRAPHIC PARTITIONS — p.421
+  - 5.7. EXERCISES — p.429
+- Codes and Designs — p.434
+  - 6.1. LINEAR CODES — p.435
+  - 6.1. EXERCISES — p.443
+  - 6.2. DECODING ALGORITHMS — p.445
+  - 6.2. EXERCISES — p.457
+  - 6.3. LATIN SQUARES — p.460
+  - 6.3. EXERCISES — p.471
+  - 6.4. BALANCED INCOMPLETE BLOCK DESIGNS — p.474
+  - 6.4. EXERCISES — p.484
+- Appendix — p.490
+  - Symmetric Polynomials — p.490
+  - Sorting Algorithms — p.498
+  - Matrix Theory — p.508
+- Bibliography — p.514
+  - GENERAL REFERENCES — p.514
+  - SPECIAL TOPICS — p.514
+- Hints and Answers to Selected Odd- Numbered Exercises — p.516
+  - CHAPTER 1 — p.516
+  - 1.1. The Fundamental Counting Principle — p.516
+  - 1.2. Pascal’s Triangle — p.517
+  - 1.3. Elementary Probability — p.517
+  - 1.4. Error- Correcting Codes — p.518
+  - 1.5. Combinatorial Identities — p.519
+  - 1.6. Four Ways to Choose — p.520
+  - 1.7. The Binomial and Multinomial Theorems — p.521
+  - 1.8. Partitions — p.522
+  - 1.9. Elementary Symmetric Functions — p.523
+  - 1.10. Combinatorial Algorithms — p.523
+  - CHAPTER 2 — p.525
+  - 2.1. Stirling Numbers of the Second Kind — p.525
+  - 2.2. Bells, Balls, and Urns — p.526
+  - 2.3. The Principle of Inclusion and Exclusion — p.528
+  - 2.4. Disjoint Cycles — p.529
+  - 2.5. Stirling Numbers of the First Kind — p.529
+  - CHAPTER 3 — p.531
+  - 3.1. Function Composition — p.531
+  - 3.2. Permutation Groups — p.531
+  - 3.3. Burnside’s Lemma — p.533
+  - 3.4. Symmetry Groups — p.534
+  - 3.5. Color Patterns — p.534
+  - 3.6. Po´lya’s Theorem — p.535
+  - 3.7. The Cycle Index Polynomial — p.536
+  - CHAPTER 4 — p.537
+  - 4.1. Difference Sequences — p.537
+  - 4.2. Ordinary Generating Functions — p.538
+  - 4.3. Applications of Generating Functions — p.539
+  - 4.4. Exponential Generating Functions — p.540
+  - 4.5. Recursive Techniques — p.541
+  - CHAPTER 5 — p.542
+  - 5.1. The Pigeonhole Principle — p.542
+  - 5.2. Edge Colorings and Ramsey Theory — p.543
+  - 5.3. Chromatic Polynomials — p.543
+  - 5.4. Planar Graphs — p.545
+  - 5.5. Matching Polynomials — p.545
+  - 5.6. Oriented Graphs — p.547
+  - 5.7. Graphic Partitions — p.548
+  - CHAPTER 6 — p.549
+  - 6.1. Linear Codes — p.549
+  - 6.2. Decoding Algorithms — p.549
+  - 6.3. Latin Squares — p.550
+  - 6.4. Balanced Incomplete Block Designs — p.551
+  - Appendix A2 Sorting Algorithms — p.552
+- Index of Notation — p.554
+- Index — p.560

@@ -1,0 +1,21 @@
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+build/
+dist/
+.venv/
+figures/gallery/
+**/gallery_local/
+*.aux
+*.log
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+.lake/
+lake-packages/
+# never commit third-party PDFs
+references/**/*.pdf
+!case-study/**/*.log
+.privacy-denylist

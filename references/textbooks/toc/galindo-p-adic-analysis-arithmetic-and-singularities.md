@@ -1,0 +1,92 @@
+# P-adic Analysis, Arithmetic and Singularities
+
+- **Author(s):** Carlos Galindo, Alejandro Melle Hernandez
+- **Format:** pdf; pages: 332
+- **TOC source:** bookmarks
+- **Page convention:** bookmark pages are PDF physical pages (1-based) unless the note says otherwise.
+
+## Table of contents
+
+- Cover — p.1
+- Title page — p.4
+- Contents — p.6
+- Preface — p.8
+- Speakers and members of the organizing committee — p.12
+- Part I: Surveys — p.18
+- Archimedean zeta functions and oscillatory integrals — p.20
+  - 1. Introduction — p.20
+  - 2. Archimedean local zeta functions — p.23
+  - 3. The Bernstein-Sato polynomial — p.26
+  - 4. Oscillatory integrals — p.29
+  - 5. Some generalizations — p.33
+  - Acknowledgements — p.36
+  - References — p.36
+- Generalized Poincaré series for plane curve singularities — p.20
+  - 1. Introduction — p.42
+  - 2. Technical tools — p.44
+  - 3. Poincaré series of a local branch — p.59
+  - 4. Integration with respect to the Euler characteristic — p.63
+  - 5. Poincaré series as an integral with respect to the Euler characteristic — p.65
+  - 6. Generalized Poincaré series — p.69
+  - 7. Generalized Poincaré series in terms of an embedded resolution — p.71
+  - References — p.84
+- Introduction to 𝑝-adic Igusa zeta functions — p.20
+  - 1. Polynomial congruences — p.42
+  - 2. 𝑝-adic Igusa (local) zeta functions — p.92
+  - 3. 𝑝-adic manifolds and rationality of the zeta function — p.96
+  - 4. Denef’s formula — p.101
+  - 5. Back to polynomial congruences — p.105
+  - 6. Igusa zeta function for plane curves — p.108
+  - 7. Topological and motivic zeta function — p.113
+  - 8. Miscellaneous — p.116
+  - Acknowledgment — p.117
+  - References — p.118
+- An introduction to 𝑝-adic and motivic integration, zeta functions and invariants of singularities — p.20
+  - Introduction — p.42
+  - 1. Prehistory: Counting \mathds{𝐹}_{𝑝}-points, 𝑝-adic integration and the Igusa zeta function — p.42
+  - 2. Motivic integration — p.142
+  - 3. Applications to singularities and the motivic zeta function — p.163
+  - Acknowledgments — p.188
+  - References — p.188
+- 𝑝-Adic analysis: A quick introduction — p.20
+  - 1. Introduction — p.42
+  - 2. 𝑝-Adic numbers: essential facts — p.195
+  - 3. Integration in ℚ_{𝕡}ⁿ — p.201
+  - 4. Change of variables formula — p.210
+  - 5. Additive characters — p.213
+  - 6. Fourier Analysis on ℚ_{𝕡}ⁿ — p.215
+  - 7. The 𝐿²-theory — p.222
+  - 8. 𝒟 as a topological vector space — p.225
+  - 9. The space of distributions on ℚ_{𝕡}ⁿ — p.226
+  - 10. The Fourier transform on 𝒟′ — p.227
+  - References — p.236
+- Part II: Articles — p.240
+- On maximal order poles of generalized topological zeta functions — p.20
+  - 1. Introduction — p.20
+  - 2. Generalized local topological zeta functions — p.44
+  - 3. Examples with several poles of order two — p.244
+  - 4. Poles distinct from -1/𝑛 — p.246
+  - References — p.247
+- Local invariants of minimal generic curves on rational surfaces — p.20
+  - 1. Introduction — p.20
+  - 2. Preliminaries — p.42
+  - 3. Old and new results for cyclic quotient singularities — p.258
+  - 4. Delta invariant of minimal generic curves on rational singularities — p.262
+  - 5. Minimal generic curves on quotient singularities — p.267
+  - 6. Proof of Theorem 5.1 — p.270
+  - References — p.273
+- Motivic Poincaré series of cusp surface singularities — p.20
+  - 1. Introduction — p.20
+  - 2. Preliminaries regarding normal surface singularities — p.23
+  - 3. The extension of the series to cusp singularities — p.285
+  - References — p.292
+- Non-Archimedean electrostatics — p.20
+  - 1. Introduction — p.20
+  - 2. Non-Archimedean fields — p.42
+  - 3. Electrostatics — p.300
+  - 4. The canonical ensemble — p.302
+  - 5. The grand canonical ensemble — p.313
+  - 6. Multi-component ensembles — p.101
+  - Acknowledgements — p.327
+  - References — p.327
+- Back Cover — p.332

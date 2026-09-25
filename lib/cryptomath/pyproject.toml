@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cryptomath"
+version = "0.1.0"
+description = "Readable, toy-scale cryptography math library for research screening: algebra (fields, cyclotomics, NTT, Z_{p^e}), lattices (samplers, security estimates, LLL), toy FHE (BGV/BFV/CKKS/TFHE + noise models + bootstrapping building blocks), symmetric, protocols, EC and an op-counting cost model. NOT for production use."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["numpy", "sympy"]
+license = {text = "MIT"}
+
+[project.optional-dependencies]
+plot = ["matplotlib"]
+test = ["pytest"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["cryptomath*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,16 @@
+# lncs.mplstyle -- Springer LNCS (llncs.cls): text width 12.2 cm = 4.80 in,
+# body 10 pt Computer Modern.  Figure text ~8 pt so that it matches footnote/
+# caption size after \includegraphics[width=\textwidth] (no rescaling!).
+# Uses matplotlib's bundled Computer Modern (cmr10 + cm mathtext): no LaTeX needed.
+font.family        : serif
+font.serif         : cmr10, CMU Serif, Latin Modern Roman, DejaVu Serif
+mathtext.fontset   : cm
+axes.unicode_minus : False
+font.size          : 8
+axes.labelsize     : 8
+axes.titlesize     : 8
+xtick.labelsize    : 7
+ytick.labelsize    : 7
+legend.fontsize    : 7
+figure.titlesize   : 8
+figure.figsize     : 4.80, 2.60

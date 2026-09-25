@@ -1,0 +1,71 @@
+% main.tex -- LNCS skeleton following skills/paper-playbook.
+% Build: make           (runs fetch_llncs.sh if llncs.cls is missing, then latexmk)
+% Drivers: main.tex (anonymous submission), main_camera.tex (proceedings,
+% de-anonymised), main_full.tex (full version for ePrint). One shared source.
+\documentclass[runningheads]{llncs}   % add 'a4paper' if the CFP requires A4
+
+\newif\iffull   \fullfalse   % proceedings/submission build vs full version
+\newif\ifanon   \anontrue    % anonymous submission build
+\ifdefined\buildfull   \fulltrue\anonfalse \fi   % set by main_full.tex
+\ifdefined\buildcamera \anonfalse \fi            % set by main_camera.tex
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs,multirow}
+\usepackage[table]{xcolor}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{tikz}
+\usepackage[hidelinks]{hyperref}
+\usepackage[capitalise,noabbrev]{cleveref}
+% Do NOT load geometry or change fonts/spacing: desk-reject risk.
+
+\input{macros}
+
+% Anonymity: empty PDF metadata and no embedded figure source paths.
+\hypersetup{pdfauthor={},pdftitle={},pdfsubject={},pdfkeywords={}}
+\ifdefined\pdfsuppressptexinfo \pdfsuppressptexinfo=-1 \fi
+
+% Optional modest float/display glue tuning (proceedings build only), see
+% skills/paper-playbook/sections/00_overall_structure.md.
+\iffull\else
+  \setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
+  \setlength{\intextsep}{8pt plus 2pt minus 2pt}
+\fi
+
+\begin{document}
+
+\title{<<Mechanism>>: <<Effect>> for <<Setting>>}
+\titlerunning{<<Short title>>}
+\ifanon
+  \author{Anonymous Submission}
+  \institute{}
+\else
+  \input{authors}   % author block kept out of the anonymous source tree
+\fi
+\maketitle
+
+\input{sections/abstract}
+
+\input{sections/intro}          % 1 Intro, 1.1 Related Work, 1.2 Contributions, 1.3 Overview
+\input{sections/prelim}         % 2 Preliminaries
+\input{sections/construction}   % 3-5 Main construction(s)
+\input{sections/security}       % 6 Security / correctness
+\input{sections/experiments}    % 7 Implementation and evaluation
+\input{sections/conclusion}     % 8 Conclusion
+
+\ifanon\else
+\subsubsection*{Acknowledgements.} <<Acknowledgements (camera-ready only).>>
+\fi
+
+\bibliographystyle{splncs04}
+\bibliography{refs}
+
+\appendix
+% APPENDIX -- supplementary; reviewers are not obliged to read it, so nothing here
+% may be load-bearing for the body's claims.
+\input{sections/appendix}
+
+\end{document}

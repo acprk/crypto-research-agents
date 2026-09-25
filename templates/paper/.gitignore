@@ -1,0 +1,13 @@
+llncs.cls
+splncs04.bst
+*.aux
+*.log
+*.bbl
+*.blg
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.run.xml
+*.pdf
+.denylist.txt

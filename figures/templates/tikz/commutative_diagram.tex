@@ -1,0 +1,18 @@
+% Correctness of homomorphic evaluation as a commutative square (tikz-cd).
+\documentclass[border=3pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{tikz-cd}
+\usepackage{crypto-tikz}
+\newcommand{\alg}[1]{\mathsf{#1}}
+\begin{document}
+\begin{tikzcd}[column sep=large, row sep=large, arrows={-Stealth}]
+  \mathcal{M} \arrow[r, "\alg{Encode}"] \arrow[d, "f"']
+    & \mathcal{R}_t \arrow[r, "\alg{Enc}_{pk}"] \arrow[d, "\hat f"']
+    & \mathcal{C} \arrow[d, "{\alg{Eval}_{evk}(\hat f,\,\cdot\,)}", color=cr1] \\
+  \mathcal{M} \arrow[r, "\alg{Encode}"']
+    & \mathcal{R}_t
+    & \mathcal{C} \arrow[l, "\alg{Dec}_{sk}"]
+\end{tikzcd}
+\end{document}

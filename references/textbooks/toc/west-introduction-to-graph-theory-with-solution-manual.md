@@ -1,0 +1,65 @@
+# Introduction to Graph Theory with Solution Manual
+
+- **Author(s):** Douglas B. West
+- **Format:** pdf; pages: 871
+- **TOC source:** bookmarks
+- **Page convention:** bookmark pages are PDF physical pages (1-based) unless the note says otherwise.
+
+## Table of contents
+
+- COVER — p.1
+- CONTENTS — p.6
+- Preface — p.13
+- CH.1-Fundamental Concepts — p.23
+  - 1.1 What is a Graph? — p.23
+  - 1.2 Paths, Cycles, and Trails — p.41
+  - 1.3 Vertex Degrees and Counting — p.56
+  - 1.4 Directed Graphs — p.75
+- CH.2-Trees and Distance — p.89
+  - 2.1 Basic Properties — p.89
+  - 2.2 Spanning Trees and Enumeration — p.103
+  - 2.3 Optimization and Trees — p.117
+- CH.3-Matchings and Factors — p.129
+  - 3.1 Matchings and Covers — p.129
+  - 3.2 Algorithms and Applications — p.145
+  - 3.3 Matchings in General Graphs — p.158
+- CH.4-Connectivity and Paths — p.171
+  - 4.1 Cuts and Connectivity — p.171
+  - 4.2 k-Connected Graphs — p.183
+  - 4.3 Network Flow Problems — p.198
+- CH.5-Coloring of Graphs — p.213
+  - 5.1 Vertex Coloring and Upper Bounds — p.213
+  - 5.2 Structure of k-chromatic Graphs — p.226
+  - 5.3 Enumerative Aspects — p.241
+- CH.6-Planar Graphs — p.255
+  - 6.1 Embeddings and Euler's Formula — p.255
+  - 6.2 Characterization of Planar Graphs — p.268
+  - 6.3 Parameters of Planarity — p.279
+- CH.7-Edges and Cycles — p.295
+  - 7.1 Line Graphs and Edge-coloring — p.295
+  - 7.2 Hamiltonian Cycles — p.308
+  - 7.3 Planarity, Colorings, and Cycles — p.321
+- CH.8-Additional Topics — p.341
+  - 8.1 Perfect Graphs — p.341
+  - 8.2 Matroids — p.371
+  - 8.3 Ramsey Theory — p.400
+  - 8.4 More Extremal Problems — p.418
+  - 8.5 Random Graphs — p.447
+  - 8.6 Eigenvalues of Graphs — p.474
+- Appendix A: Mathematical Background — p.493
+- Appendix B: Optimization and Complexity — p.515
+- Appendix C: Hints for Selected Exercises — p.529
+- Appendix D: Glossary of Terms — p.537
+- Appendix E: Supplemetal Reading — p.555
+- Appendix F: References — p.559
+- Author Index — p.591
+- Subject Index — p.597
+- Solution Manual — p.612
+  - CH.1 — p.616
+  - CH.2 — p.657
+  - CH.3 — p.687
+  - CH.4 — p.709
+  - CH.5 — p.733
+  - CH.6 — p.763
+  - CH.7 — p.785
+  - CH.8 — p.815

@@ -1,0 +1,13 @@
+# acm.mplstyle -- ACM acmart (sigconf): column 3.33 in (241 pt), text width
+# 7.0 in (506 pt).  acmart typesets in Linux Libertine; the nearest bundled
+# serif is STIX (Times-like).  If Libertine is installed, it is preferred.
+font.family      : serif
+font.serif       : Linux Libertine O, Libertinus Serif, STIXGeneral, TeX Gyre Termes, Times New Roman, DejaVu Serif
+mathtext.fontset : stix
+font.size        : 8
+axes.labelsize   : 8
+axes.titlesize   : 8
+xtick.labelsize  : 7
+ytick.labelsize  : 7
+legend.fontsize  : 7
+figure.figsize   : 3.33, 2.06
