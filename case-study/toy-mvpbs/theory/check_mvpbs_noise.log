@@ -1,0 +1,4 @@
+{"id": "L1", "ok": true, "cases": 66564}
+{"id": "L2", "ok": true, "max_norm2_by_p": {"2": 4, "4": 6, "8": 10, "16": 18}}
+{"id": "T1a", "ok": true, "empirical/predicted": [0.955, 1.029, 0.981, 0.996]}
+{"id": "T1b", "ok": true, "prediction": {"T1": {"std_BR_log2": -14.47, "std_KS_log2": -12.13, "perbit": {"norm2": [1, 1, 1, 1], "std_log2": [-12.1, -12.1, -12.1, -12.1], "p_fail_bit": [0.0, 0.0, 0.0, 0.0], "p_fail_sbox_indep": 0.0}, "mvpbs": {"norm2": [10, 10, 8, 8], "std_log2": [-11.89, -11.89, -11.93, -11.93], "p_fail_bit": [0.0, 0.0, 0.0, 0.0], "p_fail_sbox_indep": 0.0}}, "T2": {"std_BR_log2": -8.5, "std_KS_log2": -12.13, "perbit": {"norm2": [1, 1, 1, 1], "std_log2": [-8.5, -8.5, -8.5, -8.5], "p_fail_bit": [1.72e-08, 1.72e-08, 1.72e-08, 1.72e-08], "p_fail_sbox_indep": 6.88e-08}, "mvpbs": {"norm2": [10, 10, 8, 8], "std_log2": [-6.84, -6.84, -7.0, -7.0], "p_fail_bit": [0.0738, 0.0738, 0.0456, 0.0456], "p_fail_sbox_indep": 0.219}}}}

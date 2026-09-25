@@ -1,0 +1,42 @@
+## gate_check.py --phase P0 --paper paper
+PASS  gate P0: 3 items ticked (0 waived)
+
+Gate P0: PASS
+## gate_check.py --phase P1 --paper paper
+PASS  gate P1: 4 items ticked (1 waived)
+
+Gate P1: PASS
+## gate_check.py --phase P2 --paper paper
+PASS  gate P2: 2 items ticked (0 waived)
+
+Gate P2: PASS
+## gate_check.py --phase P3 --paper paper
+PASS  gate P3: 3 items ticked (0 waived)
+
+Gate P3: PASS
+## gate_check.py --phase P4 --paper paper
+PASS  gate P4: 2 items ticked (0 waived)
+
+Gate P4: PASS
+## gate_check.py --phase P5 --paper paper
+PASS  gate P5: 3 items ticked (0 waived)
+
+Gate P5: PASS
+## gate_check.py --phase P6 --paper paper
+PASS  gate P6: 3 items ticked (0 waived)
+PASS  CLAIMS.md: 6 claims ruled on
+
+Gate P6: PASS
+## gate_check.py --phase P7 --paper paper
+PASS  gate P7: 4 items ticked (0 waived)
+PASS  CLAIMS.md: 6 claims ruled on
+PASS  every number in the paper has an EVIDENCE row
+
+Gate P7: PASS
+## gate_check.py --phase P8 --paper paper
+PASS  gate P8: 3 items ticked (0 waived)
+PASS  CLAIMS.md: 6 claims ruled on
+PASS  every number in the paper has an EVIDENCE row
+PASS  bib-verify report clean
+
+Gate P8: PASS

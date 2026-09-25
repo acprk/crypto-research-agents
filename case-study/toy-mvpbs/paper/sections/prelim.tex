@@ -1,0 +1,14 @@
+% prelim.tex -- notation (TEACHING EXAMPLE).
+\section{Preliminaries}\label{sec:prelim}
+Let $q=2^{32}$, $R=\ZZ[X]/(X^N+1)$ with $N$ a power of two, and $\Rq=R/qR$. Messages % no-evidence: q is a parameter definition (E20)
+$m\in\ZZ_p$ are encoded with one padding bit as $\Delta m$, $\Delta=q/(2p)$; decoding fails
+when the error reaches $1/(4p)$ of the torus, i.e.\ $2^{-6}$ for $p=16$. A \PBSop{} for
+$f:\ZZ_p\to\ZZ_p$ blind-rotates the test polynomial
+$T_f=\sum_{j<N}\Delta f(\lfloor jp/N\rfloor)X^j$ by the mod-switched phase (with a half-box
+offset), extracts coefficient $0$ as an LWE ciphertext and key-switches it back to the input
+key~\cite{CGGI20,CJP21}. We write $\sigma^2_{\mathrm{BR}}$ and $\sigma^2_{\mathrm{KS}}$ for the
+variances added by blind rotation and key switching.
+
+\noindent\textbf{Toy parameters.} $n=32$, $N=512$, $k=1$, gadget base $2^7$ with $3$ levels,
+key-switch base $2^4$ with $5$ levels, LWE $\sigma=2^{-20}$\evid{E20}; set T1 uses GLWE
+$\sigma=2^{-28}$\evid{E20}, the noisy set T2 uses $\sigma=2^{-22}$\evid{E20}. Both are insecure.

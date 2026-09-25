@@ -1,0 +1,24 @@
+## crbench audit-tex paper/main.tex EVIDENCE.md --check-ledger --root .
+audit-tex: 0 errors, 0 warnings (22 ledger rows)
+exit=0
+## crbench audit-tex paper/sections/abstract.tex EVIDENCE.md --check-ledger --root .
+audit-tex: 0 errors, 0 warnings (22 ledger rows)
+exit=0
+## crbench audit-tex paper/sections/appendix.tex EVIDENCE.md --check-ledger --root .
+audit-tex: 0 errors, 0 warnings (22 ledger rows)
+exit=0
+## crbench audit-tex paper/sections/conclusion.tex EVIDENCE.md --check-ledger --root .
+audit-tex: 0 errors, 0 warnings (22 ledger rows)
+exit=0
+## crbench audit-tex paper/sections/construction.tex EVIDENCE.md --check-ledger --root .
+audit-tex: 0 errors, 0 warnings (22 ledger rows)
+exit=0
+## crbench audit-tex paper/sections/experiments.tex EVIDENCE.md --check-ledger --root .
+audit-tex: 0 errors, 0 warnings (22 ledger rows)
+exit=0
+## crbench audit-tex paper/sections/intro.tex EVIDENCE.md --check-ledger --root .
+audit-tex: 0 errors, 0 warnings (22 ledger rows)
+exit=0
+## crbench audit-tex paper/sections/prelim.tex EVIDENCE.md --check-ledger --root .
+audit-tex: 0 errors, 0 warnings (22 ledger rows)
+exit=0

@@ -1,0 +1,7 @@
+# crbench arm=mvpbs_k2 round=5 warmup=False
+# cmd: /usr/bin/python3 code/bench_sbox.py --method mvpbs --k 2 --params T1 --inputs 4
+# rc=0 wall=0.790365s value=0.07151900000000001 error=
+# ---
+sbox_eval time: 71.519 ms
+sbox_wall elapsed: 71.521 ms
+RESULT name=mvpbs correct=8 total=8 blind_rotations=1 cmux=32

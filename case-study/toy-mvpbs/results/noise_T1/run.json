@@ -1,0 +1,129 @@
+{
+  "arms": {
+    "perbit": "/usr/bin/python3 code/noise_experiment.py --method perbit --params T1 --trials 48",
+    "mvpbs": "/usr/bin/python3 code/noise_experiment.py --method mvpbs --params T1 --trials 48"
+  },
+  "order": "alternate",
+  "repeats": 1,
+  "warmup": 0,
+  "metric": "wall",
+  "executions": [
+    {
+      "arm": "perbit",
+      "round": 0,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 14.212092609028332,
+      "value": 14.212092609028332,
+      "log": "results/noise_T1/perbit/r000.log",
+      "error": ""
+    },
+    {
+      "arm": "mvpbs",
+      "round": 0,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 4.054251766996458,
+      "value": 4.054251766996458,
+      "log": "results/noise_T1/mvpbs/r000.log",
+      "error": ""
+    }
+  ],
+  "env": {
+    "captured_at": "2026-09-25T02:44:29-0700",
+    "host_id": "1a8729448f93",
+    "os": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+    "python": "3.10.12",
+    "cpu": {
+      "machine": "x86_64",
+      "logical_cpus": 104,
+      "Model name": "Intel(R) Xeon(R) Gold 6230R CPU @ 2.10GHz",
+      "Thread(s) per core": "2",
+      "Core(s) per socket": "26",
+      "Socket(s)": "2",
+      "CPU max MHz": "4000.0000",
+      "simd": [
+        "adx",
+        "aes",
+        "avx",
+        "avx2",
+        "avx512_vnni",
+        "avx512bw",
+        "avx512cd",
+        "avx512dq",
+        "avx512f",
+        "avx512vl",
+        "bmi1",
+        "bmi2",
+        "sse4_1",
+        "sse4_2"
+      ],
+      "L3 cache": "71.5 MiB (2 instances)",
+      "NUMA node(s)": "2",
+      "governor": "powersave",
+      "loadavg": [
+        20.0673828125,
+        32.2607421875,
+        35.41015625
+      ]
+    },
+    "mem_total_kb": 263729556,
+    "compilers": {
+      "gcc": "gcc (GCC) 9.5.0",
+      "g++": "g++ (GCC) 9.5.0",
+      "clang": "Ubuntu clang version 17.0.6 (++20231209124227+6009708b4367-1~exp1~20231209124336.77)",
+      "rustc": "rustc 1.94.0 (4a4ef493e 2026-03-02)",
+      "cargo": "cargo 1.94.0 (85eff7c80 2026-01-15)",
+      "go": "go version go1.18.1 linux/amd64",
+      "cmake": "cmake version 3.22.1",
+      "sage": "SageMath version 9.5, Release Date: 2022-01-30"
+    },
+    "env": {
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1"
+    },
+    "target": {
+      "dir_name": "toy-mvpbs",
+      "git_commit": "eb1f494a9a675195b0bb05aee8e3ecc7f995d320",
+      "git_dirty": false,
+      "git_describe": "eb1f494"
+    },
+    "bench": {
+      "threads": 1,
+      "cpus": null,
+      "order": "alternate",
+      "seed": 0
+    }
+  },
+  "warnings": [
+    "CPU governor is 'powersave', not 'performance' (frequency scaling adds noise)"
+  ],
+  "started": "2026-09-25T02:44:29-0700",
+  "finished": "2026-09-25T02:44:48-0700",
+  "summary": {
+    "perbit": {
+      "n": 1,
+      "median": 14.212092609028332,
+      "q1": 14.212092609028332,
+      "q3": 14.212092609028332,
+      "iqr": 0.0,
+      "min": 14.212092609028332,
+      "max": 14.212092609028332,
+      "ci_low": 14.212092609028332,
+      "ci_high": 14.212092609028332,
+      "failures": 0
+    },
+    "mvpbs": {
+      "n": 1,
+      "median": 4.054251766996458,
+      "q1": 4.054251766996458,
+      "q3": 4.054251766996458,
+      "iqr": 0.0,
+      "min": 4.054251766996458,
+      "max": 4.054251766996458,
+      "ci_low": 4.054251766996458,
+      "ci_high": 4.054251766996458,
+      "failures": 0
+    }
+  }
+}

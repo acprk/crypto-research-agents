@@ -1,0 +1,302 @@
+{
+  "arms": {
+    "perbit": "/usr/bin/python3 code/bench_sbox.py --method perbit --k 4 --params T1 --inputs 16",
+    "mvpbs": "/usr/bin/python3 code/bench_sbox.py --method mvpbs --k 4 --params T1 --inputs 16",
+    "vpack": "/usr/bin/python3 code/bench_sbox.py --method vpack --k 4 --params T1 --inputs 16"
+  },
+  "order": "alternate",
+  "repeats": 5,
+  "warmup": 1,
+  "metric": "time",
+  "executions": [
+    {
+      "arm": "perbit",
+      "round": 0,
+      "warmup": true,
+      "returncode": 0,
+      "wall": 5.366723388899118,
+      "value": 0.29176799999999997,
+      "log": "results/bench_T1_k4/perbit/r000_warmup.log",
+      "error": ""
+    },
+    {
+      "arm": "mvpbs",
+      "round": 0,
+      "warmup": true,
+      "returncode": 0,
+      "wall": 1.7091265850467607,
+      "value": 0.075827,
+      "log": "results/bench_T1_k4/mvpbs/r000_warmup.log",
+      "error": ""
+    },
+    {
+      "arm": "vpack",
+      "round": 0,
+      "warmup": true,
+      "returncode": 0,
+      "wall": 0.6872174160089344,
+      "value": 0.009698,
+      "log": "results/bench_T1_k4/vpack/r000_warmup.log",
+      "error": ""
+    },
+    {
+      "arm": "mvpbs",
+      "round": 1,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 1.7347811539657414,
+      "value": 0.076502,
+      "log": "results/bench_T1_k4/mvpbs/r001.log",
+      "error": ""
+    },
+    {
+      "arm": "vpack",
+      "round": 1,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 0.6858883850509301,
+      "value": 0.009672,
+      "log": "results/bench_T1_k4/vpack/r001.log",
+      "error": ""
+    },
+    {
+      "arm": "perbit",
+      "round": 1,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 5.3775759120471776,
+      "value": 0.29118099999999997,
+      "log": "results/bench_T1_k4/perbit/r001.log",
+      "error": ""
+    },
+    {
+      "arm": "vpack",
+      "round": 2,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 0.6732883380027488,
+      "value": 0.009595000000000001,
+      "log": "results/bench_T1_k4/vpack/r002.log",
+      "error": ""
+    },
+    {
+      "arm": "perbit",
+      "round": 2,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 5.424990770989098,
+      "value": 0.294144,
+      "log": "results/bench_T1_k4/perbit/r002.log",
+      "error": ""
+    },
+    {
+      "arm": "mvpbs",
+      "round": 2,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 1.6954587349900976,
+      "value": 0.074445,
+      "log": "results/bench_T1_k4/mvpbs/r002.log",
+      "error": ""
+    },
+    {
+      "arm": "perbit",
+      "round": 3,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 5.390244640992023,
+      "value": 0.291445,
+      "log": "results/bench_T1_k4/perbit/r003.log",
+      "error": ""
+    },
+    {
+      "arm": "mvpbs",
+      "round": 3,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 1.6937134520849213,
+      "value": 0.075359,
+      "log": "results/bench_T1_k4/mvpbs/r003.log",
+      "error": ""
+    },
+    {
+      "arm": "vpack",
+      "round": 3,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 0.6664041710318998,
+      "value": 0.009438,
+      "log": "results/bench_T1_k4/vpack/r003.log",
+      "error": ""
+    },
+    {
+      "arm": "mvpbs",
+      "round": 4,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 1.7036423260578886,
+      "value": 0.075639,
+      "log": "results/bench_T1_k4/mvpbs/r004.log",
+      "error": ""
+    },
+    {
+      "arm": "vpack",
+      "round": 4,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 0.6651128149824217,
+      "value": 0.009647000000000001,
+      "log": "results/bench_T1_k4/vpack/r004.log",
+      "error": ""
+    },
+    {
+      "arm": "perbit",
+      "round": 4,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 5.335688730003312,
+      "value": 0.28659100000000004,
+      "log": "results/bench_T1_k4/perbit/r004.log",
+      "error": ""
+    },
+    {
+      "arm": "vpack",
+      "round": 5,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 0.6792115169810131,
+      "value": 0.009803000000000001,
+      "log": "results/bench_T1_k4/vpack/r005.log",
+      "error": ""
+    },
+    {
+      "arm": "perbit",
+      "round": 5,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 5.370607374003157,
+      "value": 0.29092,
+      "log": "results/bench_T1_k4/perbit/r005.log",
+      "error": ""
+    },
+    {
+      "arm": "mvpbs",
+      "round": 5,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 1.6821613090578467,
+      "value": 0.07400100000000001,
+      "log": "results/bench_T1_k4/mvpbs/r005.log",
+      "error": ""
+    }
+  ],
+  "env": {
+    "captured_at": "2026-09-25T02:42:50-0700",
+    "host_id": "1a8729448f93",
+    "os": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+    "python": "3.10.12",
+    "cpu": {
+      "machine": "x86_64",
+      "logical_cpus": 104,
+      "Model name": "Intel(R) Xeon(R) Gold 6230R CPU @ 2.10GHz",
+      "Thread(s) per core": "2",
+      "Core(s) per socket": "26",
+      "Socket(s)": "2",
+      "CPU max MHz": "4000.0000",
+      "simd": [
+        "adx",
+        "aes",
+        "avx",
+        "avx2",
+        "avx512_vnni",
+        "avx512bw",
+        "avx512cd",
+        "avx512dq",
+        "avx512f",
+        "avx512vl",
+        "bmi1",
+        "bmi2",
+        "sse4_1",
+        "sse4_2"
+      ],
+      "L3 cache": "71.5 MiB (2 instances)",
+      "NUMA node(s)": "2",
+      "governor": "powersave",
+      "loadavg": [
+        19.50244140625,
+        37.046875,
+        37.13916015625
+      ]
+    },
+    "mem_total_kb": 263729556,
+    "compilers": {
+      "gcc": "gcc (GCC) 9.5.0",
+      "g++": "g++ (GCC) 9.5.0",
+      "clang": "Ubuntu clang version 17.0.6 (++20231209124227+6009708b4367-1~exp1~20231209124336.77)",
+      "rustc": "rustc 1.94.0 (4a4ef493e 2026-03-02)",
+      "cargo": "cargo 1.94.0 (85eff7c80 2026-01-15)",
+      "go": "go version go1.18.1 linux/amd64",
+      "cmake": "cmake version 3.22.1",
+      "sage": "SageMath version 9.5, Release Date: 2022-01-30"
+    },
+    "env": {
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1"
+    },
+    "target": {
+      "dir_name": "toy-mvpbs",
+      "git_commit": "eb1f494a9a675195b0bb05aee8e3ecc7f995d320",
+      "git_dirty": false,
+      "git_describe": "eb1f494"
+    },
+    "bench": {
+      "threads": 1,
+      "cpus": null,
+      "order": "alternate",
+      "seed": 0
+    }
+  },
+  "warnings": [
+    "CPU governor is 'powersave', not 'performance' (frequency scaling adds noise)"
+  ],
+  "started": "2026-09-25T02:42:50-0700",
+  "finished": "2026-09-25T02:43:37-0700",
+  "summary": {
+    "perbit": {
+      "n": 5,
+      "median": 0.29118099999999997,
+      "q1": 0.29092,
+      "q3": 0.291445,
+      "iqr": 0.0005249999999999977,
+      "min": 0.28659100000000004,
+      "max": 0.294144,
+      "ci_low": 0.28659100000000004,
+      "ci_high": 0.294144,
+      "failures": 0
+    },
+    "mvpbs": {
+      "n": 5,
+      "median": 0.075359,
+      "q1": 0.074445,
+      "q3": 0.075639,
+      "iqr": 0.0011940000000000006,
+      "min": 0.07400100000000001,
+      "max": 0.076502,
+      "ci_low": 0.07400100000000001,
+      "ci_high": 0.076502,
+      "failures": 0
+    },
+    "vpack": {
+      "n": 5,
+      "median": 0.009647000000000001,
+      "q1": 0.009595000000000001,
+      "q3": 0.009672,
+      "iqr": 7.699999999999894e-05,
+      "min": 0.009438,
+      "max": 0.009803000000000001,
+      "ci_low": 0.009438,
+      "ci_high": 0.009803000000000001,
+      "failures": 0
+    }
+  }
+}

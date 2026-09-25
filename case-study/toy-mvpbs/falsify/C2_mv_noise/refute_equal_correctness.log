@@ -1,0 +1,9 @@
+k=1: per-bit 0/128 [0.000,0.029]   MV-PBS 14/128 [0.066,0.175]
+k=2: per-bit 0/128 [0.000,0.029]   MV-PBS 22/128 [0.116,0.247]
+k=3: per-bit 0/128 [0.000,0.029]   MV-PBS 27/128 [0.149,0.290]
+k=4: per-bit 0/128 [0.000,0.029]   MV-PBS 32/128 [0.183,0.332]
+bit 0: norm2=10 measured std 2^-6.740 vs model 2^-6.838
+bit 1: norm2=10 measured std 2^-6.879 vs model 2^-6.838
+bit 2: norm2=8 measured std 2^-7.130 vs model 2^-6.999
+bit 3: norm2=8 measured std 2^-6.940 vs model 2^-6.999
+{"claim": "C2", "verdict": "weakened", "reason": "MV-PBS failure CI above per-bit CI for k in [1, 2, 3, 4] at T2; same-correctness holds only when ||d_i||^2 * Var_BR + Var_KS fits the margin"}

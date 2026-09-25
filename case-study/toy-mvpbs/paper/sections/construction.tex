@@ -1,0 +1,48 @@
+% construction.tex -- main construction + correctness/noise (TEACHING EXAMPLE).
+% Claims used: C1 (survived), C2 (weakened wording). See ../../CLAIMS.md.
+\section{Multi-Value PBS for Bit-Sliced S-boxes}\label{sec:construction}
+\begin{lemma}[factorisation, cf.~\cite{CIM19}]\label{lem:factor}
+Let $p\mid N$ and $\Delta$ be even. For $f:\ZZ_p\to\ZZ_p$ let $d_f\in\ZZ[X]$ have
+$d_f[0]=f(0)+f(p-1)$, $d_f[iN/p]=f(i)-f(i-1)$ for $1\le i<p$ and zeros elsewhere, and let
+$v_0=\frac{\Delta}{2}\sum_{j<N}X^j$. Then $T_f=v_0\cdot d_f$ in $\Rq$.
+\end{lemma}
+\begin{proof}
+In $R$, $(1-X)\sum_{j<N}X^j=1-X^N=2$, so $v_0(1-X)=\Delta$ and $(1-X)$ is a unit after
+inverting $2$. Coefficient $j\ge1$ of $T_f(1-X)$ is $t_j-t_{j-1}$, non-zero only at block
+boundaries, and coefficient $0$ is $t_0+t_{N-1}$ by negacyclicity; hence
+$T_f(1-X)=\Delta d_f=v_0(1-X)d_f$; cancelling the unit $(1-X)$ gives $T_f=v_0d_f$. All coefficients of $v_0$ are the
+integer $\Delta/2$, so the identity holds modulo $q$.
+\end{proof}
+Since blind rotation is $R$-linear in the test polynomial, rotating $v_0$ once and multiplying
+the accumulator by each $d_{f_i}$ afterwards yields the rotations of all $T_{f_i}$: \MVPBS{}
+costs one blind rotation plus, per table, one product with a polynomial of at most $p$ small
+non-zero integer coefficients, one sample extraction and one key switch.
+We checked the identity exhaustively for all Boolean tables with $p\le 16$ and for random
+tables, and \MVPBS{} decrypted all 256/256 outputs of our correctness attack (key seeds,
+all inputs, extreme tables) correctly at T1.
+
+\begin{lemma}[norm of $d_f$]\label{lem:norm}
+For Boolean $f:\ZZ_p\to\{0,1\}$, $\|d_f\|^2=(f(0)+f(p-1))^2+\#\{i: f(i)\neq f(i-1)\}\le p+2$,
+and the bound is attained. For the PRESENT S-box~\cite{PRESENT07} the four output bits give
+$\|d_f\|^2=10,10,8,8$\evid{E15}.
+\end{lemma}
+\begin{proof}
+If $f(0)=f(p-1)=1$ the number of changes along $0,\dots,p-1$ is even, hence at most $p-2$;
+otherwise $d_f[0]^2\le1$ and there are at most $p-1$ changes.
+\end{proof}
+
+\begin{theorem}[output noise]\label{thm:noise}
+Under the usual heuristic that the accumulator noise coefficients are independent and centred,
+the \MVPBS{} output for $f$ has variance $\|d_f\|^2\sigma^2_{\mathrm{BR}}+\sigma^2_{\mathrm{KS}}$,
+whereas a \PBSop{} output has $\sigma^2_{\mathrm{BR}}+\sigma^2_{\mathrm{KS}}$.
+\end{theorem}
+\begin{proof}[sketch]
+Multiplication by the plaintext polynomial $d_f$ maps the noise polynomial $e$ to $d_fe$, whose
+constant coefficient is a fixed signed combination of $\|d_f\|^2$-weighted independent terms;
+sample extraction is exact and key switching adds $\sigma^2_{\mathrm{KS}}$.
+\end{proof}
+So \MVPBS{} gives the same correctness as per-bit \PBSop{} \emph{only if}
+$\|d_f\|^2\sigma^2_{\mathrm{BR}}+\sigma^2_{\mathrm{KS}}$ still fits the decoding margin. For the
+PRESENT bits the blind-rotation noise grows by at most 1.66~bits\evid{E22}. At T1 the
+key-switch noise ($2^{-12.13}$\evid{E21}) dominates the blind-rotation noise
+($2^{-14.47}$\evid{E21}) and the growth is invisible; at T2 it is not (\Cref{sec:eval}).

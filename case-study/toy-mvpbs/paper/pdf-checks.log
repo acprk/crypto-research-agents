@@ -1,0 +1,17 @@
+# pdf_checks.py main.pdf --log main.log --limit 5  (skills/camera-ready)
+[pages] total=5 references_start=4 conclusion=4 body_last=4
+[refs] '??' occurrences in PDF text: 0
+[refs] undefined: 0 []; multiply defined: []; rerun needed: False
+[boxes] overfull: 0 (>1.0pt: 0); underfull: 0
+[fonts] 30 fonts; not embedded: []; Type 3: []
+[meta] Title:           
+[meta] Subject:         
+[meta] Keywords:        
+[meta] Author:          
+[meta] Creator:         LaTeX with hyperref
+[meta] Producer:        pdfTeX-1.40.22
+[meta] Pages:           5
+[meta] Page size:       612 x 792 pts (letter)
+[width] text block on page 3 ≈ 12.2 cm (LNCS default ≈ 12.2 cm)
+[overlap] pages with overlapping words: []
+RESULT: OK

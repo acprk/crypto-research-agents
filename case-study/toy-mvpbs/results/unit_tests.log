@@ -1,0 +1,16 @@
+test_mvpbs (__main__.TestEvaluation) ... ok
+test_mvpbs_general_lut (__main__.TestEvaluation)
+MV-PBS with non-Boolean LUTs (full nibble output, p = 16). ... ok
+test_perbit (__main__.TestEvaluation) ... ok
+test_same_as_pbs_noise_free (__main__.TestEvaluation)
+Without key switching MV-PBS and PBS agree on the decrypted value. ... ok
+test_vpack (__main__.TestEvaluation) ... ok
+test_identity_random_luts (__main__.TestFactorisation)
+T_f == v0 * d_f exactly (mod X^N+1, mod 2^32) for random LUTs Z_p -> Z_p. ... ok
+test_norm_bound_boolean (__main__.TestFactorisation)
+||d_f||^2 <= 18 for every Boolean f on Z_16 (Lemma L2); PRESENT bits give 10,10,8,8. ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 7.152s
+
+OK

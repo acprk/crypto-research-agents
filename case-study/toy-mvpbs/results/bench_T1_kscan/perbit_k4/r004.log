@@ -1,0 +1,7 @@
+# crbench arm=perbit_k4 round=4 warmup=False
+# cmd: /usr/bin/python3 code/bench_sbox.py --method perbit --k 4 --params T1 --inputs 4
+# rc=0 wall=1.864731s value=0.286202 error=
+# ---
+sbox_eval time: 286.202 ms
+sbox_wall elapsed: 286.209 ms
+RESULT name=perbit correct=16 total=16 blind_rotations=4 cmux=128

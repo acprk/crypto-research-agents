@@ -1,0 +1,7 @@
+# anon_check.py sections ../refs.bib macros.tex main.tex main.pdf ../code ../results --deny-file <private deny-list, not committed>
+# run 2026-09-25 by submission-rebuttal
+[LOW   ] pdf-meta-creator   main.pdf  LaTeX with hyperref  (informational)
+[LOW   ] pdf-meta-producer  main.pdf  pdfTeX-1.40.22  (informational)
+[LOW   ] revealing-wording  main.tex:5  % de-anonymised), main_full.tex (full version for ePrint). One shared source.
+
+summary: HIGH=0 MEDIUM=0 LOW=3

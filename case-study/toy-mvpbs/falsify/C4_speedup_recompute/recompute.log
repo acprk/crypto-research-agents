@@ -1,0 +1,2 @@
+n=5/5 same_config=True all_outputs_correct=True speedup=3.86x [3.79, 3.95]
+{"claim": "C4", "verdict": "survived", "reason": "recomputed 3.86x [3.79, 3.95] from raw logs; inside [3,4)"}

@@ -1,0 +1,7 @@
+# falsify_C3_k64 + bench_T1_kscan re-parsed from raw logs; claim: speedup >= 0.9 k
+k=1: perbit_median_ms=71.7 mvpbs_median_ms=74.8 speedup=0.96x [0.90, 1.09] claimed>=0.9 ok
+k=2: perbit_median_ms=142.7 mvpbs_median_ms=71.5 speedup=2.00x [1.98, 2.02] claimed>=1.8 ok
+k=3: perbit_median_ms=216.0 mvpbs_median_ms=73.3 speedup=2.95x [2.89, 3.13] claimed>=2.7 ok
+k=4: perbit_median_ms=290.9 mvpbs_median_ms=73.5 speedup=3.96x [3.83, 4.18] claimed>=3.6 ok
+k=64: perbit_median_ms=4565.5 mvpbs_median_ms=104.6 speedup=43.67x [42.53, 44.63] claimed>=57.6 VIOLATED
+{"claim": "C3", "verdict": "refuted", "reason": "speed-up CI entirely below 0.9k for k in [64]: per-LUT post-processing does not amortise; the speed-up saturates (Amdahl)"}

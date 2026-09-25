@@ -1,0 +1,8 @@
+perbit  op counts per S-box (as measured, LWE vs GGSW input): {'pbs': 4, 'cmux': 128, 'external_product': 128, 'keyswitch': 4}
+mvpbs   op counts per S-box (as measured, LWE vs GGSW input): {'pbs': 1, 'cmux': 32, 'external_product': 32, 'keyswitch': 4}
+vpack   op counts per S-box (as measured, LWE vs GGSW input): {'cmux': 4, 'external_product': 4, 'keyswitch': 4}
+measured medians: mvpbs 75.4 ms, vpack 9.6 ms, raw ratio 7.8x
+l_cb=1: end-to-end vpack >= 376 ms  => ratio vs mvpbs <= 0.20x
+l_cb=2: end-to-end vpack >= 667 ms  => ratio vs mvpbs <= 0.11x
+l_cb=3: end-to-end vpack >= 959 ms  => ratio vs mvpbs <= 0.08x
+{"claim": "C5", "verdict": "refuted", "reason": "raw ratio compares different input formats; with even the cheapest LWE->GGSW conversion (l_cb=1) vpack is slower than MV-PBS end-to-end"}

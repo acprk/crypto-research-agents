@@ -1,0 +1,667 @@
+{
+  "arms": {
+    "perbit_k1": "/usr/bin/python3 code/bench_sbox.py --method perbit --k 1 --params T1 --inputs 4",
+    "mvpbs_k1": "/usr/bin/python3 code/bench_sbox.py --method mvpbs --k 1 --params T1 --inputs 4",
+    "perbit_k2": "/usr/bin/python3 code/bench_sbox.py --method perbit --k 2 --params T1 --inputs 4",
+    "mvpbs_k2": "/usr/bin/python3 code/bench_sbox.py --method mvpbs --k 2 --params T1 --inputs 4",
+    "perbit_k3": "/usr/bin/python3 code/bench_sbox.py --method perbit --k 3 --params T1 --inputs 4",
+    "mvpbs_k3": "/usr/bin/python3 code/bench_sbox.py --method mvpbs --k 3 --params T1 --inputs 4",
+    "perbit_k4": "/usr/bin/python3 code/bench_sbox.py --method perbit --k 4 --params T1 --inputs 4",
+    "mvpbs_k4": "/usr/bin/python3 code/bench_sbox.py --method mvpbs --k 4 --params T1 --inputs 4"
+  },
+  "order": "alternate",
+  "repeats": 5,
+  "warmup": 1,
+  "metric": "time",
+  "executions": [
+    {
+      "arm": "perbit_k1",
+      "round": 0,
+      "warmup": true,
+      "returncode": 0,
+      "wall": 0.7969781489809975,
+      "value": 0.07143899999999999,
+      "log": "results/bench_T1_kscan/perbit_k1/r000_warmup.log",
+      "error": ""
+    },
+    {
+      "arm": "mvpbs_k1",
+      "round": 0,
+      "warmup": true,
+      "returncode": 0,
+      "wall": 0.8241492869565263,
+      "value": 0.073166,
+      "log": "results/bench_T1_kscan/mvpbs_k1/r000_warmup.log",
+      "error": ""
+    },
+    {
+      "arm": "perbit_k2",
+      "round": 0,
+      "warmup": true,
+      "returncode": 0,
+      "wall": 1.1504240590147674,
+      "value": 0.142303,
+      "log": "results/bench_T1_kscan/perbit_k2/r000_warmup.log",
+      "error": ""
+    },
+    {
+      "arm": "mvpbs_k2",
+      "round": 0,
+      "warmup": true,
+      "returncode": 0,
+      "wall": 0.7898084940388799,
+      "value": 0.07159399999999999,
+      "log": "results/bench_T1_kscan/mvpbs_k2/r000_warmup.log",
+      "error": ""
+    },
+    {
+      "arm": "perbit_k3",
+      "round": 0,
+      "warmup": true,
+      "returncode": 0,
+      "wall": 1.5398594529833645,
+      "value": 0.22364599999999998,
+      "log": "results/bench_T1_kscan/perbit_k3/r000_warmup.log",
+      "error": ""
+    },
+    {
+      "arm": "mvpbs_k3",
+      "round": 0,
+      "warmup": true,
+      "returncode": 0,
+      "wall": 0.8109970750520006,
+      "value": 0.073396,
+      "log": "results/bench_T1_kscan/mvpbs_k3/r000_warmup.log",
+      "error": ""
+    },
+    {
+      "arm": "perbit_k4",
+      "round": 0,
+      "warmup": true,
+      "returncode": 0,
+      "wall": 1.8588869459927082,
+      "value": 0.284837,
+      "log": "results/bench_T1_kscan/perbit_k4/r000_warmup.log",
+      "error": ""
+    },
+    {
+      "arm": "mvpbs_k4",
+      "round": 0,
+      "warmup": true,
+      "returncode": 0,
+      "wall": 0.813189374981448,
+      "value": 0.072857,
+      "log": "results/bench_T1_kscan/mvpbs_k4/r000_warmup.log",
+      "error": ""
+    },
+    {
+      "arm": "mvpbs_k1",
+      "round": 1,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 0.7895068399375305,
+      "value": 0.07333400000000001,
+      "log": "results/bench_T1_kscan/mvpbs_k1/r001.log",
+      "error": ""
+    },
+    {
+      "arm": "perbit_k2",
+      "round": 1,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 1.1566593289608136,
+      "value": 0.14491700000000002,
+      "log": "results/bench_T1_kscan/perbit_k2/r001.log",
+      "error": ""
+    },
+    {
+      "arm": "mvpbs_k2",
+      "round": 1,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 0.796684940927662,
+      "value": 0.071904,
+      "log": "results/bench_T1_kscan/mvpbs_k2/r001.log",
+      "error": ""
+    },
+    {
+      "arm": "perbit_k3",
+      "round": 1,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 1.4913672909606248,
+      "value": 0.214458,
+      "log": "results/bench_T1_kscan/perbit_k3/r001.log",
+      "error": ""
+    },
+    {
+      "arm": "mvpbs_k3",
+      "round": 1,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 0.778583575040102,
+      "value": 0.072851,
+      "log": "results/bench_T1_kscan/mvpbs_k3/r001.log",
+      "error": ""
+    },
+    {
+      "arm": "perbit_k4",
+      "round": 1,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 1.9226934349862859,
+      "value": 0.30269,
+      "log": "results/bench_T1_kscan/perbit_k4/r001.log",
+      "error": ""
+    },
+    {
+      "arm": "mvpbs_k4",
+      "round": 1,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 0.7794856399996206,
+      "value": 0.072435,
+      "log": "results/bench_T1_kscan/mvpbs_k4/r001.log",
+      "error": ""
+    },
+    {
+      "arm": "perbit_k1",
+      "round": 1,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 0.7790672730188817,
+      "value": 0.071695,
+      "log": "results/bench_T1_kscan/perbit_k1/r001.log",
+      "error": ""
+    },
+    {
+      "arm": "perbit_k2",
+      "round": 2,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 1.1311766259605065,
+      "value": 0.142966,
+      "log": "results/bench_T1_kscan/perbit_k2/r002.log",
+      "error": ""
+    },
+    {
+      "arm": "mvpbs_k2",
+      "round": 2,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 0.7813827230129391,
+      "value": 0.072333,
+      "log": "results/bench_T1_kscan/mvpbs_k2/r002.log",
+      "error": ""
+    },
+    {
+      "arm": "perbit_k3",
+      "round": 2,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 1.5487545829964802,
+      "value": 0.22487100000000002,
+      "log": "results/bench_T1_kscan/perbit_k3/r002.log",
+      "error": ""
+    },
+    {
+      "arm": "mvpbs_k3",
+      "round": 2,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 0.7898881620494649,
+      "value": 0.071775,
+      "log": "results/bench_T1_kscan/mvpbs_k3/r002.log",
+      "error": ""
+    },
+    {
+      "arm": "perbit_k4",
+      "round": 2,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 1.854436006047763,
+      "value": 0.284072,
+      "log": "results/bench_T1_kscan/perbit_k4/r002.log",
+      "error": ""
+    },
+    {
+      "arm": "mvpbs_k4",
+      "round": 2,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 0.804370345082134,
+      "value": 0.07398300000000001,
+      "log": "results/bench_T1_kscan/mvpbs_k4/r002.log",
+      "error": ""
+    },
+    {
+      "arm": "perbit_k1",
+      "round": 2,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 0.8008218311006203,
+      "value": 0.070979,
+      "log": "results/bench_T1_kscan/perbit_k1/r002.log",
+      "error": ""
+    },
+    {
+      "arm": "mvpbs_k1",
+      "round": 2,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 0.8255045430269092,
+      "value": 0.078977,
+      "log": "results/bench_T1_kscan/mvpbs_k1/r002.log",
+      "error": ""
+    },
+    {
+      "arm": "mvpbs_k2",
+      "round": 3,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 0.8238948140060529,
+      "value": 0.071451,
+      "log": "results/bench_T1_kscan/mvpbs_k2/r003.log",
+      "error": ""
+    },
+    {
+      "arm": "perbit_k3",
+      "round": 3,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 1.5029099970124662,
+      "value": 0.214447,
+      "log": "results/bench_T1_kscan/perbit_k3/r003.log",
+      "error": ""
+    },
+    {
+      "arm": "mvpbs_k3",
+      "round": 3,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 0.8000226109288633,
+      "value": 0.073259,
+      "log": "results/bench_T1_kscan/mvpbs_k3/r003.log",
+      "error": ""
+    },
+    {
+      "arm": "perbit_k4",
+      "round": 3,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 1.8986163720255718,
+      "value": 0.290921,
+      "log": "results/bench_T1_kscan/perbit_k4/r003.log",
+      "error": ""
+    },
+    {
+      "arm": "mvpbs_k4",
+      "round": 3,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 0.7987418749835342,
+      "value": 0.07264100000000001,
+      "log": "results/bench_T1_kscan/mvpbs_k4/r003.log",
+      "error": ""
+    },
+    {
+      "arm": "perbit_k1",
+      "round": 3,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 0.7986228630179539,
+      "value": 0.07223900000000001,
+      "log": "results/bench_T1_kscan/perbit_k1/r003.log",
+      "error": ""
+    },
+    {
+      "arm": "mvpbs_k1",
+      "round": 3,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 0.818749621976167,
+      "value": 0.077253,
+      "log": "results/bench_T1_kscan/mvpbs_k1/r003.log",
+      "error": ""
+    },
+    {
+      "arm": "perbit_k2",
+      "round": 3,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 1.1430683539947495,
+      "value": 0.141196,
+      "log": "results/bench_T1_kscan/perbit_k2/r003.log",
+      "error": ""
+    },
+    {
+      "arm": "perbit_k3",
+      "round": 4,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 1.521200094022788,
+      "value": 0.21746000000000001,
+      "log": "results/bench_T1_kscan/perbit_k3/r004.log",
+      "error": ""
+    },
+    {
+      "arm": "mvpbs_k3",
+      "round": 4,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 0.8259026050800458,
+      "value": 0.075268,
+      "log": "results/bench_T1_kscan/mvpbs_k3/r004.log",
+      "error": ""
+    },
+    {
+      "arm": "perbit_k4",
+      "round": 4,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 1.864731066976674,
+      "value": 0.286202,
+      "log": "results/bench_T1_kscan/perbit_k4/r004.log",
+      "error": ""
+    },
+    {
+      "arm": "mvpbs_k4",
+      "round": 4,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 0.7992595760151744,
+      "value": 0.07478,
+      "log": "results/bench_T1_kscan/mvpbs_k4/r004.log",
+      "error": ""
+    },
+    {
+      "arm": "perbit_k1",
+      "round": 4,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 0.7970535469939932,
+      "value": 0.07158400000000001,
+      "log": "results/bench_T1_kscan/perbit_k1/r004.log",
+      "error": ""
+    },
+    {
+      "arm": "mvpbs_k1",
+      "round": 4,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 0.8192358299857005,
+      "value": 0.074786,
+      "log": "results/bench_T1_kscan/mvpbs_k1/r004.log",
+      "error": ""
+    },
+    {
+      "arm": "perbit_k2",
+      "round": 4,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 1.1461020109709352,
+      "value": 0.140959,
+      "log": "results/bench_T1_kscan/perbit_k2/r004.log",
+      "error": ""
+    },
+    {
+      "arm": "mvpbs_k2",
+      "round": 4,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 0.7942469009431079,
+      "value": 0.07135899999999999,
+      "log": "results/bench_T1_kscan/mvpbs_k2/r004.log",
+      "error": ""
+    },
+    {
+      "arm": "mvpbs_k3",
+      "round": 5,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 0.8102368309628218,
+      "value": 0.073441,
+      "log": "results/bench_T1_kscan/mvpbs_k3/r005.log",
+      "error": ""
+    },
+    {
+      "arm": "perbit_k4",
+      "round": 5,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 1.9020248200977221,
+      "value": 0.29487599999999997,
+      "log": "results/bench_T1_kscan/perbit_k4/r005.log",
+      "error": ""
+    },
+    {
+      "arm": "mvpbs_k4",
+      "round": 5,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 0.7989639930892736,
+      "value": 0.07345,
+      "log": "results/bench_T1_kscan/mvpbs_k4/r005.log",
+      "error": ""
+    },
+    {
+      "arm": "perbit_k1",
+      "round": 5,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 0.8202042799675837,
+      "value": 0.07761900000000001,
+      "log": "results/bench_T1_kscan/perbit_k1/r005.log",
+      "error": ""
+    },
+    {
+      "arm": "mvpbs_k1",
+      "round": 5,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 0.7917662740219384,
+      "value": 0.070973,
+      "log": "results/bench_T1_kscan/mvpbs_k1/r005.log",
+      "error": ""
+    },
+    {
+      "arm": "perbit_k2",
+      "round": 5,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 1.127775343018584,
+      "value": 0.142694,
+      "log": "results/bench_T1_kscan/perbit_k2/r005.log",
+      "error": ""
+    },
+    {
+      "arm": "mvpbs_k2",
+      "round": 5,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 0.7903651780216023,
+      "value": 0.07151900000000001,
+      "log": "results/bench_T1_kscan/mvpbs_k2/r005.log",
+      "error": ""
+    },
+    {
+      "arm": "perbit_k3",
+      "round": 5,
+      "warmup": false,
+      "returncode": 0,
+      "wall": 1.5049493509577587,
+      "value": 0.21596100000000001,
+      "log": "results/bench_T1_kscan/perbit_k3/r005.log",
+      "error": ""
+    }
+  ],
+  "env": {
+    "captured_at": "2026-09-25T02:43:37-0700",
+    "host_id": "1a8729448f93",
+    "os": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+    "python": "3.10.12",
+    "cpu": {
+      "machine": "x86_64",
+      "logical_cpus": 104,
+      "Model name": "Intel(R) Xeon(R) Gold 6230R CPU @ 2.10GHz",
+      "Thread(s) per core": "2",
+      "Core(s) per socket": "26",
+      "Socket(s)": "2",
+      "CPU max MHz": "4000.0000",
+      "simd": [
+        "adx",
+        "aes",
+        "avx",
+        "avx2",
+        "avx512_vnni",
+        "avx512bw",
+        "avx512cd",
+        "avx512dq",
+        "avx512f",
+        "avx512vl",
+        "bmi1",
+        "bmi2",
+        "sse4_1",
+        "sse4_2"
+      ],
+      "L3 cache": "71.5 MiB (2 instances)",
+      "NUMA node(s)": "2",
+      "governor": "powersave",
+      "loadavg": [
+        19.7900390625,
+        34.673828125,
+        36.33154296875
+      ]
+    },
+    "mem_total_kb": 263729556,
+    "compilers": {
+      "gcc": "gcc (GCC) 9.5.0",
+      "g++": "g++ (GCC) 9.5.0",
+      "clang": "Ubuntu clang version 17.0.6 (++20231209124227+6009708b4367-1~exp1~20231209124336.77)",
+      "rustc": "rustc 1.94.0 (4a4ef493e 2026-03-02)",
+      "cargo": "cargo 1.94.0 (85eff7c80 2026-01-15)",
+      "go": "go version go1.18.1 linux/amd64",
+      "cmake": "cmake version 3.22.1",
+      "sage": "SageMath version 9.5, Release Date: 2022-01-30"
+    },
+    "env": {
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1"
+    },
+    "target": {
+      "dir_name": "toy-mvpbs",
+      "git_commit": "eb1f494a9a675195b0bb05aee8e3ecc7f995d320",
+      "git_dirty": false,
+      "git_describe": "eb1f494"
+    },
+    "bench": {
+      "threads": 1,
+      "cpus": null,
+      "order": "alternate",
+      "seed": 0
+    }
+  },
+  "warnings": [
+    "CPU governor is 'powersave', not 'performance' (frequency scaling adds noise)"
+  ],
+  "started": "2026-09-25T02:43:37-0700",
+  "finished": "2026-09-25T02:44:28-0700",
+  "summary": {
+    "perbit_k1": {
+      "n": 5,
+      "median": 0.071695,
+      "q1": 0.07158400000000001,
+      "q3": 0.07223900000000001,
+      "iqr": 0.0006550000000000028,
+      "min": 0.070979,
+      "max": 0.07761900000000001,
+      "ci_low": 0.070979,
+      "ci_high": 0.07761900000000001,
+      "failures": 0
+    },
+    "mvpbs_k1": {
+      "n": 5,
+      "median": 0.074786,
+      "q1": 0.07333400000000001,
+      "q3": 0.077253,
+      "iqr": 0.003918999999999992,
+      "min": 0.070973,
+      "max": 0.078977,
+      "ci_low": 0.070973,
+      "ci_high": 0.078977,
+      "failures": 0
+    },
+    "perbit_k2": {
+      "n": 5,
+      "median": 0.142694,
+      "q1": 0.141196,
+      "q3": 0.142966,
+      "iqr": 0.0017700000000000216,
+      "min": 0.140959,
+      "max": 0.14491700000000002,
+      "ci_low": 0.140959,
+      "ci_high": 0.14491700000000002,
+      "failures": 0
+    },
+    "mvpbs_k2": {
+      "n": 5,
+      "median": 0.07151900000000001,
+      "q1": 0.071451,
+      "q3": 0.071904,
+      "iqr": 0.0004529999999999951,
+      "min": 0.07135899999999999,
+      "max": 0.072333,
+      "ci_low": 0.07135899999999999,
+      "ci_high": 0.072333,
+      "failures": 0
+    },
+    "perbit_k3": {
+      "n": 5,
+      "median": 0.21596100000000001,
+      "q1": 0.214458,
+      "q3": 0.21746000000000001,
+      "iqr": 0.0030020000000000047,
+      "min": 0.214447,
+      "max": 0.22487100000000002,
+      "ci_low": 0.214447,
+      "ci_high": 0.22487100000000002,
+      "failures": 0
+    },
+    "mvpbs_k3": {
+      "n": 5,
+      "median": 0.073259,
+      "q1": 0.072851,
+      "q3": 0.073441,
+      "iqr": 0.0005900000000000072,
+      "min": 0.071775,
+      "max": 0.075268,
+      "ci_low": 0.071775,
+      "ci_high": 0.075268,
+      "failures": 0
+    },
+    "perbit_k4": {
+      "n": 5,
+      "median": 0.290921,
+      "q1": 0.286202,
+      "q3": 0.29487599999999997,
+      "iqr": 0.00867399999999996,
+      "min": 0.284072,
+      "max": 0.30269,
+      "ci_low": 0.284072,
+      "ci_high": 0.30269,
+      "failures": 0
+    },
+    "mvpbs_k4": {
+      "n": 5,
+      "median": 0.07345,
+      "q1": 0.07264100000000001,
+      "q3": 0.07398300000000001,
+      "iqr": 0.001341999999999996,
+      "min": 0.072435,
+      "max": 0.07478,
+      "ci_low": 0.072435,
+      "ci_high": 0.07478,
+      "failures": 0
+    }
+  }
+}

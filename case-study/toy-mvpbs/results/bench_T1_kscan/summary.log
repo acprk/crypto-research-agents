@@ -1,0 +1,6 @@
+# bench_T1_kscan: per-bit PBS vs MV-PBS for k = 1..4 output bits, toy Python, T1, 4 inputs, CPU time
+# rounds=5 warmup=1 order=alternate threads=1 started=2026-09-25T02:43:37-0700
+k=1 perbit_median_ms=71.7 mvpbs_median_ms=74.8 speedup=0.96x [0.90, 1.09] ideal=1
+k=2 perbit_median_ms=142.7 mvpbs_median_ms=71.5 speedup=2.00x [1.98, 2.02] ideal=2
+k=3 perbit_median_ms=216.0 mvpbs_median_ms=73.3 speedup=2.95x [2.89, 3.13] ideal=3
+k=4 perbit_median_ms=290.9 mvpbs_median_ms=73.5 speedup=3.96x [3.83, 4.18] ideal=4

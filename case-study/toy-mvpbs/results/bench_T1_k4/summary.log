@@ -1,0 +1,8 @@
+# bench_T1_k4: time of ONE 4-bit S-box evaluation (4 output-bit ciphertexts), toy Python, T1
+# rounds=5 warmup=1 order=alternate threads=1 started=2026-09-25T02:42:50-0700
+perbit  median_ms=291.2 iqr_ms=0.5 ci95_ms=[286.6,294.1] n=5 failures=0
+mvpbs   median_ms=75.4 iqr_ms=1.2 ci95_ms=[74.0,76.5] n=5 failures=0
+vpack   median_ms=9.6 iqr_ms=0.1 ci95_ms=[9.4,9.8] n=5 failures=0
+speedup mvpbs_vs_perbit = 3.86x [3.79, 3.95]  (median ratio, paired bootstrap 95% CI)
+speedup vpack_vs_perbit = 30.18x [29.68, 30.88]  (median ratio, paired bootstrap 95% CI)
+speedup vpack_vs_mvpbs = 7.81x [7.55, 7.98]  (median ratio, paired bootstrap 95% CI)

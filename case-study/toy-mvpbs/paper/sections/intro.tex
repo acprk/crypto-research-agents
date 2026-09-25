@@ -1,0 +1,25 @@
+% intro.tex -- funnel -> bottleneck -> open question -> contributions (TEACHING EXAMPLE).
+\section{Introduction}\label{sec:intro}
+TFHE~\cite{CGGI16,CGGI20} refreshes a ciphertext with a \emph{blind rotation} of a test
+polynomial, a technique going back to FHEW~\cite{DM15}. Choosing the test polynomial evaluates
+an arbitrary function during the refresh (programmable bootstrapping, \PBSop)~\cite{CJP21}.
+The blind rotation dominates the cost, and it does not depend on the function: evaluating
+$k$ functions of the \emph{same} input with $k$ independent \PBSop{} repeats it $k$ times.
+
+A 4-bit S-box is the textbook instance. If the next layer is bit-sliced, the four output bits
+are needed as four ciphertexts, i.e.\ four \PBSop{}. (If a single ciphertext of the nibble
+suffices, one \PBSop{} with $f=S$ does the job and there is nothing to optimise.)
+Carpov, Izabach\`ene and Mollimard~\cite{CIM19} observed that the test polynomials of many
+functions share a common factor $v_0$, so one blind rotation of $v_0$ can serve all of them
+(multi-value PBS, \MVPBS). Tree-based and multi-value variants for larger tables were studied
+in~\cite{GBA21}; CMux-tree evaluation from GGSW inputs goes back to~\cite{CGGI17}.
+
+\subsection{Contributions (of this toy study)}
+\begin{itemize}
+\item A self-contained derivation of the factorisation for the one-padding-bit encoding
+  (\Cref{lem:factor}), the exact bound $\|d_f\|^2\le p+2$ for Boolean tables
+  (\Cref{lem:norm}), and the output-variance formula (\Cref{thm:noise}).
+\item A falsification-first evaluation: 3.86×\evid{E3} for the PRESENT S-box, sub-linear
+  scaling in the number of tables, and a parameter set where the noise price becomes visible.
+\end{itemize}
+We make no novelty claim: everything here is known since~\cite{CIM19}.

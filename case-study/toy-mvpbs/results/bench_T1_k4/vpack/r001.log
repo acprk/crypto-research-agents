@@ -1,0 +1,7 @@
+# crbench arm=vpack round=1 warmup=False
+# cmd: /usr/bin/python3 code/bench_sbox.py --method vpack --k 4 --params T1 --inputs 16
+# rc=0 wall=0.685888s value=0.009672 error=
+# ---
+sbox_eval time: 9.672 ms
+sbox_wall elapsed: 9.675 ms
+RESULT name=vpack correct=64 total=64 blind_rotations=0 cmux=4

@@ -1,0 +1,15 @@
+% appendix.tex (TEACHING EXAMPLE) -- nothing here is load-bearing.
+\section{Reproducing the Case Study}\label{app:repro}
+From the repository root:
+{\small
+\begin{verbatim}
+cd case-study/toy-mvpbs
+/usr/bin/python3 code/test_sbox_fhe.py
+/usr/bin/python3 theory/check_mvpbs_noise.py
+/usr/bin/python3 code/run_experiments.py
+/usr/bin/python3 falsify/C3_linear_speedup/check_linear_speedup.py
+/usr/bin/python3 code/make_figures.py
+\end{verbatim}
+}
+The ledger \texttt{EVIDENCE.md} maps every number of this paper to a log under
+\texttt{results/}; \texttt{CLAIMS.md} records which statements survived falsification.

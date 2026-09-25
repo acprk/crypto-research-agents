@@ -1,0 +1,18 @@
+% abstract.tex -- three-part paradigm (skills/paper-playbook/sections/02_abstract.md).
+% TEACHING EXAMPLE. Every number carries an evidence tag and is in ../EVIDENCE.md.
+\begin{abstract}
+Programmable bootstrapping (PBS) evaluates any look-up table on a TFHE ciphertext, but one PBS
+returns one output; a 4-bit S-box whose output bits are consumed separately therefore costs
+four blind rotations~\cite{CJP21}. Multi-value bootstrapping~\cite{CIM19} (CT-RSA'19)
+shares one blind rotation among several tables of the same input.
+
+We re-derive the factorisation $T_f = v_0\cdot d_f$ for the standard one-padding-bit encoding,
+show that $d_f$ has at most $p$ non-zero integer coefficients with $\|d_f\|^2\le p+2$, and give
+the resulting output variance $\|d_f\|^2\sigma^2_{\mathrm{BR}}+\sigma^2_{\mathrm{KS}}$.
+
+In a pure-Python toy TFHE (insecure parameters, single thread, CPU time), the PRESENT S-box
+costs 75.4~ms\evid{E2} instead of 291.2~ms\evid{E1}, a 3.86× [3.79, 3.95]\evid{E3} speed-up,
+which saturates for many tables (43.67×\evid{E9} for 64 tables). The price is noise: at a
+deliberately noisy parameter set the S-box failure rate rises from 0/128 to 32/128.
+All code, logs and falsification scripts are part of the case study.
+\end{abstract}

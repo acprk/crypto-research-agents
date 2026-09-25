@@ -1,0 +1,17 @@
+# noise_T2: phase error of each output-bit ciphertext; margin 2^-6; trials=128 per method
+name=perbit_bit0 std_log2=-8.537 pred_std_log2=-8.495 norm2=1 fails=0 n=128
+name=perbit_bit1 std_log2=-8.447 pred_std_log2=-8.495 norm2=1 fails=0 n=128
+name=perbit_bit2 std_log2=-8.674 pred_std_log2=-8.495 norm2=1 fails=0 n=128
+name=perbit_bit3 std_log2=-8.585 pred_std_log2=-8.495 norm2=1 fails=0 n=128
+name=perbit_k1 sbox_fails=0 n=128 rate=0.000 wilson95=[0.000,0.029]
+name=perbit_k2 sbox_fails=0 n=128 rate=0.000 wilson95=[0.000,0.029]
+name=perbit_k3 sbox_fails=0 n=128 rate=0.000 wilson95=[0.000,0.029]
+name=perbit_k4 sbox_fails=0 n=128 rate=0.000 wilson95=[0.000,0.029]
+name=mvpbs_bit0 std_log2=-6.740 pred_std_log2=-6.838 norm2=10 fails=14 n=128
+name=mvpbs_bit1 std_log2=-6.879 pred_std_log2=-6.838 norm2=10 fails=9 n=128
+name=mvpbs_bit2 std_log2=-7.130 pred_std_log2=-6.999 norm2=8 fails=8 n=128
+name=mvpbs_bit3 std_log2=-6.940 pred_std_log2=-6.999 norm2=8 fails=6 n=128
+name=mvpbs_k1 sbox_fails=14 n=128 rate=0.109 wilson95=[0.066,0.175]
+name=mvpbs_k2 sbox_fails=22 n=128 rate=0.172 wilson95=[0.116,0.247]
+name=mvpbs_k3 sbox_fails=27 n=128 rate=0.211 wilson95=[0.149,0.290]
+name=mvpbs_k4 sbox_fails=32 n=128 rate=0.250 wilson95=[0.183,0.332]

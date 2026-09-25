@@ -1,0 +1,4 @@
+exhaustive inputs x 3 key seeds: 192/192 output bits correct
+edge LUT norms: {'const0': 0, 'const1': 4, 'max_norm(norm2=18)': 18, 'alt_0101': 16}
+edge LUTs in one MV-PBS call: 64/64 correct
+{"claim": "C1", "verdict": "survived", "reason": "could not refute: 256 outputs correct incl. max-norm edge LUTs"}
