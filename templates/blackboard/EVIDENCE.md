@@ -2,6 +2,9 @@
 
 > Owner: `experimenter`. Audited by `falsifier` and by `crbench audit-tex paper/main.tex EVIDENCE.md`.
 
+> Example row (add real ones with `crbench evidence add`, `cra evidence add` or the `evidence_add` tool;
+> the log must exist — its sha256 is recorded in `.cra/evidence-hashes.json`):
+> `| E1 | 1.9× | speedup of X over baseline B at param set S | crbench run ... | results/S/x_vs_b.log | abc1234 | 32c AVX-512 / 1 thr | YYYY-MM-DD | 5 interleaved, median |`
+
 | ID | value as printed | meaning | command | log path | code commit | machine / threads | date | runs, statistic |
 |---|---|---|---|---|---|---|---|---|
-| E1 | 1.9× | speedup of X over baseline B at param set S | `crbench run ...` | results/S/x_vs_b.log | abc1234 | 32c AVX-512 / 1 thr | YYYY-MM-DD | 5 interleaved, median |

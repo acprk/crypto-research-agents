@@ -1,10 +1,11 @@
 # crypto-research-agents
 
 **A multi-agent research system for cryptography papers** — from literature search to camera-ready —
-packaged as Claude Code agents, skills and slash commands (also usable from Codex via `AGENTS.md`),
+packaged as Claude Code agents, skills and slash commands **and as an MCP server (`cra-mcp`) for Codex,
+Cline + DeepSeek, Gemini CLI, Cursor, VS Code, ChatGPT and other MCP hosts**,
 with a Python algorithm library, a fair-benchmarking harness, a figure kit and a worked toy example.
 
-[中文说明](docs/zh/README.md) · [BIGMAP](docs/BIGMAP.md) · [Quickstart](docs/QUICKSTART.md) · [Case study](case-study/WALKTHROUGH.md)
+[中文说明](docs/zh/README.md) · [**Use from any platform / 各平台接入**](docs/integrations/README.md) · [**CRA Studio desktop app**](docs/studio.md) · [BIGMAP](docs/BIGMAP.md) · [Quickstart](docs/QUICKSTART.md) · [Case study](case-study/WALKTHROUGH.md)
 
 ![BIGMAP](docs/bigmap/bigmap.png)
 
@@ -30,6 +31,9 @@ makes those failures structurally hard:
 | `commands/` | `/cra-init`, `/cra-status`, `/cra-phase`, `/cra-lit`, `/cra-ideas`, `/cra-falsify`, `/cra-bench`, `/cra-write`, `/cra-figure`, `/cra-review`, `/cra-rebuttal`, `/cra-submit` |
 | `workflows/` | phase playbook P0–P8 with gates + multi-agent Workflow scripts (lit-sweep, idea-tournament, falsify-round, mock-review-panel) |
 | `lib/cryptomath/` | algebra (GF(p^k), cyclotomics, Galois, CRT slots, NTT, Z_{p^e}, digit extraction, characters), lattice (LWE/RLWE/NTRU, estimators, BKZ sim, LLL), FHE toys (BGV, BFV, CKKS, TFHE/PBS, noise models, PS/BSGS, Chebyshev), symmetric (DDT/LAT/BCT, Boolean functions, APN, AES/SPN, SAT/MILP trail models, AO-cipher costs), protocols (SS, OT, OPRF, PSI/GC cost), EC (curves, DLP), costmodel |
+| `lib/core/` | `cra_core` + `cra` CLI: lossless blackboard edits, claim/evidence invariants in code, phase gates, event log, git pre-commit hook |
+| `lib/mcp/` | `cra-mcp`: MCP server (stdio / Streamable HTTP, profiles core/full/remote) + `cra-mcp install --host <21 hosts>` |
+| `lib/studio/` | **CRA Studio**: local GUI (projects, ledgers, gates, research agent on any OpenAI-compatible API); `packaging/` builds one executable for Windows/macOS/Linux that is also the MCP server |
 | `lib/bench/` | `crbench`: interleaved A/B runs, robust stats, env capture, parsers for OpenFHE/HElib/Lattigo/TFHE-rs/…, LaTeX tables, EVIDENCE ledger, `audit-tex` |
 | `lib/lean-template/` | Lean 4 + Mathlib project template with the proposition ↔ Lean-name table pattern |
 | `figures/` | house mplstyles (LNCS/ACM/IEEE), 16 matplotlib + 5 TikZ templates, figure harvester + pattern catalog |
@@ -42,10 +46,18 @@ makes those failures structurally hard:
 ```bash
 git clone <this repo> ~/crypto-research-agents
 cd ~/crypto-research-agents
-pip install -e lib/cryptomath -e lib/bench          # python ≥ 3.10
+pip install -e lib/core -e lib/mcp -e lib/cryptomath -e lib/bench   # python ≥ 3.10  (add "[test]" for pytest)
 ./install.sh /path/to/my-paper                        # or: ./install.sh --user  (all projects)
+scripts/check_all.sh                                  # optional: run every test / self-test (needs pytest)
 ```
 Or as a Claude Code plugin: `claude plugin install <path-or-url>`.
+
+Any other AI platform (Codex, Cline + DeepSeek, Gemini CLI, Cursor, VS Code, ChatGPT, …):
+```bash
+cra init ~/papers/my-paper
+cra-mcp install --host <codex|cline|gemini|cursor|vscode|chatgpt|...> --project ~/papers/my-paper
+```
+See [docs/integrations/README.md](docs/integrations/README.md) ([中文](docs/zh/integrations.md)).
 
 Then, inside Claude Code in your project:
 ```

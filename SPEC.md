@@ -9,7 +9,8 @@ It is the single source of truth for names, formats and hand-off contracts.
    submission number, author name, reviewer text, real benchmark number, server address,
    e-mail, review-system transcript, or unpublished theorem from the maintainers' private
    workspaces. Distil *methods* only. Examples must use **toy / synthetic** problems.
-   Before every push run `scripts/privacy_scan.sh`, which greps the tree against a local,
+   Before every push run `scripts/check_all.sh` (tests + self-tests + case-study gates; CI runs
+   the same script) and `scripts/privacy_scan.sh`, which greps the tree against a local,
    **git-ignored** deny-list `.privacy-denylist` (one regex per line; each maintainer keeps
    their own). Referring to a *public* published paper by its public ePrint number is fine.
 2. **No copyrighted PDFs, no harvested figure images** in git. Textbooks appear as
@@ -30,13 +31,16 @@ skills/<name>/SKILL.md       reusable skills (+ optional scripts/, references/)
 commands/<name>.md           slash commands that kick off workflows
 workflows/                   phase playbooks + Workflow-tool scripts (*.js)
 lib/cryptomath/              Python algorithm library (package `cryptomath`)
+lib/core/                    blackboard state layer + `cra` CLI (package `cra_core`)
+lib/mcp/                     MCP server `cra-mcp` (package `cra_mcp`) + per-host installers + `cra-agent`
+lib/studio/                  CRA Studio local GUI (package `cra_studio`); packaging/ builds the single executable
 lib/bench/                   benchmarking harness (package `crbench`)
 lib/lean-template/           Lean4+Mathlib project template
 figures/                     mplstyle, template scripts, harvester, gallery index
 templates/                   blackboard, paper skeletons, MANIFEST/HANDOFF/rebuttal
 references/                  textbook catalog (TOCs), reading lists, baseline MANIFEST
 case-study/                  toy end-to-end example run through all phases
-docs/                        BIGMAP, quickstart, methodology; docs/zh/ Chinese mirror
+docs/                        BIGMAP, quickstart, integrations/ (per-host guides), methodology; docs/zh/ Chinese mirror
 AGENTS.md                    Codex / generic-agent entry point (mirrors CLAUDE.md)
 CLAUDE.md                    Claude Code entry point
 install.sh                   installs agents/skills/commands into a target project

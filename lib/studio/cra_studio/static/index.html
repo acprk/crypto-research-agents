@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CRA Studio</title>
+<style>
+:root{--bg:#f6f7f9;--panel:#fff;--ink:#16191d;--muted:#5d6670;--line:#e2e5e9;--accent:#2457c5;--accent-ink:#fff;
+--ok:#1f7a3a;--warn:#9a6700;--fail:#b42318;--code:#f1f3f5;--chip:#eef2fb}
+@media (prefers-color-scheme:dark){:root{--bg:#121417;--panel:#1a1d21;--ink:#e7e9ec;--muted:#9aa3ad;--line:#2b3036;
+--accent:#6d9bff;--accent-ink:#0d1117;--ok:#4cc27a;--warn:#e3b341;--fail:#ff7b72;--code:#22262b;--chip:#1f2a40}}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+header{display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid var(--line);background:var(--panel);position:sticky;top:0;z-index:2}
+header b{font-size:15px}header .proj{color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+nav{display:flex;gap:4px;flex-wrap:wrap}nav button{background:none;border:0;color:var(--muted);padding:6px 10px;border-radius:6px;cursor:pointer;font:inherit}
+nav button.on{background:var(--chip);color:var(--ink)}main{max-width:1100px;margin:0 auto;padding:16px}
+section{display:none}section.on{display:block}.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:14px}
+h2{font-size:16px;margin:0 0 10px}h3{font-size:14px;margin:12px 0 6px;color:var(--muted);font-weight:600}
+label{display:block;color:var(--muted);font-size:12px;margin:8px 0 3px}input,select,textarea{width:100%;padding:7px 9px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font:inherit}
+textarea{min-height:70px;resize:vertical}.row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1;min-width:180px}
+button.btn{background:var(--accent);color:var(--accent-ink);border:0;border-radius:6px;padding:7px 14px;cursor:pointer;font:inherit}
+button.ghost{background:none;color:var(--accent);border:1px solid var(--line)}button:disabled{opacity:.5;cursor:default}
+.muted{color:var(--muted)}.small{font-size:12px}table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:600}.pill{display:inline-block;padding:1px 8px;border-radius:999px;font-size:12px;background:var(--chip)}
+.s-open{color:var(--warn)}.s-survived{color:var(--ok)}.s-weakened{color:var(--warn)}.s-refuted{color:var(--fail)}
+.PASS{color:var(--ok)}.FAIL{color:var(--fail)}.WARN{color:var(--warn)}pre{background:var(--code);padding:10px;border-radius:6px;overflow:auto;white-space:pre-wrap;word-break:break-word;margin:6px 0;font-size:12px}
+.stats{display:flex;gap:10px;flex-wrap:wrap}.stat{flex:1;min-width:110px;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px}.stat b{font-size:20px;display:block}
+#log .ev{border-left:3px solid var(--line);padding:4px 10px;margin:6px 0}#log .assistant{border-color:var(--accent)}#log .user{border-color:var(--muted)}#log .tool_call{border-color:var(--warn)}
+#log .tool_result{border-color:var(--ok)}#log .error{border-color:var(--fail)}#log .approval{border-color:var(--fail);background:var(--chip);border-radius:6px}
+.toast{position:fixed;bottom:16px;right:16px;background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:8px;display:none;max-width:70vw}
+.task{padding:6px 0;border-bottom:1px dashed var(--line)}.task:last-child{border:0}
+</style>
+</head>
+<body>
+<header>
+  <b>CRA Studio</b><span class="proj" id="projLabel"></span>
+  <nav id="nav"></nav>
+  <select id="lang" style="width:auto"><option value="zh">中文</option><option value="en">EN</option></select>
+</header>
+<main>
+  <section id="s-projects">
+    <div class="card"><h2 data-t="openProject"></h2>
+      <label data-t="projectPath"></label><input id="pPath" placeholder="~/papers/my-paper">
+      <label><input type="checkbox" id="pCreate" style="width:auto"> <span data-t="createIfMissing"></span></label>
+      <p><button class="btn" id="pOpen" data-t="open"></button></p>
+      <h3 data-t="recent"></h3><div id="recent" class="muted"></div>
+    </div>
+  </section>
+
+  <section id="s-dashboard">
+    <div class="card"><h2 data-t="overview"></h2><div class="stats" id="stats"></div></div>
+    <div class="card"><h2 data-t="nextTasks"></h2><div id="tasks"></div>
+      <p><button class="btn" id="runNext" data-t="runNext"></button></p></div>
+    <div class="card"><h2><span data-t="gate"></span> <span id="gatePhase" class="pill"></span></h2><div id="gate"></div></div>
+  </section>
+
+  <section id="s-agent">
+    <div class="card"><h2 data-t="agent"></h2>
+      <p class="muted small" data-t="agentHint"></p>
+      <textarea id="task"></textarea>
+      <p class="row" style="align-items:center">
+        <span><button class="btn" id="send" data-t="send"></button>
+        <button class="btn ghost" id="stop" data-t="stop" disabled></button>
+        <label style="display:inline"><input type="checkbox" id="newChat" style="width:auto"> <span data-t="newChat"></span></label></span>
+        <span class="muted small" id="runState"></span></p>
+      <div id="log"></div>
+    </div>
+  </section>
+
+  <section id="s-ledgers">
+    <div class="card"><h2 data-t="claims"></h2><div id="claims"></div></div>
+    <div class="card"><h2 data-t="evidence"></h2><div id="evidence"></div></div>
+    <div class="card"><h2 data-t="files"></h2>
+      <div class="row"><select id="fileSel"><option>STATE.md</option><option>CLAIMS.md</option><option>EVIDENCE.md</option>
+      <option>DECISIONS.md</option><option>IDEAS.md</option><option>LITERATURE.md</option><option>THEORY.md</option><option>REVIEWS.md</option></select>
+      <button class="btn ghost" id="fileLoad" data-t="show" style="flex:0"></button></div><pre id="fileBox"></pre></div>
+  </section>
+
+  <section id="s-settings">
+    <div class="card"><h2 data-t="model"></h2>
+      <p class="muted small" data-t="modelHint"></p>
+      <div class="row">
+        <div><label data-t="preset"></label><select id="cPreset"></select></div>
+        <div><label data-t="baseUrl"></label><input id="cBase" placeholder="https://.../v1"></div>
+      </div>
+      <div class="row">
+        <div><label data-t="apiKey"></label><input id="cKey" type="password" autocomplete="off"><span class="muted small" id="cKeyHint"></span></div>
+        <div><label data-t="modelId"></label><input id="cModel" list="modelList"><datalist id="modelList"></datalist></div>
+      </div>
+      <div class="row">
+        <div><label data-t="approve"></label><select id="cApprove"><option value="destructive" data-t="apDestructive"></option>
+          <option value="all" data-t="apAll"></option><option value="none" data-t="apNone"></option></select></div>
+        <div><label data-t="maxSteps"></label><input id="cSteps" type="number" min="1" max="200"></div>
+        <div><label data-t="toolProfile"></label><select id="cProfile"><option value="full">full (24)</option><option value="core">core (15)</option></select></div>
+      </div>
+      <p><button class="btn" id="cSave" data-t="save"></button> <button class="btn ghost" id="cTest" data-t="test"></button>
+        <button class="btn ghost" id="cClear" data-t="clearKey"></button></p>
+      <p class="muted small" id="cPath"></p><pre id="cOut" style="display:none"></pre>
+    </div>
+  </section>
+
+  <section id="s-connect">
+    <div class="card"><h2 data-t="connect"></h2><p class="muted small" data-t="connectHint"></p>
+      <div class="row"><select id="hostSel"></select><button class="btn ghost" id="hostShow" data-t="preview" style="flex:0"></button>
+      <button class="btn" id="hostApply" data-t="apply" style="flex:0"></button></div><pre id="hostOut"></pre></div>
+  </section>
+</main>
+<div class="toast" id="toast"></div>
+<script>
+const I18N={zh:{projects:"项目",dashboard:"概览",agent:"研究助手",ledgers:"账本",settings:"设置",connect:"接入其他工具",
+openProject:"打开或新建研究项目",projectPath:"项目目录",createIfMissing:"不存在时新建（黑板文件 + 论文骨架）",open:"打开",recent:"最近的项目",
+overview:"项目状态",nextTasks:"下一步任务",runNext:"让研究助手执行第一项",gate:"阶段门",phase:"阶段",open_:"待证伪",survived:"已通过",weakened:"已削弱",refuted:"已推翻",evRows:"证据行",
+agentHint:"助手通过 cra 工具读写黑板；它不能执行命令，需要跑实验时会告诉你命令。破坏性操作（推进阶段、写文件）会先请你确认。",
+send:"发送",stop:"停止",newChat:"新对话",claims:"Claims（论断）",evidence:"Evidence（证据）",files:"黑板文件",show:"查看",
+model:"模型接口",modelHint:"任何 OpenAI 兼容接口：选预设或填写 Base URL；API key 只保存在本机配置文件（权限 600），不会回显，也不会写进项目或 git。",
+preset:"预设",baseUrl:"Base URL（留空则用预设）",apiKey:"API key（留空表示不修改）",modelId:"模型 id",approve:"需要确认的操作",
+apDestructive:"破坏性操作（推荐）",apAll:"所有写入",apNone:"都不确认",maxSteps:"每次最多步数",toolProfile:"工具档位",save:"保存",test:"测试连接 / 列出模型",clearKey:"清除 key",
+connectHint:"把同一套工具接到 Claude Code、Codex、Cline、Cursor、VS Code 等（MCP）。预览不会写文件；应用只写本项目内的配置文件。",
+preview:"预览",apply:"写入项目",saved:"已保存",noProject:"请先打开一个项目",approvalQ:"助手请求执行",allow:"允许",deny:"拒绝",
+running:"运行中…",waiting:"等待你确认",done:"完成",stopped:"已停止",error:"出错",assistant:"助手",you:"你",tool:"工具",result:"结果",
+defaultTask:"调用 cra_resume，完成 next_tasks 中的第一项任务，然后汇报改动。"},
+en:{projects:"Projects",dashboard:"Dashboard",agent:"Research agent",ledgers:"Ledgers",settings:"Settings",connect:"Connect tools",
+openProject:"Open or create a research project",projectPath:"Project directory",createIfMissing:"create if missing (blackboard + paper skeleton)",open:"Open",recent:"Recent projects",
+overview:"Project state",nextTasks:"Next tasks",runNext:"Let the agent do the first one",gate:"Phase gate",phase:"Phase",open_:"open",survived:"survived",weakened:"weakened",refuted:"refuted",evRows:"evidence rows",
+agentHint:"The agent reads and writes the blackboard through the cra tools. It cannot run commands; when an experiment is needed it tells you the command. Destructive calls (phase changes, file writes) ask for your approval.",
+send:"Send",stop:"Stop",newChat:"new chat",claims:"Claims",evidence:"Evidence",files:"Blackboard files",show:"Show",
+model:"Model endpoint",modelHint:"Any OpenAI-compatible API: pick a preset or enter a base URL. The API key is stored only in your local config file (mode 600), never shown again, never written to a project or git.",
+preset:"Preset",baseUrl:"Base URL (empty = preset)",apiKey:"API key (empty = keep)",modelId:"Model id",approve:"Ask before",
+apDestructive:"destructive calls (recommended)",apAll:"every write",apNone:"never",maxSteps:"Max steps per run",toolProfile:"Tool profile",save:"Save",test:"Test / list models",clearKey:"Clear key",
+connectHint:"Use the same tools from Claude Code, Codex, Cline, Cursor, VS Code, … (MCP). Preview writes nothing; Apply only writes config files inside this project.",
+preview:"Preview",apply:"Write to project",saved:"Saved",noProject:"Open a project first",approvalQ:"The agent wants to run",allow:"Allow",deny:"Deny",
+running:"running…",waiting:"waiting for your approval",done:"done",stopped:"stopped",error:"error",assistant:"assistant",you:"you",tool:"tool",result:"result",
+defaultTask:"Call cra_resume, do the first task in next_tasks, then report what changed."}};
+const TABS=["projects","dashboard","agent","ledgers","settings","connect"];
+let L=(navigator.language||"zh").startsWith("zh")?"zh":"en", PROJECT=sessionStorage.getItem("cra-project")||"", RUN=null, NEXT=0, POLL=null;
+const TOKEN=(()=>{const m=location.hash.match(/t=([\w-]+)/);if(m){sessionStorage.setItem("cra-token",m[1]);history.replaceState(null,"",location.pathname);}return sessionStorage.getItem("cra-token")||"";})();
+const $=id=>document.getElementById(id), t=k=>I18N[L][k]||k, esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function toast(m){const e=$("toast");e.textContent=m;e.style.display="block";clearTimeout(e._t);e._t=setTimeout(()=>e.style.display="none",3500);}
+async function api(path,opt={}){const r=await fetch(path,{...opt,headers:{"Content-Type":"application/json","X-CRA-Token":TOKEN,...(opt.headers||{})}});
+  const j=await r.json().catch(()=>({ok:false,error:"HTTP "+r.status}));if(!j.ok)throw new Error(j.error||("HTTP "+r.status));return j;}
+const post=(p,b)=>api(p,{method:"POST",body:JSON.stringify(b||{})});
+function i18n(){document.querySelectorAll("[data-t]").forEach(e=>e.textContent=t(e.dataset.t));$("task").placeholder=t("defaultTask");
+  $("nav").innerHTML=TABS.map(x=>`<button data-tab="${x}">${t(x)}</button>`).join("");document.querySelectorAll("#nav button").forEach(b=>b.onclick=()=>show(b.dataset.tab));
+  $("lang").value=L;show(current);}
+let current=PROJECT?"dashboard":"projects";
+function show(tab){current=tab;TABS.forEach(x=>{$("s-"+x).classList.toggle("on",x===tab);});document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.tab===tab));
+  $("projLabel").textContent=PROJECT||"";if(["dashboard","ledgers","connect","agent"].includes(tab)&&!PROJECT){toast(t("noProject"));return show("projects");}
+  ({projects:loadProjects,dashboard:loadDash,ledgers:loadLedgers,settings:loadSettings,connect:loadConnect,agent:()=>{}})[tab]();}
+async function loadProjects(){const j=await api("/api/projects");$("pPath").placeholder=j.home+"/papers/my-paper";
+  $("recent").innerHTML=j.recent.length?j.recent.map(p=>`<div><a href="#" data-p="${esc(p)}">${esc(p)}</a></div>`).join(""):"—";
+  document.querySelectorAll("#recent a").forEach(a=>a.onclick=e=>{e.preventDefault();openProj(a.dataset.p,false);});}
+async function openProj(path,create){try{const j=await post("/api/projects/open",{path,create});PROJECT=j.project;sessionStorage.setItem("cra-project",PROJECT);show("dashboard");}catch(e){toast(e.message);}}
+$("pOpen").onclick=()=>openProj($("pPath").value.trim(),$("pCreate").checked);
+async function loadDash(){try{const s=(await api("/api/status?project="+encodeURIComponent(PROJECT))).status;
+  const c=s.claims;$("stats").innerHTML=[[t("phase"),s.phase||"—"],[t("open_"),c.open.length],[t("survived"),c.survived.length],[t("weakened"),c.weakened.length],[t("refuted"),c.refuted.length],[t("evRows"),s.evidence_rows]]
+   .map(([k,v])=>`<div class="stat"><span class="muted small">${k}</span><b>${esc(v)}</b></div>`).join("");
+  $("tasks").innerHTML=s.next_tasks.map(x=>`<div class="task"><span class="pill">${esc(x.agent)}</span> ${esc(x.task)}<div class="muted small">→ ${esc(x.tool)}</div></div>`).join("")||"—";
+  $("gatePhase").textContent=s.phase||"";$("gate").innerHTML=s.gate.map(g=>`<div><span class="${g.level}">${g.level}</span> ${esc(g.message)}</div>`).join("")+
+   s.evidence_issues.map(g=>`<div><span class="${g.level}">${g.level}</span> ${esc(g.message)}</div>`).join("");
+  if(s.active_run&&!RUN){RUN=s.active_run;NEXT=0;poll();}}catch(e){toast(e.message);}}
+$("runNext").onclick=()=>{show("agent");$("task").value=t("defaultTask");send();};
+function table(rows,cols,cls){if(!rows.length)return'<span class="muted">—</span>';return`<table><tr>${cols.map(c=>`<th>${c}</th>`).join("")}</tr>${rows.map(r=>`<tr>${cols.map(c=>`<td class="${cls&&cls(c,r)||""}">${esc(r[c])}</td>`).join("")}</tr>`).join("")}</table>`;}
+async function loadLedgers(){try{const q="?project="+encodeURIComponent(PROJECT);const c=await api("/api/ledger/claims"+q),e=await api("/api/ledger/evidence"+q);
+  $("claims").innerHTML=table(c.rows,["id","status","claim","falsifier","refs"],(k,r)=>k==="status"?"s-"+r.status:"");
+  $("evidence").innerHTML=table(e.rows,["id","printed","meaning","command","log","date"]);loadFile();}catch(x){toast(x.message);}}
+async function loadFile(){try{$("fileBox").textContent=(await api(`/api/file?project=${encodeURIComponent(PROJECT)}&path=${encodeURIComponent($("fileSel").value)}`)).text;}catch(x){$("fileBox").textContent=x.message;}}
+$("fileLoad").onclick=loadFile;$("fileSel").onchange=loadFile;
+async function loadSettings(){const c=(await api("/api/config")).config,p=c.provider;$("cPreset").innerHTML=Object.entries(c.presets).map(([k,v])=>`<option value="${k}">${k} — ${esc(v)}</option>`).join("");
+  $("cPreset").value=p.preset;$("cBase").value=p.base_url;$("cModel").value=p.model;$("cKey").value="";$("cKeyHint").textContent=p.api_key_set?("✓ "+p.api_key_hint):"";
+  $("cApprove").value=c.approve;$("cSteps").value=c.max_steps;$("cProfile").value=c.profile;$("cPath").textContent=c.config_path;}
+async function saveSettings(){await post("/api/config",{provider:{preset:$("cPreset").value,base_url:$("cBase").value,model:$("cModel").value,api_key:$("cKey").value},
+  approve:$("cApprove").value,max_steps:+$("cSteps").value,profile:$("cProfile").value});toast(t("saved"));loadSettings();}
+$("cSave").onclick=()=>saveSettings().catch(e=>toast(e.message));
+$("cClear").onclick=()=>post("/api/config",{provider:{clear_api_key:true}}).then(loadSettings).catch(e=>toast(e.message));
+$("cTest").onclick=async()=>{const o=$("cOut");o.style.display="block";o.textContent="…";try{await saveSettings();const j=await post("/api/config/test");
+  o.textContent=j.base_url+"\n"+j.models.join("\n");$("modelList").innerHTML=j.models.map(m=>`<option value="${esc(m)}">`).join("");}catch(e){o.textContent=e.message;}};
+async function loadConnect(){const j=await api("/api/connect?project="+encodeURIComponent(PROJECT));$("hostSel").innerHTML=j.hosts.map(h=>`<option>${h}</option>`).join("");}
+async function connect(apply){try{const j=await api(`/api/connect?project=${encodeURIComponent(PROJECT)}&host=${$("hostSel").value}${apply?"&apply=1":""}`);$("hostOut").textContent=j.lines.join("\n\n");}catch(e){toast(e.message);}}
+$("hostShow").onclick=()=>connect(false);$("hostApply").onclick=()=>connect(true);
+function addEv(e){const d=document.createElement("div");d.className="ev "+e.type;let h="";
+  if(e.type==="assistant")h=`<b>${t("assistant")}</b><pre>${esc(e.text)}</pre>`;
+  else if(e.type==="user")h=`<b>${t("you")}</b><pre>${esc(e.text)}</pre>`;
+  else if(e.type==="reasoning")h=`<details><summary class="muted small">reasoning</summary><pre>${esc(e.text)}</pre></details>`;
+  else if(e.type==="tool_call")h=`<b>${t("tool")}</b> <code>${esc(e.name)}</code><pre>${esc(e.arguments)}</pre>`;
+  else if(e.type==="tool_result"){let r=e.result;try{r=JSON.stringify(JSON.parse(r),null,1);}catch(_){}h=`<details><summary>${t("result")} · ${esc(e.name)} ${/"ok":\s*false/.test(e.result)?'<span class="FAIL">ok=false</span>':''}</summary><pre>${esc(r)}</pre></details>`;}
+  else if(e.type==="approval")h=`<b>${t("approvalQ")} <code>${esc(e.name)}</code></b><pre>${esc(e.arguments)}</pre><button class="btn" data-a="1">${t("allow")}</button> <button class="btn ghost" data-a="0">${t("deny")}</button>`;
+  else if(e.type==="error")h=`<b class="FAIL">${t("error")}</b><pre>${esc(e.text)}</pre>`;
+  else h=`<span class="muted small">${esc(e.type)} ${esc(e.steps??"")}</span>`;
+  d.innerHTML=h;$("log").appendChild(d);d.querySelectorAll("button[data-a]").forEach(b=>b.onclick=async()=>{await post(`/api/run/${RUN}/decide`,{allow:b.dataset.a==="1"});d.querySelectorAll("button").forEach(x=>x.disabled=true);});
+  d.scrollIntoView({block:"end",behavior:"smooth"});}
+async function poll(){clearTimeout(POLL);if(!RUN)return;try{const j=await api(`/api/run/${RUN}?after=${NEXT}`);j.events.forEach(addEv);NEXT=j.next;
+  $("runState").textContent=t({running:"running",waiting_approval:"waiting",done:"done",stopped:"stopped",error:"error"}[j.status]);
+  const live=["running","waiting_approval"].includes(j.status);$("send").disabled=live;$("stop").disabled=!live;
+  if(live)POLL=setTimeout(poll,800);else{RUN=null;if(current==="dashboard")loadDash();}}catch(e){toast(e.message);RUN=null;$("send").disabled=false;}}
+async function send(){if(!PROJECT)return toast(t("noProject"));try{const j=await post("/api/run",{project:PROJECT,task:$("task").value.trim()||t("defaultTask"),new_chat:$("newChat").checked});
+  if($("newChat").checked)$("log").innerHTML="";$("newChat").checked=false;RUN=j.run;NEXT=0;addEv({type:"user",text:(($("task").value.trim()||t("defaultTask")))});poll();}catch(e){toast(e.message);}}
+$("send").onclick=send;$("stop").onclick=()=>RUN&&post(`/api/run/${RUN}/stop`);
+$("lang").onchange=()=>{L=$("lang").value;i18n();};
+if(!TOKEN)document.body.innerHTML='<main><div class="card">Open the URL printed by <code>cra-studio</code> (it contains the session token).</div></main>';else i18n();
+</script>
+</body>
+</html>

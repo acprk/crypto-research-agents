@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cra-core"
+version = "0.2.0"
+description = "Typed state layer for the crypto-research-agents blackboard: lossless Markdown tables, claim/evidence ledgers with invariants, phase gates, file lock and event log. Shared by the gate scripts, the `cra` CLI and the cra-mcp server."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+license = {text = "MIT"}
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[project.scripts]
+cra = "cra_core.cli:main"
+
+[tool.setuptools]
+packages = ["cra_core"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

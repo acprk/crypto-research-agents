@@ -41,8 +41,11 @@
 \newcommand{\CKKS}{\textsf{CKKS}}
 \newcommand{\PSI}{\textsf{PSI}}
 
-% ---- evidence tag (renders nothing; used by cross-check scripts)
-\newcommand{\ev}[1]{}                            % usage: 3.4$\times$\ev{E12}
+% ---- provenance tags (render nothing; checked by `crbench audit-tex` and the P7 gate)
+\newcommand{\evid}[1]{}                          % usage: 3.4$\times$\evid{E12}  (number -> EVIDENCE row)
+\newcommand{\ev}[1]{\evid{#1}}                   % short alias of \evid
+\newcommand{\claimref}[1]{}                      % usage: ...sentence.\claimref{C4}  (statement -> CLAIMS row,
+                                                 %  must be survived/weakened; comma lists allowed)
 
 % ---- drafting helpers (remove before submission; grep for TODO)
 \newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}

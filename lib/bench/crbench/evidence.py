@@ -13,7 +13,7 @@ Rules enforced here:
 * IDs are unique; ``derived:`` rows only reference existing IDs;
 * with ``root`` given, log paths must exist;
 * ``audit_tex``: every *measurement-like* number in the paper body is either listed in
-  some row's printed column, or explicitly tagged ``\\evid{ID}`` (and then it must
+  some row's printed column, or explicitly tagged ``\\evid{ID}`` / ``\\ev{ID}`` (and then it must
   match that row), or sits on a line carrying ``% crbench:ignore``.
 """
 from __future__ import annotations
@@ -221,7 +221,7 @@ def strip_tex(line: str) -> str:
     # \cmd*[opt]{arg}  (one level of braces is enough for these commands)
     names = "|".join(_DROP_CMDS_WITH_ARG)
     line = re.sub(rf"\\(?:{names})\*?(?:\[[^\]]*\])*(?:\{{[^{{}}]*\}})?(?:\{{[^{{}}]*\}})?", " ", line)
-    line = re.sub(r"\\evid\{[^}]*\}", " ", line)
+    line = re.sub(r"\\(?:evid|ev|claimref)\{[^}]*\}", " ", line)
     line = re.sub(r"\\[a-zA-Z]+\d*", lambda m: " " if re.search(r"\d", m.group(0)) else m.group(0), line)
     return line
 
@@ -277,7 +277,7 @@ def audit_tex(tex_path: str, ledger_rows: list[dict], strict: bool = False, body
         if not in_body or ignore_block or "crbench:ignore" in raw_line:
             continue
         # explicit evidence tags: number immediately before \evid{ID}
-        for m in re.finditer(r"\\evid\{([^}]*)\}", raw_line):
+        for m in re.finditer(r"\\evid?\{([^}]*)\}", raw_line):
             eid = m.group(1).strip()
             prev = numbers_in(strip_tex(raw_line[max(0, m.start() - 60): m.start()]))
             if eid not in by_id:
