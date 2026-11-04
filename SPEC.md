@@ -31,6 +31,7 @@ skills/<name>/SKILL.md       reusable skills (+ optional scripts/, references/)
 commands/<name>.md           slash commands that kick off workflows
 workflows/                   phase playbooks + Workflow-tool scripts (*.js)
 lib/cryptomath/              Python algorithm library (package `cryptomath`)
+lib/core/                    blackboard state layer + `cra` CLI (package `cra_core`)
 lib/bench/                   benchmarking harness (package `crbench`)
 lib/lean-template/           Lean4+Mathlib project template
 figures/                     mplstyle, template scripts, harvester, gallery index

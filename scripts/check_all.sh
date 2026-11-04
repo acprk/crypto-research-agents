@@ -3,15 +3,16 @@
 # case-study gates. Used by CI (.github/workflows/ci.yml) and before every push.
 #   scripts/check_all.sh            # all checks
 #   scripts/check_all.sh --quick    # skip the figure-rendering tests (slowest part)
-# Needs: pip install -e "lib/cryptomath[test,plot]" -e "lib/bench[test]" pymupdf
+# Needs: pip install -e "lib/core[test]" -e "lib/cryptomath[test,plot]" -e "lib/bench[test]" pymupdf
 set -uo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"; cd "$ROOT"
 PY="${PYTHON:-python3}"; QUICK=0; [ "${1:-}" = "--quick" ] && QUICK=1
 FAILED=()
 run() { local name="$1"; shift; echo "::group::$name"; if "$@"; then echo "ok   $name"; else echo "FAIL $name"; FAILED+=("$name"); fi; echo "::endgroup::"; }
 
-"$PY" -c "import pytest" 2>/dev/null || { echo "pytest missing: pip install -e 'lib/cryptomath[test]' -e 'lib/bench[test]'"; exit 2; }
+"$PY" -c "import pytest" 2>/dev/null || { echo "pytest missing: pip install -e 'lib/core[test]' -e 'lib/cryptomath[test]' -e 'lib/bench[test]'"; exit 2; }
 
+run "pytest lib/core"         bash -c "cd lib/core && $PY -m pytest -q"
 run "pytest lib/cryptomath"   bash -c "cd lib/cryptomath && $PY -m pytest -q"
 run "pytest lib/bench"        bash -c "cd lib/bench && $PY -m pytest -q"
 run "pytest skills"           "$PY" -m pytest -q skills/anonymize-check/tests

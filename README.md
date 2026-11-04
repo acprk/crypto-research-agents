@@ -30,6 +30,7 @@ makes those failures structurally hard:
 | `commands/` | `/cra-init`, `/cra-status`, `/cra-phase`, `/cra-lit`, `/cra-ideas`, `/cra-falsify`, `/cra-bench`, `/cra-write`, `/cra-figure`, `/cra-review`, `/cra-rebuttal`, `/cra-submit` |
 | `workflows/` | phase playbook P0–P8 with gates + multi-agent Workflow scripts (lit-sweep, idea-tournament, falsify-round, mock-review-panel) |
 | `lib/cryptomath/` | algebra (GF(p^k), cyclotomics, Galois, CRT slots, NTT, Z_{p^e}, digit extraction, characters), lattice (LWE/RLWE/NTRU, estimators, BKZ sim, LLL), FHE toys (BGV, BFV, CKKS, TFHE/PBS, noise models, PS/BSGS, Chebyshev), symmetric (DDT/LAT/BCT, Boolean functions, APN, AES/SPN, SAT/MILP trail models, AO-cipher costs), protocols (SS, OT, OPRF, PSI/GC cost), EC (curves, DLP), costmodel |
+| `lib/core/` | `cra_core` + `cra` CLI: lossless blackboard edits, claim/evidence invariants in code, phase gates, event log, git pre-commit hook |
 | `lib/bench/` | `crbench`: interleaved A/B runs, robust stats, env capture, parsers for OpenFHE/HElib/Lattigo/TFHE-rs/…, LaTeX tables, EVIDENCE ledger, `audit-tex` |
 | `lib/lean-template/` | Lean 4 + Mathlib project template with the proposition ↔ Lean-name table pattern |
 | `figures/` | house mplstyles (LNCS/ACM/IEEE), 16 matplotlib + 5 TikZ templates, figure harvester + pattern catalog |
@@ -42,7 +43,7 @@ makes those failures structurally hard:
 ```bash
 git clone <this repo> ~/crypto-research-agents
 cd ~/crypto-research-agents
-pip install -e lib/cryptomath -e lib/bench          # python ≥ 3.10  (add "[test]" for pytest)
+pip install -e lib/core -e lib/cryptomath -e lib/bench   # python ≥ 3.10  (add "[test]" for pytest)
 ./install.sh /path/to/my-paper                        # or: ./install.sh --user  (all projects)
 scripts/check_all.sh                                  # optional: run every test / self-test (needs pytest)
 ```

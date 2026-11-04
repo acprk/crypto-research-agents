@@ -2,7 +2,7 @@
 
 ## 1. Install
 ```bash
-pip install -e lib/cryptomath -e lib/bench
+pip install -e lib/core -e lib/cryptomath -e lib/bench
 ./install.sh ~/papers/my-new-paper          # copies agents/skills/commands into .claude/
 cd ~/papers/my-new-paper && claude
 ```

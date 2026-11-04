@@ -16,5 +16,5 @@ if [ "$TARGET" != "$HOME" ]; then
   mkdir -p "$TARGET/.cra"; put "$HERE/workflows" "$TARGET/.cra/workflows"
   [ -f "$TARGET/AGENTS.md" ] || cp "$HERE/AGENTS.md" "$TARGET/AGENTS.md"
 fi
-echo "Installed into $DEST ($MODE). Python libs: pip install -e $HERE/lib/cryptomath -e $HERE/lib/bench"
+echo "Installed into $DEST ($MODE). Python libs: pip install -e $HERE/lib/core -e $HERE/lib/cryptomath -e $HERE/lib/bench"
 echo "Next: in Claude Code run  /cra-init <project-dir>"
