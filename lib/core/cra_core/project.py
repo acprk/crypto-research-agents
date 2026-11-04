@@ -11,7 +11,8 @@ import re
 from dataclasses import dataclass, asdict
 
 from .mdtable import Document, Table
-from .schema import (CLAIM_HEADER, CLAIM_HINTS, EVIDENCE_HEADER, EVIDENCE_HINTS, STATUSES)
+from .schema import (CLAIM_HEADER, CLAIM_HINTS, DECISION_HEADER, DECISION_HINTS, EVIDENCE_HEADER, EVIDENCE_HINTS,
+                     STATUSES)
 
 
 class CraError(ValueError):
@@ -297,6 +298,96 @@ class Project:
             "evidence_issues": [{"level": s, "message": m} for s, m in self.check_evidence()],
             "recent_events": self.events(10),
         }
+
+    # ------------------------------------------------------------- decisions & phases
+    def add_decision(self, decision: str, options: str = "", evidence: str = "", by: str = "",
+                     revisit: str = "") -> str:
+        """Append a dated go/no-go entry to DECISIONS.md.  Returns its id ``D-<n>``."""
+        if len(decision.strip()) < 10:
+            raise CraError("a decision needs a one-line statement plus rationale")
+        with self.lock():
+            doc, t = self._table("DECISIONS.md", DECISION_HINTS, ("date", "decision"), DECISION_HEADER, create=True)
+            text = self.read("DECISIONS.md") or ""
+            nums = [int(n) for n in re.findall(r"\bD-?(\d+)\b", text)]
+            did = f"D-{max(nums, default=0) + 1}"
+            t.append({"date": _today(), "decision": f"**{did}** {decision.strip()}", "options": options,
+                      "evidence": evidence, "by": by or self.actor, "revisit": revisit})
+            self._write("DECISIONS.md", doc.render())
+            self.log_event("decision.add", did)
+        return did
+
+    def tick_gate_item(self, phase: str, item: str, waive_reason: str = "", decision: str = "") -> str:
+        """Tick (``[x]``) or waive (``[~] ... WAIVED: reason (DECISIONS D-n)``) one gate item matched by substring."""
+        from .gates import gate_section
+        state = self.read("STATE.md")
+        if state is None:
+            raise CraError("STATE.md missing")
+        if gate_section(state, phase) is None:
+            raise CraError(f"STATE.md has no gate section for {phase}")
+        if waive_reason and not re.fullmatch(r"D-?\d+", decision.strip()):
+            raise CraError("waiving a gate item needs a DECISIONS id (decision='D-n'); log it with decision_log first")
+        lines = state.split("\n")
+        start = next(i for i, l in enumerate(lines)
+                     if l.lstrip().startswith("#") and "gate" in l.lower() and re.search(rf"\b{phase}\b", l))
+        level = len(lines[start]) - len(lines[start].lstrip("#"))
+        hits = []
+        for i in range(start + 1, len(lines)):
+            l = lines[i]
+            if l.lstrip().startswith("#") and len(l) - len(l.lstrip("#")) <= level:
+                break
+            if re.match(r"\s*[-*] \[[ xX~]\]", l) and item.lower() in l.lower():
+                hits.append(i)
+        if len(hits) != 1:
+            raise CraError(f"item text matches {len(hits)} gate items in {phase}; give a longer, unique substring")
+        i = hits[0]
+        if waive_reason:
+            body = re.sub(r"^(\s*[-*]) \[[ xX~]\]\s*", "", lines[i])
+            lines[i] = re.match(r"^(\s*[-*])", lines[i]).group(1) + f" [~] {body} WAIVED: {waive_reason.strip()} (DECISIONS {decision.strip()})"
+        else:
+            lines[i] = re.sub(r"\[[ ~]\]", "[x]", lines[i], count=1)
+        with self.lock():
+            self._write("STATE.md", "\n".join(lines))
+            self.log_event("gate.tick" if not waive_reason else "gate.waive", phase, item=lines[i].strip())
+        return lines[i].strip()
+
+    def advance_phase(self, to: str, rationale: str, paper: str | None = None) -> dict:
+        """Move the project to phase ``to``.  Forward moves (one step) require the current gate to pass;
+        backward moves (feedback loops) need a rationale naming the trigger.  Both are logged in DECISIONS."""
+        from .gates import PHASES, check_gate, gate_section
+        from .phases import PHASE_INFO, gate_section_text
+        cur = self.phase()
+        if cur is None:
+            raise CraError("STATE.md has no 'phase: P<k>' line")
+        if to not in PHASES:
+            raise CraError(f"unknown phase {to}")
+        ci, ti = PHASES.index(cur), PHASES.index(to)
+        if ti == ci:
+            raise CraError(f"already in {cur}")
+        if len(rationale.strip()) < 10:
+            raise CraError("give a rationale (for a backward move: the CLAIMS/REVIEWS id that triggered it)")
+        if ti > ci + 1:
+            raise CraError(f"cannot skip phases: {cur} -> {to}; advance one phase at a time")
+        if ti == ci + 1:
+            if paper is None and os.path.isdir(self.path("paper")) and ci >= 7:
+                paper = "paper"
+            res = check_gate(self.root, cur, paper)
+            fails = [m for s, m in res if s == "FAIL"]
+            if fails:
+                raise CraError(f"gate {cur} does not pass: " + "; ".join(fails[:8]))
+        did = self.add_decision(f"{'Advance' if ti > ci else 'Back'} {cur} -> {to}. {rationale.strip()}",
+                                evidence=f"cra gate {cur}" if ti > ci else "", by=self.actor)
+        with self.lock():
+            state = self.read("STATE.md") or ""
+            m = PHASE_RX.search(state)
+            seg = state[m.start(1):]
+            name = PHASE_INFO[cur][0].split()[0]
+            new_seg = re.sub(rf"^{cur}(\s+{re.escape(name)}\b)?", f"{to} {PHASE_INFO[to][0]}" if m.group(0).strip().startswith(("-", "*")) else to, seg, count=1)
+            state = state[:m.start(1)] + new_seg
+            if gate_section(state, to) is None:
+                state = state.rstrip("\n") + "\n\n" + gate_section_text(to)
+            self._write("STATE.md", state)
+            self.log_event("phase.advance", to, frm=cur, decision=did)
+        return {"from": cur, "to": to, "decision": did}
 
     def claims_as_dicts(self) -> list[dict]:
         return [asdict(c) for c in self.claims()]

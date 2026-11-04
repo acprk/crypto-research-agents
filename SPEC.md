@@ -32,13 +32,14 @@ commands/<name>.md           slash commands that kick off workflows
 workflows/                   phase playbooks + Workflow-tool scripts (*.js)
 lib/cryptomath/              Python algorithm library (package `cryptomath`)
 lib/core/                    blackboard state layer + `cra` CLI (package `cra_core`)
+lib/mcp/                     MCP server `cra-mcp` (package `cra_mcp`) + per-host installers
 lib/bench/                   benchmarking harness (package `crbench`)
 lib/lean-template/           Lean4+Mathlib project template
 figures/                     mplstyle, template scripts, harvester, gallery index
 templates/                   blackboard, paper skeletons, MANIFEST/HANDOFF/rebuttal
 references/                  textbook catalog (TOCs), reading lists, baseline MANIFEST
 case-study/                  toy end-to-end example run through all phases
-docs/                        BIGMAP, quickstart, methodology; docs/zh/ Chinese mirror
+docs/                        BIGMAP, quickstart, integrations/ (per-host guides), methodology; docs/zh/ Chinese mirror
 AGENTS.md                    Codex / generic-agent entry point (mirrors CLAUDE.md)
 CLAUDE.md                    Claude Code entry point
 install.sh                   installs agents/skills/commands into a target project

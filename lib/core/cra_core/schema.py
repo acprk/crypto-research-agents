@@ -46,3 +46,13 @@ TASK_HINTS = [
     ("due", _has("due")),
     ("status", _is("status")),
 ]
+
+DECISION_HINTS = [
+    ("date", _is("date")),
+    ("decision", _is("decision")),
+    ("options", _has("option")),
+    ("evidence", _has("evidence")),
+    ("by", _has("decided", "by", "owner")),
+    ("revisit", _has("revisit", "reversal")),
+]
+DECISION_HEADER = ["date", "decision", "options considered", "evidence", "decided by", "revisit when"]

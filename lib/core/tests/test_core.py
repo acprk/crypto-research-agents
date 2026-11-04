@@ -166,3 +166,36 @@ def test_pre_commit_hook_blocks_bad_reference(proj, monkeypatch):
     open(proj.path("paper/sections/x.tex"), "w").write("As shown.\n")
     run("git", "add", "-A")
     assert run("git", "commit", "-qm", "good").returncode == 0
+
+
+def test_phase_advance_tick_waive_and_decisions(proj):
+    with pytest.raises(CraError, match="does not pass"):
+        proj.advance_phase("P1", "skip the scoping gate")
+    with pytest.raises(CraError, match="skip"):
+        proj.advance_phase("P3", "jump ahead three phases")
+    for it in ("falsifiable", "venue", "in-scope", "budget"):
+        proj.tick_gate_item("P0", it)
+    with pytest.raises(CraError, match="DECISIONS id"):
+        proj.tick_gate_item("P0", "kill", waive_reason="toy")
+    with pytest.raises(CraError, match="matches 0"):
+        proj.tick_gate_item("P0", "no such item")
+    did = proj.add_decision("Waive the kill date: teaching toy", options="set / waive")
+    assert did == "D-1"
+    proj.tick_gate_item("P0", "kill", waive_reason="teaching toy", decision=did)
+    r = proj.advance_phase("P1", "P0 gate passes")
+    assert r == {"from": "P0", "to": "P1", "decision": "D-2"} and proj.phase() == "P1"
+    state = proj.read("STATE.md")
+    assert "## Gate P1" in state and "- **Phase:** P1 Literature" in state
+    assert not [m for s, m in check_gate(proj.root, "P0") if s == "FAIL"]     # old gate kept as the log
+    back = proj.advance_phase("P0", "thesis too vague (REVIEWS R0)")
+    assert back["to"] == "P0" and proj.phase() == "P0"
+    assert "D-3" in proj.read("DECISIONS.md")
+
+
+def test_planner_puts_falsifier_first(proj):
+    from cra_core.planner import next_actions
+    proj.add_claim("For all toy sets the method needs one blind rotation", "idea-miner")
+    acts = next_actions(proj)
+    assert acts[0]["agent"] == "falsifier" and acts[0]["tool"] == "claim_verdict"
+    assert all("do_not" in a and "id" in a for a in acts)
+    assert any(a["agent"] == "pi-orchestrator" and "P0 gate item" in a["task"] for a in acts)

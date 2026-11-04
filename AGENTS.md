@@ -16,6 +16,12 @@ When working *in a research project* that uses this system:
 
 When working *on this repo*: follow `SPEC.md` (names, formats, the no-private-content rule).
 
+## Using the system through MCP (recommended outside Claude Code)
+`cra-mcp install --host <codex|cline|gemini|cursor|...> --project <dir>` connects the `cra` MCP server
+(see docs/integrations/README.md). Then call the `cra_resume` tool first in every session and change the
+ledgers only through the typed tools (`claim_register`, `claim_verdict`, `evidence_add`, `decision_log`,
+`gate_tick`, `phase_advance`), which enforce the invariants above.
+
 ## Using the agents without Claude Code subagents
 Each file in `agents/` is a self-contained role prompt. In tools without subagents,
 "become" an agent by reading its file and following its Procedure; skills in
