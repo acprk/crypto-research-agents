@@ -3,10 +3,11 @@
     cra-mcp --project ~/papers/my-paper                      # stdio (Claude Code, Codex, Cline, Cursor, ...)
     cra-mcp --project . --profile full                       # all tools
     cra-mcp --project . --http --port 8765                   # Streamable HTTP on 127.0.0.1:8765/mcp
-    cra-mcp --project . --http --profile remote --secret-path --public-url https://abc.trycloudflare.com
-                                                             # ChatGPT / claude.ai through a tunnel
+    cra-mcp --project . --http --profile remote --secret-path --public-url https://cra.example.org
+                                                             # ChatGPT / claude.ai (remote MCP)
     cra-mcp --list-tools [--profile core]                    # print the tool list (names + schemas)
-    cra-mcp --export openai|anthropic|gemini                 # function-calling schemas for non-MCP hosts
+    cra-mcp --export openai|openai-responses|openai-compat|anthropic|gemini
+                                                             # function-calling schemas for non-MCP code
     cra-mcp install --host <claude-code|codex|cline|gemini|cursor|vscode|chatgpt|...> --project <dir>
     cra-mcp doctor --project <dir>                           # check the installation
 
@@ -150,35 +151,9 @@ def tool_schemas(project: str, profile: str) -> list[dict]:
     return out
 
 
-def _clean(schema: dict, strict: bool) -> dict:
-    """Drop JSON-Schema keywords some function-calling APIs reject; optionally OpenAI strict form."""
-    s = {k: v for k, v in schema.items() if k not in ("title", "$schema", "additionalProperties")}
-    if s.get("type") == "object":
-        props = {k: {kk: vv for kk, vv in v.items() if kk != "title"} for k, v in s.get("properties", {}).items()}
-        if strict:
-            for k, v in props.items():
-                v.pop("default", None)
-                if k not in s.get("required", []):
-                    v["type"] = [v["type"], "null"] if isinstance(v.get("type"), str) else v.get("type")
-            s["required"] = list(props)
-            s["additionalProperties"] = False
-        s["properties"] = props
-    return s
-
-
 def export(fmt: str, project: str, profile: str) -> list[dict]:
-    tools = tool_schemas(project, profile)
-    if fmt == "anthropic":
-        return [{"name": t["name"], "description": t["description"], "input_schema": _clean(t["inputSchema"], False)}
-                for t in tools]
-    if fmt == "openai":
-        return [{"type": "function", "function": {"name": t["name"], "description": t["description"][:1024],
-                                                  "parameters": _clean(t["inputSchema"], True), "strict": True}}
-                for t in tools]
-    if fmt == "gemini":
-        return [{"functionDeclarations": [{"name": t["name"], "description": t["description"],
-                                           "parameters": _clean(t["inputSchema"], False)} for t in tools]}]
-    raise ValueError(fmt)
+    from .adapter import convert
+    return convert(tool_schemas(project, profile), fmt)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -202,13 +177,13 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--secret-path", action="store_true",
                     help="serve at /mcp/<random> (for hosts that cannot send headers, e.g. ChatGPT no-auth)")
     ap.add_argument("--token-env", default="CRA_MCP_TOKEN", help="env var holding a bearer token (HTTP)")
-    ap.add_argument("--allow-host", action="append", default=[], help="public host name of a tunnel (repeatable)")
+    ap.add_argument("--allow-host", action="append", default=[], help="public host name the server is reached under (repeatable)")
     ap.add_argument("--public-url", default="",
-                    help="public HTTPS base URL of your tunnel, e.g. https://abc.trycloudflare.com "
+                    help="public HTTPS base URL the server is reached under, e.g. https://cra.example.org "
                          "(implies --allow-host <its host>; prints the exact URL to paste into ChatGPT / claude.ai)")
     ap.add_argument("--new-secret", action="store_true", help="rotate the persisted --secret-path secret")
     ap.add_argument("--list-tools", action="store_true")
-    ap.add_argument("--export", choices=["openai", "anthropic", "gemini"])
+    ap.add_argument("--export", choices=["openai", "openai-responses", "openai-compat", "anthropic", "gemini"])
     ap.add_argument("--version", action="version", version=__version__)
     a = ap.parse_args(argv)
     project = os.path.abspath(os.path.expanduser(a.project))

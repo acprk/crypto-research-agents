@@ -9,7 +9,7 @@
 | M1 `cra_core` | ✅ 完成 | 无损 Markdown 表格、claim/evidence 不变量、ID+文件锁、事件流、`\claimref`/`\evid`、`cra` CLI、git pre-commit 钩子；顺带修复 3 个模板 bug（新项目 P0 门必挂、模板示例行是真数据、`\ev` 与 `\evid` 不一致） |
 | M2 `cra-mcp` | ✅ 完成 | 24 个工具三档（core 15 / full 24 / remote 21）、prompts、resources、stdio + Streamable HTTP（bearer 或秘密路径）、`cra-mcp install --host`（21 个平台）、`doctor`、`--export openai/anthropic/gemini`、中英文接入文档、Cline + DeepSeek 指南 |
 | M3 研究循环 | ⏳ 下一步 | `trial_start/finish`（worktree + 预算 + keep/discard 棘轮）、预算字段、`task_next(parallel)` |
-| M4 兼容层收尾 | ◐ 部分完成 | 已完成：安装器、schema 导出、ChatGPT/claude.ai 远程方案；待做：OpenAI 兼容参考 agent（`cra-agent`）、真实宿主冒烟测试（需要你的账号/key） |
+| M4 兼容层收尾 | ✅ 接口适配完成 | 安装器；导出 `openai`/`openai-responses`/`openai-compat`/`anthropic`/`gemini`（strict 可空枚举等细节）；`ToolBox` 函数调用适配器；`cra-agent`（任意 OpenAI 兼容 Chat Completions：ChatGPT API、DeepSeek、GLM、Kimi、通义、MiniMax…）；ChatGPT 远程 MCP 接口（秘密路径、Host/Origin、search/fetch）。按你的要求不做网关/隧道部署；真实账号联调待你验证 |
 | M5 异构红队 | ⏳ | 默认关闭 |
 | M6 发布 | ⏳ | PyPI 自包含 wheel（内置 templates/agents/skills，支持 `uvx cra-mcp`）、Claude Desktop `.mcpb` |
 > 范围：本仓库（toolkit）。不涉及任何私有研究内容（遵守 SPEC §0）。

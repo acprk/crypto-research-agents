@@ -209,19 +209,16 @@ def remote_instructions(host: str, project: str) -> str:
         "claude-ai": ("claude.ai -> Settings -> Connectors -> Add custom connector: paste the public URL printed by\n"
                       "   cra-mcp (no OAuth). On Team/Enterprise an owner adds it. Per-call timeout is 240 s."),
     }[host]
-    return f"""{app} reaches MCP servers from the cloud: it needs a public HTTPS URL (no local stdio).
-Step-by-step guide: docs/integrations/chatgpt.md (中文: docs/zh/integrations.md#chatgpt-逐步接入)
-1. Open a tunnel to local port 8765 in a first terminal and note its https:// URL:
-   cloudflared tunnel --url http://127.0.0.1:8765      (prints https://<random>.trycloudflare.com)
-   ngrok http 8765                                     (prints https://<random>.ngrok-free.app)
-2. In a second terminal start the server with that URL (remote profile = file access + search/fetch,
-   because {app} cannot see your disk):
-   cra-mcp --project {project} --http --profile remote --secret-path --public-url <tunnel URL>
-   It prints the exact URL to paste (">>> paste this as the MCP server URL: ..."). The secret part of
-   the path is stored in .cra/mcp-secret and stays the same across restarts.
-3. {steps}
-Security: everyone with the URL can read and write this project's files. Stop the tunnel when done;
-never paste the URL into shared chats. Nothing in cra can submit, e-mail or publish."""
+    return f"""{app} connects to remote MCP servers over HTTPS (no local stdio). Interface details:
+docs/integrations/chatgpt.md (中文: docs/zh/integrations.md#chatgpt--openai-接口适配)
+1. Serve the project over Streamable HTTP (remote profile = file access + search/fetch, because
+   {app} cannot see your disk), giving the public HTTPS base URL under which you expose it:
+   cra-mcp --project {project} --http --profile remote --secret-path --public-url https://<your host>
+   It prints the exact URL to use (">>> paste this as the MCP server URL: ..."); the secret part of the
+   path is kept in .cra/mcp-secret and stays the same across restarts.
+2. {steps}
+Security: everyone with the URL can read and write this project's files through the tools.
+Nothing in cra can submit, e-mail or publish."""
 
 
 def doctor(project: str) -> int:

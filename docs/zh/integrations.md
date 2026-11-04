@@ -50,51 +50,28 @@ cra-mcp install --host <平台> --project ~/papers/my-paper    # 加 --dry-run �
 
 接好后，在对话里说：**"调用 cra_resume，然后继续这个项目"**。
 
-## 3. ChatGPT 和 claude.ai（云端宿主）
+## 3. ChatGPT、claude.ai 与 OpenAI API
 
-这两个平台从云端连接 MCP 服务器，所以需要一个公网 HTTPS 地址。请使用 `remote` 档：它在 core 的基础上增加了沙箱内的 `file_list`/`file_read`/`file_write` 和 `search`/`fetch`，因为云端宿主看不到你本地的磁盘。
+完整的接口说明见下文"ChatGPT / OpenAI 接口适配"一节（英文版：[chatgpt.md](../integrations/chatgpt.md)）。
 
-```bash
-cloudflared tunnel --url http://127.0.0.1:8765          # 终端 1（或 ngrok http 8765），记下打印出的 https 地址
-```
+- **ChatGPT / claude.ai**：走远程 MCP。运行 `cra-mcp --project <目录> --http --profile remote --secret-path --public-url https://<你的域名>`，把打印出的 `>>>` 那行 URL 填到 App 或连接器的地址栏，认证选"无"。`remote` 档额外提供限定在项目目录内的文件工具，以及符合 ChatGPT 规范的 `search`/`fetch`。服务怎样对外可达由你自己决定。
+- **Responses API / Agents SDK**：可以作为远程 MCP 工具接入（`"type": "mcp"`，bearer token 取自 `$CRA_MCP_TOKEN`），也可以用 `cra-mcp --export openai-responses` 导出为本地函数工具。
 
-```bash
-cra-mcp --project ~/papers/my-paper --http --profile remote --secret-path --public-url <隧道地址>   # 终端 2
-```
-
-- **ChatGPT**：设置 → Apps（连接器）→ 高级 → 打开**开发者模式** → **创建 App**：
-  - MCP 服务器地址填 `>>>` 那一行给出的 URL；认证方式选 **无认证**。URL 里的随机路径就是密钥，保存在 `.cra/mcp-secret`，重启服务器后不变。
-  - 然后新开一个对话：**+** → **Developer mode** → 勾选 **cra**。
-  - 详细步骤和排错见下文"ChatGPT 逐步接入"一节。
-  - 写入类工具每次调用都会请求确认。
-  - 更新 cra 之后，要在 App 设置里点一次**刷新**。
-  - 哪些套餐可以使用写入类工具，OpenAI 各页面的说法不一致，以你自己账号里看到的为准。
-  - OpenAI 还提供只需出站连接的 *Secure MCP Tunnel*，可以代替公网 URL。
-- **claude.ai**：设置 → Connectors → **添加自定义连接器**，填同一个 URL。
-
-拿到 URL 的人可以读写这个项目的文件。用完请关掉隧道，不要把 URL 发到任何共享的地方。
-
-## 4. OpenAI API / Agents SDK
-
-先用 bearer token 以 HTTP 方式启动服务器：
+## 4. Chat Completions 与 OpenAI 兼容接口（ChatGPT API、DeepSeek、GLM、通义、Kimi 等）
 
 ```bash
-CRA_MCP_TOKEN=$(openssl rand -hex 24) cra-mcp --project . --http     # http://127.0.0.1:8765/mcp
+cra-mcp --export openai          # strict 模式的函数定义（Chat Completions）
+cra-mcp --export openai-compat   # 同样的工具，但不带 strict（适用于各家兼容接口）
+cra-agent --provider deepseek --model <模型id> --project <目录> "调用 cra_resume，完成第一项任务"
 ```
 
-然后作为远程 MCP 工具传给 API。这个 URL 必须能从公网访问，可以用第 3 节的隧道：
+如果要接进你自己写的循环，把模型返回的每个 tool call 交给 `cra_mcp.adapter.ToolBox(project).call(name, arguments)` 执行即可。它和 MCP 路径用的是同一套参数校验和不变量。
 
-```json
-{"type": "mcp", "server_label": "cra", "server_url": "https://<域名>/mcp",
- "headers": {"Authorization": "Bearer <token>"}, "require_approval": "never"}
-```
-
-## 5. 完全不用 MCP：导出函数调用 schema
+## 5. 其他函数调用接口
 
 ```bash
-cra-mcp --export openai    > cra-tools.openai.json      # OpenAI strict 模式
-cra-mcp --export anthropic > cra-tools.anthropic.json
-cra-mcp --export gemini    > cra-tools.gemini.json
+cra-mcp --export anthropic       # Messages API 的 input_schema
+cra-mcp --export gemini          # functionDeclarations（OpenAPI 3.0 子集）
 ```
 
 同样的操作在命令行里也能用 `cra …` 完成（见 `cra --help`）。
@@ -119,55 +96,71 @@ cra-mcp --export gemini    > cra-tools.gemini.json
 
 ---
 
-## ChatGPT 逐步接入
+## ChatGPT / OpenAI 接口适配
 
-> 说明：cra-mcp 这一侧已经测试过，包括 HTTP 传输、秘密路径，以及经隧道转发、带 ChatGPT Origin 的请求能否通过 Host/Origin 校验。
-> ChatGPT 的菜单名称来自 2026 年 11 月 OpenAI 的文档和近期的第三方教程。ChatGPT 改版很频繁，如果名称对不上，就找 "Developer mode" 和 "Create app"。
+本节只讲接口本身。服务怎样对外可达（反向代理、现有网关、托管）由你决定，不在本文范围内。
 
-**准备**
-- ChatGPT 付费账号（Plus / Pro / Business / Enterprise / Edu），开发者模式在 **ChatGPT 网页版**里。各套餐能否使用写入类工具，OpenAI 各页面说法不一；即使写入被限制，只读工具（`cra_resume`、`claim_list`、`gate_check`、`search`、`fetch` 等）仍然可用。
-- 存放研究项目的电脑，并已装好 cra（见第 1 节）。
-- 隧道工具。ChatGPT 从 OpenAI 的云端发起连接，访问不到你的 `localhost`。推荐 cloudflared，不需要注册：
-  - macOS：`brew install cloudflared`
-  - Windows：`winget install --id Cloudflare.cloudflared`
-  - Linux：从 Cloudflare 官网下载 deb/rpm 包
+**ChatGPT 的要求与 cra 的对应**
 
-**步骤**
-1. 准备项目：`cra init ~/papers/my-paper`（已有项目可跳过），再运行 `cra-mcp doctor --project ~/papers/my-paper` 自检。
-2. 终端 1（保持运行）：`cloudflared tunnel --url http://127.0.0.1:8765`，复制它打印的 `https://<随机>.trycloudflare.com`。快速隧道每次启动地址都会变；想要固定地址，可以用 Cloudflare 命名隧道，或 ngrok 的固定域名。
-3. 终端 2（保持运行）：
-   ```bash
-   cra-mcp --project ~/papers/my-paper --http --profile remote --secret-path --public-url https://<随机>.trycloudflare.com
-   ```
-   它会打印一行 `>>> paste this as the MCP server URL: https://…/mcp/<密钥>`。
-4. ChatGPT：**设置 → Apps → Advanced settings → 打开 Developer mode** → **Create app**：
-   - 名称填 `cra`；
-   - MCP Server URL 填 `>>>` 那一行给出的 URL；
-   - Authentication 选 **No authentication**；
-   - 勾选信任，然后创建。
-
-   创建后应能看到 21 个工具。
-5. **新开一个对话** → 点 **+** → **Developer mode** → 勾选 **cra**。第一句话可以这样说：
-   > 使用 cra app。调用 cra_resume，然后完成 next_tasks 里的第一项任务（先用 role_card 加载对应角色），最后告诉我改了什么。
-6. 写入类工具（`claim_register`、`evidence_add`、`file_write` 等）每次都会弹出确认，批准前请看一眼参数。
-7. 以后更新了 cra，要到 **设置 → Apps → cra** 里点一次 **Refresh**，因为 ChatGPT 会缓存工具列表。
-
-**和本地 IDE 的区别**
-- ChatGPT 没有终端，**不能跑实验**。实验在你的电脑上跑，跑完后让 ChatGPT 用 `evidence_add` 登记日志（只接受项目里真实存在的日志），再在论文里引用这个数字。
-- ChatGPT 只能通过 `file_read` / `file_write` 读写项目文件；CLAIMS、EVIDENCE、DECISIONS 这几个账本不能用 `file_write` 改，必须走专门的工具。
-- 有了 `search` / `fetch`，ChatGPT 的深度研究模式也能检索和引用项目里的笔记和草稿。
-
-**排错**
-
-| 现象 | 处理 |
+| ChatGPT 的要求 | cra 的实现 |
 |---|---|
-| ChatGPT 提示连接失败或列不出工具 | 确认两个终端都还在运行。用浏览器打开 `>>>` 的 URL：看到 `"Not Acceptable: Client must accept text/event-stream"` 这行 JSON 说明链路是通的（浏览器本来就不是 MCP 客户端）；看到 Cloudflare 的错误页说明隧道断了 |
-| 服务器日志出现 `Invalid Host header`（421） | 隧道地址变了。用新地址重新执行第 3 步的 `--public-url`，并在 App 设置里更新 URL |
-| 404 | 路径不对。要粘贴完整的 `>>>` URL，包括 `/mcp/<密钥>` |
-| 更新 cra 后工具还是旧的 | 设置 → Apps → cra → Refresh |
-| 写入调用被拦截 | 你的套餐或工作区不允许在开发者模式下执行写入（管理员可以限制这项）；只读工具仍然可用 |
+| 远程 MCP，Streamable HTTP | `cra-mcp --project <目录> --http [--host] [--port 8765] [--path /mcp]` |
+| 认证只能是"无认证"或 OAuth，不能带自定义 header | `--secret-path`：URL 路径本身就是凭证。密钥保存在 `.cra/mcp-secret`（权限 0600，不进 git），重启后不变，App 地址不会失效；用 `--new-secret` 更换。能带 header 的 API 客户端可以用 bearer token（`$CRA_MCP_TOKEN`） |
+| 通过公网域名访问时的 Host / Origin 校验 | `--public-url https://<你的域名>`（或 `--allow-host <域名>`）把该域名加入允许列表；允许的 Origin 包括 `https://chatgpt.com` 和 `https://chat.openai.com`；来自其他域名的请求返回 421 |
+| 没有 `readOnlyHint` 的工具一律当作写入，需要用户确认 | 每个工具都声明了 `readOnlyHint` / `destructiveHint` / `idempotentHint` / `openWorldHint` |
+| 深度研究 / 公司知识模式需要只读的 `search(query)` 和 `fetch(id)`，且必须**只返回一个 text 内容项，内容是 JSON 字符串** | `remote` 档已提供，返回格式由测试保证 |
+| ChatGPT 没有本地文件系统 | `remote` 档提供 `file_list` / `file_read` / `file_write`，只能访问项目目录；CLAIMS、EVIDENCE、DECISIONS 这几个账本不能用 `file_write` 改，必须走专门的工具 |
+| 服务器说明的前 512 个字符要能独立看懂 | 已满足 |
+| ChatGPT 会缓存工具定义 | 更新 cra 后，在 ChatGPT 的 App 设置里点一次刷新 |
 
-**安全**：拿到 `>>>` URL 的人可以通过这些工具读写项目里的文件（不会超出项目目录）。用完请关掉两个终端，不要把 URL 发到任何共享的地方，也不要提交进 git。cra 没有任何投稿、发邮件或公开发布的工具。
+在 ChatGPT 的 App 设置中：MCP 服务器地址填 `https://<你的域名>/mcp/<密钥>`（就是 `>>>` 那一行），认证选"无"。ChatGPT 不能执行命令，实验要在你自己的电脑上跑，跑完后由 ChatGPT 用 `evidence_add` 登记日志；该工具只接受项目里真实存在的日志。
+
+**Responses API**：作为远程 MCP 工具使用的写法：
+```json
+{"type": "mcp", "server_label": "cra", "server_url": "https://<域名>/mcp",
+ "headers": {"Authorization": "Bearer <CRA_MCP_TOKEN>"},
+ "require_approval": {"never": {"tool_names": ["cra_resume", "claim_list", "gate_check"]}}}
+```
+也可以完全不暴露服务：用 `cra-mcp --export openai-responses` 导出函数工具（扁平格式，strict 模式），在本地执行。
+
+**Chat Completions / OpenAI 兼容接口**：
+- `--export openai` 输出 strict 模式的定义。`openai-compat` 输出同样的工具但不带 `strict`，因为不少兼容接口只在 beta 端点上支持 `strict`。
+- 为满足 strict 模式，导出时做了这些处理：所有参数都列进 `required`；可选参数改为可为 null，可为 null 的枚举里加上 `null`；默认值移到参数说明里；执行前丢掉值为 null 的参数，让默认值生效。
+- 要接进你自己的循环，把每个 tool call 交给 `ToolBox(project).call(name, arguments)` 执行，返回值作为 tool 消息回传给模型。
+
+也可以直接用现成的 `cra-agent`。它只用 Python 标准库，执行破坏性工具（`phase_advance`、`file_write`）前会在终端请求确认：
+
+```bash
+export DEEPSEEK_API_KEY=...
+cra-agent --provider deepseek --model <模型id> --project ~/papers/my-paper "调用 cra_resume，完成第一项任务"
+```
+
+| 预设 | 接口地址 | API key 环境变量 |
+|---|---|---|
+| `openai` | `https://api.openai.com/v1` | `OPENAI_API_KEY` |
+| `deepseek` | `https://api.deepseek.com` | `DEEPSEEK_API_KEY` |
+| `glm` / `glm-cn` | `https://api.z.ai/api/paas/v4` / `https://open.bigmodel.cn/api/paas/v4` | `ZAI_API_KEY` / `ZHIPUAI_API_KEY` |
+| `kimi` / `kimi-cn` | `https://api.moonshot.ai/v1` / `https://api.moonshot.cn/v1` | `MOONSHOT_API_KEY` |
+| `qwen` / `qwen-cn` | DashScope 国际站 / 国内站的 `compatible-mode/v1` | `DASHSCOPE_API_KEY` |
+| `minimax` | `https://api.minimax.io/v1` | `MINIMAX_API_KEY` |
+| 其他 | `--base-url <任意兼容地址> --api-key-env <变量名>` | |
+
+为适配非 OpenAI 的模型，`cra-agent` 还做了这些处理：
+- `tool_choice` 固定为 `auto`，这是 DeepSeek 思考模式的要求；
+- 不主动发送 `temperature`，因为部分思考模式会固定这个值；
+- 在工具调用轮次里把 `reasoning_content` 原样回传（DeepSeek、Kimi 的思考模式需要）；
+- 不内置模型 id，请填你账号里实际列出的 id。
+
+**测试覆盖**（不需要联网，也不需要账号）：
+- 所有档位、所有工具都符合 strict schema 规则；
+- Responses、Gemini、Anthropic 三种导出格式；
+- `search`/`fetch` 的返回格式；
+- 带公网 Host 和 ChatGPT Origin 的 HTTP 会话可以通过，陌生的 Host/Origin 被拒绝，缺少秘密路径会被拒绝；
+- `ToolBox` 对错误调用的拒绝；
+- `cra-agent` 的完整循环（用脚本模拟模型回复，覆盖 tool_call_id、破坏性工具的确认和 `reasoning_content` 回传）；
+- 对本地伪造的 OpenAI 兼容服务器检查请求格式。
+
+**未覆盖**：真实调用 ChatGPT 或任何厂商的 API。
 
 ---
 

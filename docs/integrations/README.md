@@ -52,56 +52,33 @@ Configs use the absolute Python interpreter path, so hosts with a minimal `PATH`
 
 Then, in the host, say: **"call cra_resume and continue the project"**.
 
-## 3. ChatGPT and claude.ai (cloud hosts)
+## 3. ChatGPT, claude.ai and the OpenAI API
 
-**Step-by-step guide with troubleshooting: [chatgpt.md](chatgpt.md).**
+Full interface description: **[chatgpt.md](chatgpt.md)**.
 
-ChatGPT and claude.ai connect from the cloud, so they need a public HTTPS URL. Use the `remote` profile:
-it adds sandboxed `file_list`/`file_read`/`file_write` and `search`/`fetch`, because these hosts cannot
-see your disk.
+- **ChatGPT / claude.ai** use remote MCP. Run `cra-mcp --project <dir> --http --profile remote --secret-path
+  --public-url https://<your host>`, then use the printed `>>>` URL as the app/connector URL with
+  authentication "none". The `remote` profile adds sandboxed file tools and ChatGPT-compatible
+  `search`/`fetch`. How the host is made reachable is up to you.
+- **Responses API / Agents SDK:** a remote MCP tool (`"type": "mcp"`, bearer token from `$CRA_MCP_TOKEN`), or
+  local function tools from `cra-mcp --export openai-responses`.
 
-```bash
-cloudflared tunnel --url http://127.0.0.1:8765          # terminal 1 (or: ngrok http 8765) -> note the https URL
-```
-
-```bash
-cra-mcp --project ~/papers/my-paper --http --profile remote --secret-path --public-url <tunnel URL>   # terminal 2
-```
-
-- **ChatGPT:** Settings → Apps (Connectors) → Advanced → enable **Developer mode** → **Create app**:
-  - MCP server URL = the URL printed after `>>>`; Authentication = **No auth**. The random URL path is the
-    secret; it is kept in `.cra/mcp-secret` and stays the same across restarts.
-  - Then, in a new chat: **+** → **Developer mode** → enable **cra**.
-  - Write tools ask for confirmation.
-  - After updating cra, press **Refresh** in the app settings.
-  - Which plans may use write tools differs between OpenAI's own pages; check yours.
-  - OpenAI also offers an outbound-only *Secure MCP Tunnel* instead of a public URL.
-- **claude.ai:** Settings → Connectors → **Add custom connector** with the same URL.
-
-Anyone who has the URL can read and write that project's files, so stop the tunnel when you are done.
-
-## 4. OpenAI API / Agents SDK
-
-To use cra from the OpenAI API or Agents SDK, serve it over HTTP with a bearer token:
+## 4. Chat Completions / OpenAI-compatible APIs (ChatGPT API, DeepSeek, GLM, Qwen, Kimi, …)
 
 ```bash
-CRA_MCP_TOKEN=$(openssl rand -hex 24) cra-mcp --project . --http     # http://127.0.0.1:8765/mcp
+cra-mcp --export openai          # strict function definitions (Chat Completions)
+cra-mcp --export openai-compat   # same, without `strict` (for compatible providers)
+cra-agent --provider deepseek --model <id> --project <dir> "Call cra_resume and do the first task."
 ```
 
-Then pass it as a remote MCP tool. The URL must be publicly reachable, for example through the tunnel
-from §3:
+To use them in your own loop, run each tool call through `cra_mcp.adapter.ToolBox(project).call(name, arguments)`,
+which applies the same validation and invariants as MCP.
 
-```json
-{"type": "mcp", "server_label": "cra", "server_url": "https://<host>/mcp",
- "headers": {"Authorization": "Bearer <token>"}, "require_approval": "never"}
-```
-
-## 5. No MCP at all: function-calling schemas
+## 5. Other function-calling APIs
 
 ```bash
-cra-mcp --export openai    > cra-tools.openai.json      # strict-mode function definitions
-cra-mcp --export anthropic > cra-tools.anthropic.json
-cra-mcp --export gemini    > cra-tools.gemini.json
+cra-mcp --export anthropic       # Messages API input_schema
+cra-mcp --export gemini          # functionDeclarations (OpenAPI-3.0 subset)
 ```
 
 The same operations are also available from the shell as `cra …` (`cra --help`).

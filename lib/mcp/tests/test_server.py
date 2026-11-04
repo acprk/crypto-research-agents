@@ -231,8 +231,8 @@ def _start_http(proj, *extra, env_token=""):
     return p, port, "".join(lines)
 
 
-def test_chatgpt_tunnel_setup(proj):
-    """Simulate ChatGPT behind a cloudflared quick tunnel: public Host header, ChatGPT Origin, secret path."""
+def test_chatgpt_public_host_setup(proj):
+    """ChatGPT request shape: public Host header, ChatGPT Origin, secret path."""
     pub = "https://abc-def.trycloudflare.com"
     p, port, banner = _start_http(proj, "--profile", "remote", "--secret-path", "--public-url", pub)
     try:

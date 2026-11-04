@@ -16,6 +16,7 @@ test = ["pytest"]
 
 [project.scripts]
 cra-mcp = "cra_mcp.server:main"
+cra-agent = "cra_mcp.agent:main"
 
 [tool.setuptools]
 packages = ["cra_mcp"]

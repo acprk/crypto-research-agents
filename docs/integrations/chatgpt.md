@@ -1,83 +1,110 @@
-# ChatGPT step by step
+# ChatGPT and the OpenAI API: interface
 
-[中文版](../zh/integrations.md#chatgpt-逐步接入) · [Back to integrations](README.md)
+[中文版](../zh/integrations.md#chatgpt--openai-接口适配) · [Back to integrations](README.md)
 
-> Status: the cra-mcp side is tested. That covers the HTTP transport, the secret path, and the
-> Host/Origin checks for a tunnelled request carrying ChatGPT's Origin. The ChatGPT menu names below come
-> from OpenAI's docs and recent third-party guides as of 2026-11. ChatGPT changes them often; if yours
-> differ, look for "Developer mode" and "Create app".
+This page describes the interface cra exposes for the OpenAI family. How you make the HTTP endpoint
+reachable (reverse proxy, existing gateway, hosting) is your choice and is out of scope here.
 
-## What you need
-- A paid ChatGPT plan (Plus / Pro / Business / Enterprise / Edu). Developer mode is on **ChatGPT web**. OpenAI's
-  pages differ on which plans may use *write* tools. If write calls are blocked on your plan, the read-only
-  tools (`cra_resume`, `claim_list`, `gate_check`, `search`, `fetch`, …) still work.
-- A computer that holds the research project, with cra installed (`pip install -e lib/core -e lib/mcp …`,
-  see [README](README.md)).
-- A tunnel program, because ChatGPT connects from OpenAI's cloud and cannot reach `localhost`.
-  [cloudflared](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/downloads/)
-  works without an account:
-  `brew install cloudflared` · `winget install --id Cloudflare.cloudflared` · Linux: the .deb/.rpm from that page.
+## Three ways in
 
-## 1. Project
-```bash
-cra init ~/papers/my-paper          # skip if it exists
-cra-mcp doctor --project ~/papers/my-paper
-```
+| You use | Interface | cra side |
+|---|---|---|
+| **ChatGPT** (developer mode → app) | remote MCP over Streamable HTTP | `cra-mcp --http --profile remote` |
+| **OpenAI Responses API / Agents SDK** | remote MCP tool (`"type": "mcp"`) **or** function tools | `cra-mcp --http`, or `cra-mcp --export openai-responses` |
+| **Chat Completions** (OpenAI, or any OpenAI-compatible API: DeepSeek, GLM, Qwen, Kimi, MiniMax, vLLM, Ollama) | function calling | `cra-mcp --export openai` / `openai-compat`, `cra_mcp.adapter.ToolBox`, or the ready loop `cra-agent` |
 
-## 2. Tunnel (terminal 1, keep it open)
-```bash
-cloudflared tunnel --url http://127.0.0.1:8765
-```
-Copy the `https://<random>.trycloudflare.com` URL it prints. A quick tunnel gets a new URL every time it
-starts. For a stable URL, use a named Cloudflare tunnel or ngrok with a reserved domain.
+## 1. ChatGPT: what the server provides
 
-## 3. Server (terminal 2, keep it open)
-```bash
-cra-mcp --project ~/papers/my-paper --http --profile remote --secret-path \
-        --public-url https://<random>.trycloudflare.com
-```
-It prints a line like
-`>>> paste this as the MCP server URL: https://<random>.trycloudflare.com/mcp/<secret>`.
-- The `<secret>` part is stored in `<project>/.cra/mcp-secret`, which is git-ignored. It stays the same
-  across server restarts, so the ChatGPT app keeps working while the tunnel URL is unchanged.
-- To rotate the secret, add `--new-secret`.
-
-## 4. ChatGPT
-1. **Settings → Apps → Advanced settings → Developer mode: on.**
-2. Still under Apps: **Create app**.
-   - Name: `cra`.
-   - MCP server URL: the `>>>` URL.
-   - Authentication: **No authentication**. The secret path is the credential.
-   - Tick that you trust the app, then create it.
-3. ChatGPT now lists the tools: 21 in the remote profile. If it shows none, see Troubleshooting below.
-4. Start a **new chat** → **+** → **Developer mode** → enable **cra**.
-5. First message:
-   > Use the cra app. Call cra_resume, then do the first task in next_tasks (load its role with role_card).
-   > Report what changed.
-6. Write tools (`claim_register`, `evidence_add`, `file_write`, …) ask for confirmation. Read the arguments
-   before you approve them.
-
-After updating cra, open the app in **Settings → Apps** and press **Refresh**, because ChatGPT caches tool
-definitions.
-
-## What works differently in ChatGPT
-- ChatGPT has no shell, so it **cannot run experiments**. Run them on your machine. ChatGPT can then
-  register the log with `evidence_add`, which only accepts logs that exist in the project, and cite the
-  number.
-- It reads and writes project files only through `file_read` / `file_write`. The ledgers (CLAIMS / EVIDENCE /
-  DECISIONS) are refused there and must go through the typed tools.
-- `search` / `fetch` also let ChatGPT's deep-research mode cite your project's notes and drafts.
-
-## Troubleshooting
-| Symptom | Fix |
+| ChatGPT requirement | cra |
 |---|---|
-| ChatGPT: "couldn't connect" / no tools | Both terminals must still be running. Open the `>>>` URL in a browser. A JSON line `"Not Acceptable: Client must accept text/event-stream"` means everything is reachable (browsers are not MCP clients); a Cloudflare error page means the tunnel is down. |
-| Server log shows `Invalid Host header` (HTTP 421) | The tunnel URL changed. Restart step 3 with the new `--public-url`, then update the app's URL. |
-| 404 | Wrong path: paste the full `>>>` URL, including `/mcp/<secret>`. |
-| Tools are stale after an update | Settings → Apps → cra → Refresh. |
-| Write call blocked | Your plan or workspace may not allow write actions in developer mode (admins can restrict it). Read-only tools still work. |
+| Remote MCP, Streamable HTTP | `cra-mcp --project <dir> --http [--host] [--port 8765] [--path /mcp]` |
+| Authentication: "No authentication" or OAuth (no static headers) | `--secret-path` makes the URL path the credential. It is persisted in `.cra/mcp-secret` (0600, git-ignored) so the app URL survives restarts; rotate with `--new-secret`. Bearer tokens (`$CRA_MCP_TOKEN`) are for API clients that can send headers. |
+| Host / Origin checks behind a public hostname | `--public-url https://<your host>` (or `--allow-host <host>`) adds the host to the DNS-rebinding allow-list. Origins `https://chatgpt.com` and `https://chat.openai.com` are allowed. Requests from unknown hosts get 421. |
+| Tools without `readOnlyHint` count as writes and need confirmation | Every tool declares `readOnlyHint` / `destructiveHint` / `idempotentHint` / `openWorldHint` |
+| Deep research / company knowledge need read-only `search(query)` and `fetch(id)` returning **one text item holding JSON** (`{"results":[{id,title,url}]}` / `{id,title,text,url,metadata}`) | `remote` profile; format checked by `tests/test_server.py` |
+| No local filesystem in ChatGPT | `remote` profile adds `file_list` / `file_read` / `file_write`, sandboxed to the project. The ledgers are refused there and must go through the typed tools. |
+| Server instructions: first 512 characters self-contained | yes |
+| Cached tool definitions | after updating cra, press Refresh on the app in ChatGPT |
 
-## Security
-Anyone with the `>>>` URL can read and write the project's files through the tools, which stay inside the
-project directory. Stop both terminals when you are done. Never paste the URL into shared chats or commit it.
-cra has no tool that submits, e-mails or publishes anything.
+App settings in ChatGPT: MCP server URL = `https://<your host>/mcp/<secret>` (printed after `>>>`),
+authentication = No authentication. ChatGPT cannot run shell commands, so experiments run on your machine.
+ChatGPT then records the log with `evidence_add`, which only accepts logs that exist in the project.
+
+## 2. Responses API
+
+Remote MCP tool. The server must be reachable from OpenAI.
+
+```json
+{"type": "mcp", "server_label": "cra", "server_url": "https://<host>/mcp",
+ "headers": {"Authorization": "Bearer <CRA_MCP_TOKEN>"},
+ "allowed_tools": ["cra_resume", "claim_list", "claim_register", "claim_verdict", "evidence_add", "gate_check"],
+ "require_approval": {"never": {"tool_names": ["cra_resume", "claim_list", "gate_check"]}}}
+```
+
+Or function tools, executed locally with no network endpoint at all:
+
+```bash
+cra-mcp --export openai-responses --profile core > cra-tools.json     # flat {"type":"function","name",...}, strict
+```
+
+## 3. Chat Completions and OpenAI-compatible APIs
+
+`cra-mcp --export openai` emits strict-mode definitions. `openai-compat` emits the same tools without `strict`,
+because several compatible providers accept `strict` only on beta endpoints. Strict-mode details handled:
+- every property is listed in `required`;
+- optional properties are nullable, and a nullable enum lists `null`;
+- defaults move into the description;
+- `null` arguments are dropped before execution, so defaults apply.
+
+Execute the model's tool calls with `ToolBox`. It uses the same in-process server, so the validation and
+invariants are identical to MCP:
+
+```python
+from cra_mcp.adapter import ToolBox
+box = ToolBox("~/papers/my-paper", profile="core")
+tools = box.tools("openai-compat")            # or "openai" (strict)
+# ... resp = client.chat.completions.create(model=..., messages=..., tools=tools)
+for tc in resp.choices[0].message.tool_calls or []:
+    messages.append({"role": "tool", "tool_call_id": tc.id,
+                     "content": box.call(tc.function.name, tc.function.arguments)})
+```
+
+Or use the ready-made loop. It has no extra dependencies and asks for confirmation before destructive
+tools:
+
+```bash
+export DEEPSEEK_API_KEY=...        # or OPENAI_API_KEY, ZAI_API_KEY, MOONSHOT_API_KEY, DASHSCOPE_API_KEY, ...
+cra-agent --provider deepseek --model <model id> --project ~/papers/my-paper "Call cra_resume and do the first task."
+cra-agent --base-url https://<any-openai-compatible>/v1 --api-key-env MY_KEY --model <id> "..."
+```
+
+| Provider preset | Base URL | Key variable |
+|---|---|---|
+| `openai` | `https://api.openai.com/v1` | `OPENAI_API_KEY` |
+| `deepseek` | `https://api.deepseek.com` | `DEEPSEEK_API_KEY` |
+| `glm` / `glm-cn` | `https://api.z.ai/api/paas/v4` / `https://open.bigmodel.cn/api/paas/v4` | `ZAI_API_KEY` / `ZHIPUAI_API_KEY` |
+| `kimi` / `kimi-cn` | `https://api.moonshot.ai/v1` / `https://api.moonshot.cn/v1` | `MOONSHOT_API_KEY` |
+| `qwen` / `qwen-cn` | `https://dashscope-intl.aliyuncs.com/compatible-mode/v1` / `https://dashscope.aliyuncs.com/compatible-mode/v1` | `DASHSCOPE_API_KEY` |
+| `minimax` | `https://api.minimax.io/v1` | `MINIMAX_API_KEY` |
+| `openrouter`, `ollama`, `vllm` | see `cra-agent --help` | |
+
+Behaviour that matters for non-OpenAI providers:
+- `tool_choice` is always `auto`, which DeepSeek's thinking mode requires.
+- No `temperature` is sent unless you pass `--temperature`, because some thinking modes fix it.
+- `reasoning_content` is echoed back within a tool turn (DeepSeek / Kimi thinking mode).
+- Model IDs are not built in: pass the ID your account lists.
+
+## Test coverage (no network, no accounts)
+
+`lib/mcp/tests/` checks:
+- strict-schema rules for every tool and profile;
+- the Responses, Gemini and Anthropic formats;
+- `search`/`fetch` result shape;
+- an HTTP session with a public Host and ChatGPT Origin, with foreign Host/Origin rejected and the secret
+  path required;
+- `ToolBox` refusals;
+- the `cra-agent` loop against a scripted model, including tool-call ids, approval of destructive calls and
+  the `reasoning_content` echo;
+- the client's wire format against a local fake OpenAI-compatible server.
+
+Not covered: live calls to ChatGPT or any provider API.

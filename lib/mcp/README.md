@@ -12,8 +12,13 @@ cra-mcp doctor --project <dir>
 cra-mcp --project <dir>                       # stdio
 cra-mcp --project <dir> --http                # http://127.0.0.1:8765/mcp ($CRA_MCP_TOKEN = bearer token)
 cra-mcp --list-tools --profile full           # tool names + JSON schemas
-cra-mcp --export openai|anthropic|gemini      # function-calling definitions for non-MCP code
+cra-mcp --export openai|openai-responses|openai-compat|anthropic|gemini   # function-calling definitions
+cra-agent --provider openai|deepseek|glm|kimi|qwen|minimax|... --model <id> --project <dir> "<task>"
+                                              # ready loop for any OpenAI-compatible Chat Completions API
 ```
+
+In your own function-calling loop: `from cra_mcp.adapter import ToolBox`, then pass `box.tools("openai-compat")`
+to the model and feed every tool call through `box.call(name, arguments)`.
 
 User guide: [docs/integrations/README.md](../../docs/integrations/README.md) (中文:
 [docs/zh/integrations.md](../../docs/zh/integrations.md)).
