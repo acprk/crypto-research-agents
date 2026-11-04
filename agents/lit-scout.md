@@ -26,7 +26,7 @@ prior work), `references/reading-lists/*.md` (seeds), existing `LITERATURE.md`, 
      `- YYYY-MM-DD | query: "..." | sources: eprint,crossref | window: 12m | hits reviewed: N | verdict: clear|overlap:<key>|taken:<key>`
   3. `## Reading log` — which papers were read, which sections, by whom, date; which were only skimmed.
 - **`refs.bib`** — only entries that pass `verify_bib.py`, or carry a `% UNVERIFIED` line above them.
-- **`bib-verify-report.md`** — output of the last verifier run (must be newer than refs.bib).
+- **`bib-verify-report.md`** — output of the last verifier run (its `bib-sha256:` line must match the current refs.bib).
 - **`notes/papers/<year>-<id>-<short>.md`** — reading notes per the `reading-notes` template.
 
 ## Procedure

@@ -15,15 +15,20 @@ Checks (each prints PASS/FAIL/WARN; exit 1 if any FAIL):
   >= P7       with --paper DIR: every number-with-unit in the .tex sources (e.g. "3.2x", "41%",
               "2^{128}", "12.5 ms") must appear verbatim in the EVIDENCE.md column
               "number/fact as printed in paper", unless the line carries "% no-evidence: <reason>".
-  >= P8       refs.bib exists and a bib-verify report (bib-verify-report.md) is newer than refs.bib.
+  >= P8       refs.bib exists and bib-verify-report.md is fresh for it and lists only VERIFIED entries.
+              Freshness: the report's "bib-sha256: <hex>" line must equal sha256(refs.bib)
+              (written by verify_bib.py). Legacy reports without that line fall back to git
+              commit times (both files tracked and unmodified), then to file mtimes (WARN).
 
 Blackboard formats follow SPEC section 3 (tables with a header row; column order as in SPEC).
 """
 from __future__ import annotations
 
 import argparse
+import hashlib
 import os
 import re
+import subprocess
 import sys
 import tempfile
 
@@ -78,6 +83,33 @@ def gate_section(state: str, phase: str) -> list[str] | None:
             break
         out.append(l)
     return out
+
+
+def _git_commit_time(path: str) -> int | None:
+    """Commit time of the last commit touching `path`, or None if untracked / modified / no git."""
+    d, f = os.path.split(os.path.abspath(path))
+    try:
+        dirty = subprocess.run(["git", "status", "--porcelain", "--", f], cwd=d,
+                               capture_output=True, text=True, timeout=10)
+        if dirty.returncode != 0 or dirty.stdout.strip():
+            return None
+        out = subprocess.run(["git", "log", "-1", "--format=%ct", "--", f], cwd=d,
+                             capture_output=True, text=True, timeout=10)
+        return int(out.stdout.strip()) if out.returncode == 0 and out.stdout.strip() else None
+    except (OSError, ValueError, subprocess.SubprocessError):
+        return None
+
+
+def report_fresh(bib: str, rep: str) -> tuple[bool, str]:
+    """Is the bib-verify report up to date for refs.bib?  Returns (fresh, method)."""
+    m = re.search(r"^bib-sha256:\s*([0-9a-f]{64})\s*$", read(rep) or "", re.M)
+    if m:
+        with open(bib, "rb") as fh:
+            return m.group(1) == hashlib.sha256(fh.read()).hexdigest(), "sha256"
+    tb, tr = _git_commit_time(bib), _git_commit_time(rep)
+    if tb is not None and tr is not None:
+        return tr >= tb, "git commit time"
+    return os.path.getmtime(rep) >= os.path.getmtime(bib), "file mtime"
 
 
 NUM_PAT = re.compile(r"(?<![\w.])(\d+(?:\.\d+)?\s*(?:\\times|×|x\b|\\%|%|\s?(?:ms|s|us|µs|MB|MiB|KB|KiB|GB|GiB|bits?)\b)"
@@ -151,11 +183,19 @@ def check(project: str, phase: str, paper: str | None) -> list[tuple[str, str]]:
         rep = os.path.join(project, "bib-verify-report.md")
         if not os.path.exists(bib):
             res.append(("FAIL", "refs.bib missing"))
-        elif not os.path.exists(rep) or os.path.getmtime(rep) < os.path.getmtime(bib):
-            res.append(("FAIL", "bib-verify report missing or older than refs.bib (run verify_bib.py)"))
+        elif not os.path.exists(rep):
+            res.append(("FAIL", "bib-verify-report.md missing (run verify_bib.py refs.bib > bib-verify-report.md)"))
         else:
+            fresh, how = report_fresh(bib, rep)
             txt = read(rep)
-            if re.search(r"\| (MISMATCH|NOT_FOUND|WEAK|UNCHECKED) \|", txt):
+            if not fresh:
+                res.append(("FAIL", f"bib-verify report is stale for refs.bib ({how}); re-run verify_bib.py"))
+            elif how != "sha256":
+                res.append(("WARN", f"bib-verify report has no bib-sha256 line; freshness judged by {how}. "
+                                    "Re-run verify_bib.py to stamp it."))
+            if not fresh:
+                pass
+            elif re.search(r"\| (MISMATCH|NOT_FOUND|WEAK|UNCHECKED) \|", txt):
                 res.append(("FAIL", "bib-verify report still lists non-VERIFIED entries"))
             else:
                 res.append(("PASS", "bib-verify report clean"))
@@ -183,6 +223,17 @@ def selftest() -> int:
         w("CLAIMS.md", "| ID | claim | proposer | status | falsifier evidence | EVIDENCE refs |\n|---|---|---|---|---|---|\n"
                        "| C1 | x | y | open | | |\n")
         assert any("still open" in m for s, m in check(d, "P6", None))
+        # P8 bib freshness: content hash, not mtime
+        w("STATE.md", "# STATE\n## Gate P8\n- [x] done\n")
+        w("CLAIMS.md", "| ID | claim | proposer | status | falsifier evidence | EVIDENCE refs |\n"
+                       "|---|---|---|---|---|---|\n| C1 | x | y | survived | ok | E1 |\n")
+        w("refs.bib", "@misc{a, title={A}}\n")
+        sha = hashlib.sha256(b"@misc{a, title={A}}\n").hexdigest()
+        w("bib-verify-report.md", f"# bib-verify report\n\nbib-sha256: {sha}\n\n| status | key |\n|---|---|\n| VERIFIED | `a` |\n")
+        os.utime(os.path.join(d, "bib-verify-report.md"), (0, 0))   # mtime older than refs.bib: must not matter
+        assert any(s == "PASS" and "bib-verify" in m for s, m in check(d, "P8", None)), check(d, "P8", None)
+        w("refs.bib", "@misc{a, title={A}}\n@misc{b, title={B}}\n")   # bib changed after verification
+        assert any(s == "FAIL" and "stale" in m for s, m in check(d, "P8", None))
     print("selftest: OK")
     return 0
 

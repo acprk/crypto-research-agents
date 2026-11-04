@@ -42,8 +42,9 @@ makes those failures structurally hard:
 ```bash
 git clone <this repo> ~/crypto-research-agents
 cd ~/crypto-research-agents
-pip install -e lib/cryptomath -e lib/bench          # python ≥ 3.10
+pip install -e lib/cryptomath -e lib/bench          # python ≥ 3.10  (add "[test]" for pytest)
 ./install.sh /path/to/my-paper                        # or: ./install.sh --user  (all projects)
+scripts/check_all.sh                                  # optional: run every test / self-test (needs pytest)
 ```
 Or as a Claude Code plugin: `claude plugin install <path-or-url>`.
 

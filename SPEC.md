@@ -9,7 +9,8 @@ It is the single source of truth for names, formats and hand-off contracts.
    submission number, author name, reviewer text, real benchmark number, server address,
    e-mail, review-system transcript, or unpublished theorem from the maintainers' private
    workspaces. Distil *methods* only. Examples must use **toy / synthetic** problems.
-   Before every push run `scripts/privacy_scan.sh`, which greps the tree against a local,
+   Before every push run `scripts/check_all.sh` (tests + self-tests + case-study gates; CI runs
+   the same script) and `scripts/privacy_scan.sh`, which greps the tree against a local,
    **git-ignored** deny-list `.privacy-denylist` (one regex per line; each maintainer keeps
    their own). Referring to a *public* published paper by its public ePrint number is fine.
 2. **No copyrighted PDFs, no harvested figure images** in git. Textbooks appear as
