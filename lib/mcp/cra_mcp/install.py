@@ -203,23 +203,25 @@ def remote_instructions(host: str, project: str) -> str:
     app = "ChatGPT" if host == "chatgpt" else "claude.ai"
     steps = {
         "chatgpt": ("ChatGPT -> Settings -> Apps (Connectors) -> Advanced -> enable Developer mode -> Create app:\n"
-                    "   name 'cra', MCP server URL = the public URL printed by cra-mcp, Authentication = No auth\n"
+                    "   name 'cra', MCP server URL = the URL printed after '>>>', Authentication = No auth\n"
                     "   (the secret URL path is the credential). Write tools ask for confirmation; after changing\n"
                     "   tools press Refresh in the app settings. Availability of write tools depends on your plan."),
         "claude-ai": ("claude.ai -> Settings -> Connectors -> Add custom connector: paste the public URL printed by\n"
                       "   cra-mcp (no OAuth). On Team/Enterprise an owner adds it. Per-call timeout is 240 s."),
     }[host]
     return f"""{app} reaches MCP servers from the cloud: it needs a public HTTPS URL (no local stdio).
-1. Start the server (remote profile = file access + search/fetch, because {app} cannot see your disk):
-   cra-mcp --project {project} --http --profile remote --secret-path --allow-host <your-tunnel-host>
-2. Expose port 8765 over HTTPS with a tunnel, e.g.
+Step-by-step guide: docs/integrations/chatgpt.md (中文: docs/zh/integrations.md#chatgpt-逐步接入)
+1. Open a tunnel to local port 8765 in a first terminal and note its https:// URL:
    cloudflared tunnel --url http://127.0.0.1:8765      (prints https://<random>.trycloudflare.com)
-   ngrok http 8765                                     (prints https://<random>.ngrok.app)
-   then restart step 1 with --allow-host <that host name> so the Host header is accepted.
-   ChatGPT also offers OpenAI's Secure MCP Tunnel (outbound-only); see COMPATIBILITY.md.
+   ngrok http 8765                                     (prints https://<random>.ngrok-free.app)
+2. In a second terminal start the server with that URL (remote profile = file access + search/fetch,
+   because {app} cannot see your disk):
+   cra-mcp --project {project} --http --profile remote --secret-path --public-url <tunnel URL>
+   It prints the exact URL to paste (">>> paste this as the MCP server URL: ..."). The secret part of
+   the path is stored in .cra/mcp-secret and stays the same across restarts.
 3. {steps}
 Security: everyone with the URL can read and write this project's files. Stop the tunnel when done;
-never use --secret-path URLs in shared chats. Nothing in cra can submit, e-mail or publish."""
+never paste the URL into shared chats. Nothing in cra can submit, e-mail or publish."""
 
 
 def doctor(project: str) -> int:

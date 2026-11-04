@@ -3,7 +3,7 @@
     cra-mcp --project ~/papers/my-paper                      # stdio (Claude Code, Codex, Cline, Cursor, ...)
     cra-mcp --project . --profile full                       # all tools
     cra-mcp --project . --http --port 8765                   # Streamable HTTP on 127.0.0.1:8765/mcp
-    cra-mcp --project . --http --profile remote --secret-path --allow-host abc.ngrok.app
+    cra-mcp --project . --http --profile remote --secret-path --public-url https://abc.trycloudflare.com
                                                              # ChatGPT / claude.ai through a tunnel
     cra-mcp --list-tools [--profile core]                    # print the tool list (names + schemas)
     cra-mcp --export openai|anthropic|gemini                 # function-calling schemas for non-MCP hosts
@@ -117,6 +117,27 @@ def serve_http(srv: MCPServer, host: str, port: int, path: str, token: str | Non
     uvicorn.run(app, host=host, port=port, log_level="warning")
 
 
+def _secret(project: str, rotate: bool = False) -> str:
+    """Secret URL path segment, persisted in <project>/.cra/mcp-secret so the connector URL survives restarts."""
+    d = os.path.join(project, ".cra")
+    p = os.path.join(d, "mcp-secret")
+    if not rotate and os.path.exists(p):
+        v = open(p).read().strip()
+        if re.fullmatch(r"[A-Za-z0-9_-]{20,}", v):
+            return v
+    os.makedirs(d, exist_ok=True)
+    v = secrets.token_urlsafe(24)
+    fd = os.open(p, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+    with os.fdopen(fd, "w") as fh:
+        fh.write(v + "\n")
+    gi = os.path.join(d, ".gitignore")
+    lines = open(gi).read().split() if os.path.exists(gi) else []
+    if "mcp-secret" not in lines:
+        with open(gi, "a") as fh:
+            fh.write("mcp-secret\n")
+    return v
+
+
 # ----------------------------------------------------------------------------- export
 def tool_schemas(project: str, profile: str) -> list[dict]:
     srv = build_server(project, profile)
@@ -182,6 +203,10 @@ def main(argv: list[str] | None = None) -> int:
                     help="serve at /mcp/<random> (for hosts that cannot send headers, e.g. ChatGPT no-auth)")
     ap.add_argument("--token-env", default="CRA_MCP_TOKEN", help="env var holding a bearer token (HTTP)")
     ap.add_argument("--allow-host", action="append", default=[], help="public host name of a tunnel (repeatable)")
+    ap.add_argument("--public-url", default="",
+                    help="public HTTPS base URL of your tunnel, e.g. https://abc.trycloudflare.com "
+                         "(implies --allow-host <its host>; prints the exact URL to paste into ChatGPT / claude.ai)")
+    ap.add_argument("--new-secret", action="store_true", help="rotate the persisted --secret-path secret")
     ap.add_argument("--list-tools", action="store_true")
     ap.add_argument("--export", choices=["openai", "anthropic", "gemini"])
     ap.add_argument("--version", action="version", version=__version__)
@@ -200,7 +225,14 @@ def main(argv: list[str] | None = None) -> int:
         srv.run("stdio")
         return 0
     token = os.environ.get(a.token_env) or None
-    path = a.path.rstrip("/") + (f"/{secrets.token_urlsafe(18)}" if a.secret_path else "")
+    if a.public_url:
+        from urllib.parse import urlparse
+        u = urlparse(a.public_url if "://" in a.public_url else "https://" + a.public_url)
+        if not u.hostname:
+            print(f"cannot parse --public-url {a.public_url!r}", file=sys.stderr)
+            return 2
+        a.allow_host.append(u.hostname)
+    path = a.path.rstrip("/") + (f"/{_secret(project, a.new_secret)}" if a.secret_path else "")
     public = a.host not in ("127.0.0.1", "localhost", "::1") or a.allow_host
     if public and not token and not a.secret_path:
         print("refusing to serve beyond localhost without auth: set $%s or use --secret-path" % a.token_env,
@@ -210,8 +242,11 @@ def main(argv: list[str] | None = None) -> int:
     print(f"  local URL : http://{a.host}:{a.port}{path}", file=sys.stderr)
     for h in a.allow_host:
         print(f"  public URL: https://{h}{path}", file=sys.stderr)
+    if a.public_url:
+        print(f"\n  >>> paste this as the MCP server URL: https://{a.allow_host[-1]}{path}\n", file=sys.stderr)
     if a.secret_path:
-        print("  the URL path is the secret: do not share or commit it", file=sys.stderr)
+        print("  the URL path is the secret (kept in .cra/mcp-secret, same across restarts; "
+              "rotate with --new-secret): do not share or commit it", file=sys.stderr)
     serve_http(srv, a.host, a.port, path, token, a.allow_host)
     return 0
 

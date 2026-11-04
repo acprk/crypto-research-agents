@@ -38,5 +38,5 @@ def init_project(target: str) -> list[str]:
     gi = os.path.join(target, ".cra", ".gitignore")
     if not os.path.exists(gi):
         with open(gi, "w") as fh:
-            fh.write("lock\n")
+            fh.write("lock\nmcp-secret\n")
     return created

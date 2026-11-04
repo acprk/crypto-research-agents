@@ -55,15 +55,17 @@ cra-mcp install --host <平台> --project ~/papers/my-paper    # 加 --dry-run �
 这两个平台从云端连接 MCP 服务器，所以需要一个公网 HTTPS 地址。请使用 `remote` 档：它在 core 的基础上增加了沙箱内的 `file_list`/`file_read`/`file_write` 和 `search`/`fetch`，因为云端宿主看不到你本地的磁盘。
 
 ```bash
-cloudflared tunnel --url http://127.0.0.1:8765          # 或 ngrok http 8765，记下分配到的域名
+cloudflared tunnel --url http://127.0.0.1:8765          # 终端 1（或 ngrok http 8765），记下打印出的 https 地址
 ```
 
 ```bash
-cra-mcp --project ~/papers/my-paper --http --profile remote --secret-path --allow-host <隧道域名>
+cra-mcp --project ~/papers/my-paper --http --profile remote --secret-path --public-url <隧道地址>   # 终端 2
 ```
 
 - **ChatGPT**：设置 → Apps（连接器）→ 高级 → 打开**开发者模式** → **创建 App**：
-  - MCP 服务器地址填 `cra-mcp` 打印出来的公网 URL；认证方式选 **无认证**。URL 里的随机路径就是密钥。
+  - MCP 服务器地址填 `>>>` 那一行给出的 URL；认证方式选 **无认证**。URL 里的随机路径就是密钥，保存在 `.cra/mcp-secret`，重启服务器后不变。
+  - 然后新开一个对话：**+** → **Developer mode** → 勾选 **cra**。
+  - 详细步骤和排错见下文"ChatGPT 逐步接入"一节。
   - 写入类工具每次调用都会请求确认。
   - 更新 cra 之后，要在 App 设置里点一次**刷新**。
   - 哪些套餐可以使用写入类工具，OpenAI 各页面的说法不一致，以你自己账号里看到的为准。
@@ -114,6 +116,58 @@ cra-mcp --export gemini    > cra-tools.gemini.json
   - `file_write` 拒绝直接修改 CLAIMS、EVIDENCE、DECISIONS 这几个账本文件。
 - **git 钩子**：在项目里运行一次 `cra hook install`。之后，只要论文引用了未通过证伪的 claim（`\claimref{C9}`）或不存在的证据行，或者日志在登记后被改过，提交就会被拒绝。这一层与使用哪个 IDE 或 agent 无关。
 - **阶段门**：`gate_check`（命令行是 `cra gate P<k>`）负责每个阶段门里能机械检查的部分。
+
+---
+
+## ChatGPT 逐步接入
+
+> 说明：cra-mcp 这一侧已经测试过，包括 HTTP 传输、秘密路径，以及经隧道转发、带 ChatGPT Origin 的请求能否通过 Host/Origin 校验。
+> ChatGPT 的菜单名称来自 2026 年 11 月 OpenAI 的文档和近期的第三方教程。ChatGPT 改版很频繁，如果名称对不上，就找 "Developer mode" 和 "Create app"。
+
+**准备**
+- ChatGPT 付费账号（Plus / Pro / Business / Enterprise / Edu），开发者模式在 **ChatGPT 网页版**里。各套餐能否使用写入类工具，OpenAI 各页面说法不一；即使写入被限制，只读工具（`cra_resume`、`claim_list`、`gate_check`、`search`、`fetch` 等）仍然可用。
+- 存放研究项目的电脑，并已装好 cra（见第 1 节）。
+- 隧道工具。ChatGPT 从 OpenAI 的云端发起连接，访问不到你的 `localhost`。推荐 cloudflared，不需要注册：
+  - macOS：`brew install cloudflared`
+  - Windows：`winget install --id Cloudflare.cloudflared`
+  - Linux：从 Cloudflare 官网下载 deb/rpm 包
+
+**步骤**
+1. 准备项目：`cra init ~/papers/my-paper`（已有项目可跳过），再运行 `cra-mcp doctor --project ~/papers/my-paper` 自检。
+2. 终端 1（保持运行）：`cloudflared tunnel --url http://127.0.0.1:8765`，复制它打印的 `https://<随机>.trycloudflare.com`。快速隧道每次启动地址都会变；想要固定地址，可以用 Cloudflare 命名隧道，或 ngrok 的固定域名。
+3. 终端 2（保持运行）：
+   ```bash
+   cra-mcp --project ~/papers/my-paper --http --profile remote --secret-path --public-url https://<随机>.trycloudflare.com
+   ```
+   它会打印一行 `>>> paste this as the MCP server URL: https://…/mcp/<密钥>`。
+4. ChatGPT：**设置 → Apps → Advanced settings → 打开 Developer mode** → **Create app**：
+   - 名称填 `cra`；
+   - MCP Server URL 填 `>>>` 那一行给出的 URL；
+   - Authentication 选 **No authentication**；
+   - 勾选信任，然后创建。
+
+   创建后应能看到 21 个工具。
+5. **新开一个对话** → 点 **+** → **Developer mode** → 勾选 **cra**。第一句话可以这样说：
+   > 使用 cra app。调用 cra_resume，然后完成 next_tasks 里的第一项任务（先用 role_card 加载对应角色），最后告诉我改了什么。
+6. 写入类工具（`claim_register`、`evidence_add`、`file_write` 等）每次都会弹出确认，批准前请看一眼参数。
+7. 以后更新了 cra，要到 **设置 → Apps → cra** 里点一次 **Refresh**，因为 ChatGPT 会缓存工具列表。
+
+**和本地 IDE 的区别**
+- ChatGPT 没有终端，**不能跑实验**。实验在你的电脑上跑，跑完后让 ChatGPT 用 `evidence_add` 登记日志（只接受项目里真实存在的日志），再在论文里引用这个数字。
+- ChatGPT 只能通过 `file_read` / `file_write` 读写项目文件；CLAIMS、EVIDENCE、DECISIONS 这几个账本不能用 `file_write` 改，必须走专门的工具。
+- 有了 `search` / `fetch`，ChatGPT 的深度研究模式也能检索和引用项目里的笔记和草稿。
+
+**排错**
+
+| 现象 | 处理 |
+|---|---|
+| ChatGPT 提示连接失败或列不出工具 | 确认两个终端都还在运行。用浏览器打开 `>>>` 的 URL：看到 `"Not Acceptable: Client must accept text/event-stream"` 这行 JSON 说明链路是通的（浏览器本来就不是 MCP 客户端）；看到 Cloudflare 的错误页说明隧道断了 |
+| 服务器日志出现 `Invalid Host header`（421） | 隧道地址变了。用新地址重新执行第 3 步的 `--public-url`，并在 App 设置里更新 URL |
+| 404 | 路径不对。要粘贴完整的 `>>>` URL，包括 `/mcp/<密钥>` |
+| 更新 cra 后工具还是旧的 | 设置 → Apps → cra → Refresh |
+| 写入调用被拦截 | 你的套餐或工作区不允许在开发者模式下执行写入（管理员可以限制这项）；只读工具仍然可用 |
+
+**安全**：拿到 `>>>` URL 的人可以通过这些工具读写项目里的文件（不会超出项目目录）。用完请关掉两个终端，不要把 URL 发到任何共享的地方，也不要提交进 git。cra 没有任何投稿、发邮件或公开发布的工具。
 
 ---
 

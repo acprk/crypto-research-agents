@@ -54,21 +54,24 @@ Then, in the host, say: **"call cra_resume and continue the project"**.
 
 ## 3. ChatGPT and claude.ai (cloud hosts)
 
+**Step-by-step guide with troubleshooting: [chatgpt.md](chatgpt.md).**
+
 ChatGPT and claude.ai connect from the cloud, so they need a public HTTPS URL. Use the `remote` profile:
 it adds sandboxed `file_list`/`file_read`/`file_write` and `search`/`fetch`, because these hosts cannot
 see your disk.
 
 ```bash
-cloudflared tunnel --url http://127.0.0.1:8765          # or: ngrok http 8765 -> note the host name
+cloudflared tunnel --url http://127.0.0.1:8765          # terminal 1 (or: ngrok http 8765) -> note the https URL
 ```
 
 ```bash
-cra-mcp --project ~/papers/my-paper --http --profile remote --secret-path --allow-host <tunnel-host>
+cra-mcp --project ~/papers/my-paper --http --profile remote --secret-path --public-url <tunnel URL>   # terminal 2
 ```
 
 - **ChatGPT:** Settings → Apps (Connectors) → Advanced → enable **Developer mode** → **Create app**:
-  - MCP server URL = the public URL printed by `cra-mcp`; Authentication = **No auth**. The random URL path
-    is the secret.
+  - MCP server URL = the URL printed after `>>>`; Authentication = **No auth**. The random URL path is the
+    secret; it is kept in `.cra/mcp-secret` and stays the same across restarts.
+  - Then, in a new chat: **+** → **Developer mode** → enable **cra**.
   - Write tools ask for confirmation.
   - After updating cra, press **Refresh** in the app settings.
   - Which plans may use write tools differs between OpenAI's own pages; check yours.

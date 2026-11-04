@@ -204,3 +204,75 @@ def test_refuses_public_bind_without_auth(proj):
     r = subprocess.run([sys.executable, "-m", "cra_mcp.server", "--project", proj, "--http", "--host", "0.0.0.0"],
                        env=dict(os.environ, CRA_MCP_TOKEN=""), capture_output=True, text=True, timeout=30)
     assert r.returncode == 2 and "refusing" in r.stderr
+
+
+def _start_http(proj, *extra, env_token=""):
+    port = _free_port()
+    args = [sys.executable, "-m", "cra_mcp.server", "--project", proj, "--http", "--port", str(port), *extra]
+    p = subprocess.Popen(args, env=dict(os.environ, CRA_MCP_TOKEN=env_token), stderr=subprocess.PIPE, text=True)
+    lines, t0 = [], time.time()
+    while time.time() - t0 < 20:
+        line = p.stderr.readline()
+        lines.append(line)
+        if "local URL" in line:
+            break
+    for _ in range(50):
+        try:
+            socket.create_connection(("127.0.0.1", port), timeout=0.2).close()
+            break
+        except OSError:
+            time.sleep(0.1)
+    # read the rest of the banner without blocking forever
+    t1 = time.time()
+    while time.time() - t1 < 1.5:
+        import select
+        if select.select([p.stderr], [], [], 0.2)[0]:
+            lines.append(p.stderr.readline())
+    return p, port, "".join(lines)
+
+
+def test_chatgpt_tunnel_setup(proj):
+    """Simulate ChatGPT behind a cloudflared quick tunnel: public Host header, ChatGPT Origin, secret path."""
+    pub = "https://abc-def.trycloudflare.com"
+    p, port, banner = _start_http(proj, "--profile", "remote", "--secret-path", "--public-url", pub)
+    try:
+        m = re.search(r">>> paste this as the MCP server URL: (https://abc-def\.trycloudflare\.com(/mcp/[\w-]+))", banner)
+        assert m, banner
+        path = m.group(2)
+        local = f"http://127.0.0.1:{port}{path}"
+        hdr = {"Accept": "application/json, text/event-stream", "Content-Type": "application/json",
+               "Host": "abc-def.trycloudflare.com", "Origin": "https://chatgpt.com"}
+        body = {"jsonrpc": "2.0", "id": 1, "method": "initialize",
+                "params": {"protocolVersion": "2025-06-18", "capabilities": {}, "clientInfo": {"name": "openai-mcp", "version": "1"}}}
+        code, text = _post(local, body, hdr)
+        assert code == 200 and '"cra"' in text, (code, text)
+        assert _post(local, body, hdr | {"Host": "evil.example"})[0] in (400, 403, 421)       # DNS-rebinding guard
+        assert _post(local, body, hdr | {"Origin": "https://evil.example"})[0] in (400, 403)
+        assert _post(f"http://127.0.0.1:{port}/mcp", body, hdr)[0] == 404                   # secret required
+    finally:
+        p.terminate()
+        p.wait(timeout=10)
+    # the secret survives a restart, so the ChatGPT app URL stays valid
+    p2, _, banner2 = _start_http(proj, "--profile", "remote", "--secret-path", "--public-url", pub)
+    p2.terminate()
+    p2.wait(timeout=10)
+    assert path in banner2
+    assert "mcp-secret" in open(os.path.join(proj, ".cra", ".gitignore")).read()
+    assert oct(os.stat(os.path.join(proj, ".cra", "mcp-secret")).st_mode & 0o777) == "0o600"
+
+
+def test_http_client_session_calls_tools(proj):
+    """A real MCP client over Streamable HTTP (as a remote host would use it)."""
+    p, port, _ = _start_http(proj, "--profile", "remote", env_token="")
+    try:
+        async def go():
+            async with Client(f"http://127.0.0.1:{port}/mcp") as c:
+                names = [t.name for t in (await c.list_tools()).tools]
+                assert {"search", "fetch", "file_write", "cra_resume"} <= set(names) and len(names) == 21
+                r = payload(await c.call_tool("claim_register", {"claim": "For every toy set the gate check terminates",
+                                                                 "proposer": "pi-orchestrator", "kill": "one set loops"}))
+                assert r["ok"] and r["data"]["id"] == "C1"
+        asyncio.run(go())
+    finally:
+        p.terminate()
+        p.wait(timeout=10)
