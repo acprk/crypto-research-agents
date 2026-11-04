@@ -146,3 +146,31 @@ def test_chat_client_wire_format(monkeypatch):
     b = got["body"]
     assert b["model"] == "some-model" and b["tool_choice"] == "auto" and len(b["tools"]) == 15
     assert "temperature" not in b                     # DeepSeek thinking mode rejects custom temperature
+
+
+def test_openai_base_url_env_and_list_models(monkeypatch, capsys):
+    from cra_mcp.agent import main
+
+    class H(BaseHTTPRequestHandler):
+        def do_GET(self):
+            assert self.path == "/v1/models" and self.headers.get("Authorization") == "Bearer k"
+            out = json.dumps({"data": [{"id": "m-a"}, {"id": "m-b"}]}).encode()
+            self.send_response(200)
+            self.send_header("Content-Length", str(len(out)))
+            self.end_headers()
+            self.wfile.write(out)
+
+        def log_message(self, *a):
+            pass
+
+    srv = HTTPServer(("127.0.0.1", 0), H)
+    threading.Thread(target=srv.serve_forever, daemon=True).start()
+    for k in ("NO_PROXY", "no_proxy"):
+        monkeypatch.setenv(k, "127.0.0.1")
+    monkeypatch.setenv("OPENAI_BASE_URL", f"http://127.0.0.1:{srv.server_port}/v1")
+    monkeypatch.setenv("OPENAI_API_KEY", "k")
+    try:
+        assert main(["--list-models"]) == 0
+    finally:
+        srv.shutdown()
+    assert capsys.readouterr().out.split() == ["m-a", "m-b"]

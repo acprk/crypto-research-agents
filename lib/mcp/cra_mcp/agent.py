@@ -6,6 +6,9 @@
 
     cra-agent --base-url https://my-gateway/v1 --api-key-env MY_KEY --model m "..."
 
+    # OpenAI SDK convention: OPENAI_BASE_URL + OPENAI_API_KEY (e.g. an OpenAI-compatible relay)
+    OPENAI_BASE_URL=https://relay.example/v1 OPENAI_API_KEY=... cra-agent --model m "..."
+
 No MCP client is needed: the same tools run in-process (cra_mcp.adapter.ToolBox), with the same
 validation and invariants. Destructive tools (phase_advance, file_write) ask for confirmation
 in the terminal unless --approve none. Model IDs are not built in, because providers rename
@@ -115,7 +118,8 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--provider", choices=sorted(PROVIDERS), help="preset base URL + API-key variable")
     ap.add_argument("--base-url", help="any OpenAI-compatible endpoint (overrides --provider)")
     ap.add_argument("--api-key-env", help="environment variable holding the API key")
-    ap.add_argument("--model", required=True, help="model id as listed by your provider")
+    ap.add_argument("--model", default=os.environ.get("CRA_MODEL"), help="model id as listed by your provider ($CRA_MODEL)")
+    ap.add_argument("--list-models", action="store_true", help="print the endpoint's /models and exit")
     ap.add_argument("--project", default=os.environ.get("CRA_PROJECT", "."))
     ap.add_argument("--profile", default="core", choices=["core", "full", "remote"])
     ap.add_argument("--max-steps", type=int, default=30)
@@ -125,13 +129,28 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--transcript", help="write the full message list as JSON here")
     a = ap.parse_args(argv)
     base, key_env = PROVIDERS.get(a.provider, (None, None)) if a.provider else (None, None)
+    if not a.base_url and a.provider in (None, "openai") and os.environ.get("OPENAI_BASE_URL"):
+        base, key_env = os.environ["OPENAI_BASE_URL"], key_env or "OPENAI_API_KEY"   # OpenAI SDK convention
     base = a.base_url or base
     if not base:
-        ap.error("give --provider or --base-url")
+        ap.error("give --provider, --base-url, or set OPENAI_BASE_URL")
     key_env = a.api_key_env or key_env or ""
     key = os.environ.get(key_env, "") if key_env else ""
     if key_env and not key:
         ap.error(f"set ${key_env} to your API key")
+    if a.list_models:
+        req = urllib.request.Request(base.rstrip("/") + "/models",
+                                     headers={"Authorization": f"Bearer {key}"} if key else {})
+        try:
+            with urllib.request.urlopen(req, timeout=60) as r:
+                data = json.loads(r.read().decode())
+        except (urllib.error.URLError, OSError) as e:
+            ap.exit(2, f"cannot reach {base}/models: {e}\n")
+        for m in data.get("data", []):
+            print(m.get("id"))
+        return 0
+    if not a.model:
+        ap.error("give --model (see --list-models)")
     box = ToolBox(a.project, a.profile, actor=f"cra-agent:{a.model}")
     msgs = run(a.task, box, ChatClient(base, key, a.model), max_steps=a.max_steps, approve=a.approve,
                temperature=a.temperature)
