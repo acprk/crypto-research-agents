@@ -32,7 +32,8 @@ commands/<name>.md           slash commands that kick off workflows
 workflows/                   phase playbooks + Workflow-tool scripts (*.js)
 lib/cryptomath/              Python algorithm library (package `cryptomath`)
 lib/core/                    blackboard state layer + `cra` CLI (package `cra_core`)
-lib/mcp/                     MCP server `cra-mcp` (package `cra_mcp`) + per-host installers
+lib/mcp/                     MCP server `cra-mcp` (package `cra_mcp`) + per-host installers + `cra-agent`
+lib/studio/                  CRA Studio local GUI (package `cra_studio`); packaging/ builds the single executable
 lib/bench/                   benchmarking harness (package `crbench`)
 lib/lean-template/           Lean4+Mathlib project template
 figures/                     mplstyle, template scripts, harvester, gallery index

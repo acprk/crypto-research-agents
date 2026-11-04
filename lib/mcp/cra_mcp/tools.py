@@ -112,8 +112,9 @@ class Context:
     def script(self, rel: str, args: list[str], timeout: int = SCRIPT_TIMEOUT) -> dict:
         path = os.path.join(self.toolkit, rel)
         try:
-            p = subprocess.run([sys.executable, path, *args], cwd=self.project, capture_output=True, text=True,
-                               timeout=timeout)
+            # in a frozen app sys.executable is the app itself; it runs bundled scripts via --run-script
+            cmd = [sys.executable, "--run-script", path] if getattr(sys, "frozen", False) else [sys.executable, path]
+            p = subprocess.run([*cmd, *args], cwd=self.project, capture_output=True, text=True, timeout=timeout)
         except subprocess.TimeoutExpired:
             return {"exit": -1, "stdout": "", "stderr": f"timed out after {timeout}s; run it in a shell instead: "
                                                         f"python3 {path} {' '.join(args)}"}

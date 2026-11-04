@@ -39,7 +39,10 @@ HOSTS = ["claude-code", "claude-desktop", "claude-ai", "chatgpt", "codex", "gemi
 
 
 def server_cmd(project: str, profile: str) -> tuple[str, list[str]]:
-    """Absolute interpreter + module: works even where GUI apps have a minimal PATH (Claude Desktop)."""
+    """Absolute interpreter + module: works even where GUI apps have a minimal PATH (Claude Desktop).
+    In the packaged app (CRA Studio executable) the app itself is the MCP server: `<exe> mcp ...`."""
+    if getattr(sys, "frozen", False):
+        return sys.executable, ["mcp", "--project", project, "--profile", profile]
     return sys.executable, ["-m", "cra_mcp.server", "--project", project, "--profile", profile]
 
 
@@ -250,7 +253,12 @@ def doctor(project: str) -> int:
         line(n > 0, f"server builds; core profile exposes {n} tools")
     except Exception as e:
         line(False, f"server failed to build: {e}")
-    for exe in ("cra", "cra-mcp"):
+    if getattr(sys, "frozen", False):
+        print(f"ok    packaged app: {sys.executable} (it is the MCP server: `<app> mcp ...`)")
+        exes = ()
+    else:
+        exes = ("cra", "cra-mcp")
+    for exe in exes:
         line(shutil.which(exe) is not None, f"`{exe}` on PATH" + ("" if shutil.which(exe) else
              " (configs written by `install` use the absolute interpreter path, so this is optional)"))
     for opt in ("crbench",):

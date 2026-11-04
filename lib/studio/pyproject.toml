@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cra-studio"
+version = "0.2.0"
+description = "CRA Studio: local desktop workbench for crypto-research-agents -- projects, ledgers, phase gates and an LLM research agent on any OpenAI-compatible API; the same executable is also the cra MCP server."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["cra-core>=0.2.0", "cra-mcp>=0.2.0", "starlette", "uvicorn"]
+license = {text = "MIT"}
+
+[project.optional-dependencies]
+test = ["pytest", "httpx"]
+build = ["pyinstaller>=6"]
+
+[project.scripts]
+cra-studio = "cra_studio.main:main"
+
+[tool.setuptools]
+packages = ["cra_studio"]
+
+[tool.setuptools.package-data]
+cra_studio = ["static/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

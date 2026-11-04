@@ -85,20 +85,37 @@ def _assistant_message(msg: dict) -> dict:
 
 
 def run(task: str, box: ToolBox, client: ChatClient, *, max_steps: int = 30, approve: str = "destructive",
-        temperature: float | None = None, ask=input, log=print) -> list[dict]:
+        temperature: float | None = None, ask=input, log=print, emit=None, should_stop=lambda: False,
+        history: list[dict] | None = None) -> list[dict]:
+    """The tool loop.  ``emit(event: dict)`` receives structured events (for GUIs); ``ask(prompt)`` decides
+    approvals (return "y" to allow); ``history`` continues an earlier conversation."""
+    def ev(kind, **kw):
+        if emit:
+            emit({"type": kind, **kw})
+
     tools = box.tools("openai-compat")
-    messages = [{"role": "system", "content": SYSTEM}, {"role": "user", "content": task}]
+    messages = list(history) if history else [{"role": "system", "content": SYSTEM}]
+    messages.append({"role": "user", "content": task})
     for step in range(max_steps):
+        if should_stop():
+            ev("stopped", step=step)
+            log("\n(stopped by the user)")
+            return messages
         resp = client.complete(messages, tools, temperature)
         msg = resp["choices"][0]["message"]
         messages.append(_assistant_message(msg))
         calls = msg.get("tool_calls") or []
+        if msg.get("reasoning_content"):
+            ev("reasoning", text=msg["reasoning_content"])
         if msg.get("content"):
+            ev("assistant", text=msg["content"])
             log(f"\n[assistant] {msg['content']}")
         if not calls:
+            ev("done", steps=step + 1)
             return messages
         for tc in calls:
             name, args = tc["function"]["name"], tc["function"].get("arguments") or "{}"
+            ev("tool_call", id=tc["id"], name=name, arguments=args)
             log(f"[tool] {name} {args[:300]}")
             need = approve == "all" and box.is_write(name) or approve == "destructive" and box.is_destructive(name)
             if need and ask(f"  allow {name}? [y/N] ").strip().lower() not in ("y", "yes"):
@@ -106,8 +123,10 @@ def run(task: str, box: ToolBox, client: ChatClient, *, max_steps: int = 30, app
                                      "next_actions": ["explain what you wanted to do and ask the human"]})
             else:
                 result = box.call(name, args)
+            ev("tool_result", id=tc["id"], name=name, result=result[:20000])
             log(f"  -> {result[:300]}{'...' if len(result) > 300 else ''}")
             messages.append({"role": "tool", "tool_call_id": tc["id"], "content": result})
+    ev("limit", steps=max_steps)
     log(f"\n(stopped after {max_steps} steps; run again to continue -- state is on the blackboard)")
     return messages
 

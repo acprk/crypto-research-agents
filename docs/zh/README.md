@@ -4,7 +4,8 @@
 公平实验、证伪审查，到论文写作、画图、模拟审稿、投稿、rebuttal、camera-ready，
 全部打包为 Claude Code 的 agents / skills / 斜杠命令；同时封装成 **MCP 服务器 `cra-mcp`**，
 Codex、Cline + DeepSeek、Gemini CLI、通义 Qwen Code、Cursor、VS Code、ChatGPT 等平台都能直接接入
-（一条命令：`cra-mcp install --host <平台>`，见[各平台接入指南](integrations.md)）。
+（一条命令：`cra-mcp install --host <平台>`，见[各平台接入指南](integrations.md)）；
+还提供桌面应用 **CRA Studio**（单个可执行文件，Windows / macOS / Linux，见 [studio.md](studio.md)）。
 另配有 Python 算法库、公平基准测试框架、画图模板和一个完整的玩具示例。
 
 ![BIGMAP](../bigmap/bigmap.png)

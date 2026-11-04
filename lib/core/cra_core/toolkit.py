@@ -2,12 +2,16 @@
 from __future__ import annotations
 
 import os
+import sys
 
 
 def toolkit_root() -> str:
-    """``$CRA_HOME`` if set, else the checkout this package was installed from (pip install -e)."""
+    """``$CRA_HOME`` if set, else the toolkit bundled into a frozen app (PyInstaller), else the checkout
+    this package was installed from (pip install -e)."""
     env = os.environ.get("CRA_HOME")
     cands = [env] if env else []
+    if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
+        cands.append(os.path.join(sys._MEIPASS, "toolkit"))
     here = os.path.dirname(os.path.abspath(__file__))
     cands += [os.path.normpath(os.path.join(here, *[".."] * n)) for n in range(1, 5)]
     for c in cands:

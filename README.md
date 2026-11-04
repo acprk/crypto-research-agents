@@ -5,7 +5,7 @@ packaged as Claude Code agents, skills and slash commands **and as an MCP server
 Cline + DeepSeek, Gemini CLI, Cursor, VS Code, ChatGPT and other MCP hosts**,
 with a Python algorithm library, a fair-benchmarking harness, a figure kit and a worked toy example.
 
-[中文说明](docs/zh/README.md) · [**Use from any platform / 各平台接入**](docs/integrations/README.md) · [BIGMAP](docs/BIGMAP.md) · [Quickstart](docs/QUICKSTART.md) · [Case study](case-study/WALKTHROUGH.md)
+[中文说明](docs/zh/README.md) · [**Use from any platform / 各平台接入**](docs/integrations/README.md) · [**CRA Studio desktop app**](docs/studio.md) · [BIGMAP](docs/BIGMAP.md) · [Quickstart](docs/QUICKSTART.md) · [Case study](case-study/WALKTHROUGH.md)
 
 ![BIGMAP](docs/bigmap/bigmap.png)
 
@@ -33,6 +33,7 @@ makes those failures structurally hard:
 | `lib/cryptomath/` | algebra (GF(p^k), cyclotomics, Galois, CRT slots, NTT, Z_{p^e}, digit extraction, characters), lattice (LWE/RLWE/NTRU, estimators, BKZ sim, LLL), FHE toys (BGV, BFV, CKKS, TFHE/PBS, noise models, PS/BSGS, Chebyshev), symmetric (DDT/LAT/BCT, Boolean functions, APN, AES/SPN, SAT/MILP trail models, AO-cipher costs), protocols (SS, OT, OPRF, PSI/GC cost), EC (curves, DLP), costmodel |
 | `lib/core/` | `cra_core` + `cra` CLI: lossless blackboard edits, claim/evidence invariants in code, phase gates, event log, git pre-commit hook |
 | `lib/mcp/` | `cra-mcp`: MCP server (stdio / Streamable HTTP, profiles core/full/remote) + `cra-mcp install --host <21 hosts>` |
+| `lib/studio/` | **CRA Studio**: local GUI (projects, ledgers, gates, research agent on any OpenAI-compatible API); `packaging/` builds one executable for Windows/macOS/Linux that is also the MCP server |
 | `lib/bench/` | `crbench`: interleaved A/B runs, robust stats, env capture, parsers for OpenFHE/HElib/Lattigo/TFHE-rs/…, LaTeX tables, EVIDENCE ledger, `audit-tex` |
 | `lib/lean-template/` | Lean 4 + Mathlib project template with the proposition ↔ Lean-name table pattern |
 | `figures/` | house mplstyles (LNCS/ACM/IEEE), 16 matplotlib + 5 TikZ templates, figure harvester + pattern catalog |

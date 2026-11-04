@@ -10,6 +10,7 @@
 | M2 `cra-mcp` | ✅ 完成 | 24 个工具三档（core 15 / full 24 / remote 21）、prompts、resources、stdio + Streamable HTTP（bearer 或秘密路径）、`cra-mcp install --host`（21 个平台）、`doctor`、`--export openai/anthropic/gemini`、中英文接入文档、Cline + DeepSeek 指南 |
 | M3 研究循环 | ⏳ 下一步 | `trial_start/finish`（worktree + 预算 + keep/discard 棘轮）、预算字段、`task_next(parallel)` |
 | M4 兼容层收尾 | ✅ 接口适配完成 | 安装器；导出 `openai`/`openai-responses`/`openai-compat`/`anthropic`/`gemini`（strict 可空枚举等细节）；`ToolBox` 函数调用适配器；`cra-agent`（任意 OpenAI 兼容 Chat Completions：ChatGPT API、DeepSeek、GLM、Kimi、通义、MiniMax…）；ChatGPT 远程 MCP 接口（秘密路径、Host/Origin、search/fetch）。按你的要求不做网关/隧道部署；真实账号联调待你验证 |
+| M4+ CRA Studio | ✅ MVP 完成 | 桌面工作台（项目/概览/研究助手/账本/设置/接入），模型接口开放配置（任意 OpenAI 兼容地址+key+模型）；单个可执行文件 = GUI + MCP 服务器 + CLI + cra-agent；PyInstaller 打包，`release` 工作流构建 Windows/macOS/Linux（Linux 已本地实测，Win/mac 由 CI 构建） |
 | M5 异构红队 | ⏳ | 默认关闭 |
 | M6 发布 | ⏳ | PyPI 自包含 wheel（内置 templates/agents/skills，支持 `uvx cra-mcp`）、Claude Desktop `.mcpb` |
 > 范围：本仓库（toolkit）。不涉及任何私有研究内容（遵守 SPEC §0）。

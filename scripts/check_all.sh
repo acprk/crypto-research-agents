@@ -3,7 +3,7 @@
 # case-study gates. Used by CI (.github/workflows/ci.yml) and before every push.
 #   scripts/check_all.sh            # all checks
 #   scripts/check_all.sh --quick    # skip the figure-rendering tests (slowest part)
-# Needs: pip install -e "lib/core[test]" -e "lib/mcp[test]" -e "lib/cryptomath[test,plot]" -e "lib/bench[test]" pymupdf
+# Needs: pip install -e "lib/core[test]" -e "lib/mcp[test]" -e "lib/studio[test]" -e "lib/cryptomath[test,plot]" -e "lib/bench[test]" pymupdf
 set -uo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"; cd "$ROOT"
 PY="${PYTHON:-python3}"; QUICK=0; [ "${1:-}" = "--quick" ] && QUICK=1
@@ -14,6 +14,7 @@ run() { local name="$1"; shift; echo "::group::$name"; if "$@"; then echo "ok   
 
 run "pytest lib/core"         bash -c "cd lib/core && $PY -m pytest -q"
 run "pytest lib/mcp"          bash -c "cd lib/mcp && $PY -m pytest -q"
+run "pytest lib/studio"       bash -c "cd lib/studio && $PY -m pytest -q"
 run "pytest lib/cryptomath"   bash -c "cd lib/cryptomath && $PY -m pytest -q"
 run "pytest lib/bench"        bash -c "cd lib/bench && $PY -m pytest -q"
 run "pytest skills"           "$PY" -m pytest -q skills/anonymize-check/tests
