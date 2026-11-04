@@ -1,6 +1,17 @@
 # 方案：Auto-Research 工作流优化 + MCP 化 + 多平台兼容
 
-> 状态：**方案草案，待确认后实施**。本文只描述设计和路线，不改动现有行为。
+> 状态：**已确认，正在实施**（2026-11-04）。进度见下表，平台事实以
+> [docs/integrations/COMPATIBILITY.md](../integrations/COMPATIBILITY.md) 为准（含来源，未证实处已标注）。
+
+| 里程碑 | 状态 | 交付 |
+|---|---|---|
+| M0 修复与卫生 | ✅ 完成 | 引用核验改为 sha256 新鲜度（mtime 降为兜底）；`scripts/check_all.sh`；GitHub Actions CI（py3.10/3.13）；测试 extra |
+| M1 `cra_core` | ✅ 完成 | 无损 Markdown 表格、claim/evidence 不变量、ID+文件锁、事件流、`\claimref`/`\evid`、`cra` CLI、git pre-commit 钩子；顺带修复 3 个模板 bug（新项目 P0 门必挂、模板示例行是真数据、`\ev` 与 `\evid` 不一致） |
+| M2 `cra-mcp` | ✅ 完成 | 24 个工具三档（core 15 / full 24 / remote 21）、prompts、resources、stdio + Streamable HTTP（bearer 或秘密路径）、`cra-mcp install --host`（21 个平台）、`doctor`、`--export openai/anthropic/gemini`、中英文接入文档、Cline + DeepSeek 指南 |
+| M3 研究循环 | ⏳ 下一步 | `trial_start/finish`（worktree + 预算 + keep/discard 棘轮）、预算字段、`task_next(parallel)` |
+| M4 兼容层收尾 | ◐ 部分完成 | 已完成：安装器、schema 导出、ChatGPT/claude.ai 远程方案；待做：OpenAI 兼容参考 agent（`cra-agent`）、真实宿主冒烟测试（需要你的账号/key） |
+| M5 异构红队 | ⏳ | 默认关闭 |
+| M6 发布 | ⏳ | PyPI 自包含 wheel（内置 templates/agents/skills，支持 `uvx cra-mcp`）、Claude Desktop `.mcpb` |
 > 范围：本仓库（toolkit）。不涉及任何私有研究内容（遵守 SPEC §0）。
 
 ---
@@ -171,6 +182,12 @@ api_key_env = "DEEPSEEK_API_KEY"   # 只读环境变量，key 不落盘
 所以首次使用需要用户显式确认，并写入 DECISIONS。如果宿主支持 MCP sampling，也可以改用宿主自己的模型，不需要额外配置 key。
 
 ### 4.5 平台兼容矩阵
+
+> 已按调研结果实现，最新、带来源的版本见 [COMPATIBILITY.md](../integrations/COMPATIBILITY.md)。
+> 调研后的主要修正：**ChatGPT** 只支持远程 HTTPS（开发者模式 App，认证方式只有"无认证"或 OAuth，
+> 不能带自定义 header），因此新增 `remote` 档（文件读写 + `search`/`fetch`）和 `--secret-path`；
+> Cline 的 `timeout` 单位是秒，URL 型配置不写 `type` 会默认走 SSE；Gemini CLI 会剥掉部分 schema 关键字，
+> 服务器名不能含 `_`；VS Code 用 `servers` 而不是 `mcpServers`；OpenCode 用 `mcp` 且 `command` 是数组。
 
 | 平台 / 用法 | 接入方式 | 能拿到什么 |
 |---|---|---|
